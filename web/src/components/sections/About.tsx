@@ -1,62 +1,81 @@
+"use client";
+
 import type { AboutContent } from "@/types/content";
-import { Reveal } from "@/components/animations/Reveal";
+import { ShieldCheck, Terminal, Layers, Award } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 export function About({ content }: { content: AboutContent }) {
   return (
     <section
       id="about"
-      className="relative z-[2] mx-auto max-w-[1240px] px-[clamp(20px,5vw,72px)] py-[clamp(90px,12vw,150px)]"
+      className="relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-12 py-24 sm:py-32"
     >
-      <Reveal>
-        <Eyebrow className="mb-7">{content.eyebrow}</Eyebrow>
-      </Reveal>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Left Column: Storytelling Narrative */}
+        <div className="lg:col-span-7 space-y-8">
+          <Eyebrow>{content.eyebrow}</Eyebrow>
 
-      <div className="grid grid-cols-1 items-start gap-[clamp(32px,6vw,80px)] lg:grid-cols-[1.55fr_1fr]">
-        <div>
-          <Reveal
-            as="h2"
-            className="max-w-[20ch] text-[clamp(1.8rem,3.6vw,3.1rem)] font-semibold leading-[1.15] tracking-[-0.028em]"
-          >
+          <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1]">
             {content.heading}
-          </Reveal>
+          </h2>
 
-          {content.paragraphs.map((paragraph, index) => (
-            <Reveal key={index} delay={120 + index * 60}>
-              <p className="mt-6 max-w-[58ch] text-[1.08rem] leading-[1.72] text-[var(--color-muted)]">
-                {paragraph}
+          <div className="space-y-6 text-base sm:text-lg leading-relaxed text-zinc-300">
+            {content.paragraphs.map((p, i) => (
+              <p key={i} className="border-l-2 border-amber-500/40 pl-6 py-1 bg-white/[0.01] rounded-r-xl">
+                {p}
               </p>
-            </Reveal>
-          ))}
+            ))}
+          </div>
+
+          {/* Key Principles Pills */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 flex flex-col gap-2">
+              <ShieldCheck className="h-5 w-5 text-amber-400" />
+              <span className="font-mono text-xs font-semibold text-white">Sub-Second Latency</span>
+              <span className="text-xs text-zinc-400">P99 optimized in-process ML inference</span>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 flex flex-col gap-2">
+              <Layers className="h-5 w-5 text-cyan-400" />
+              <span className="font-mono text-xs font-semibold text-white">Data Parity</span>
+              <span className="text-xs text-zinc-400">Declarative schemas & strict contract parity</span>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 flex flex-col gap-2">
+              <Award className="h-5 w-5 text-emerald-400" />
+              <span className="font-mono text-xs font-semibold text-white">Production Ready</span>
+              <span className="text-xs text-zinc-400">Zero-downtime ETL & API security</span>
+            </div>
+          </div>
         </div>
 
-        {/* Ficha técnica */}
-        <Reveal delay={120}>
-          <div className="group card-spotlight glass-panel spin-border relative overflow-hidden rounded-[20px] p-7 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]">
-            <div className="mb-6 flex items-center justify-between border-b border-white/[0.07] pb-4">
-              <span className="font-mono-token text-[11px] tracking-[0.15em] text-[var(--color-accent-2)]">
-                {content.panelTitle}
-              </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80] shadow-[0_0_8px_#4ade80]" />
+        {/* Right Column: Operational Telemetry Card with Specular 3D Tilt */}
+        <div className="lg:col-span-5 sticky top-28">
+          <TiltCard className="p-8">
+            <div className="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
+              <div className="flex items-center gap-2">
+                <Terminal className="h-4 w-4 text-amber-400" />
+                <span className="font-mono text-xs font-bold tracking-widest text-amber-400 uppercase">
+                  {content.panelTitle}
+                </span>
+              </div>
+              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]" />
             </div>
-            <dl className="flex flex-col divide-y divide-white/[0.05]">
+
+            <dl className="divide-y divide-white/10 font-mono text-xs space-y-4">
               {content.facts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0"
-                >
-                  <dt className="font-mono-token text-[10.5px] uppercase tracking-[0.14em] text-[var(--color-faint)]">
-                    {fact.label}
-                  </dt>
-                  <dd className="text-right text-[15px] font-medium text-[var(--color-ink)]">
-                    {fact.value}
-                  </dd>
+                <div key={fact.label} className="flex justify-between items-center pt-4 first:pt-0">
+                  <dt className="text-zinc-400 uppercase tracking-wider">{fact.label}</dt>
+                  <dd className="font-semibold text-white text-right text-sm">{fact.value}</dd>
                 </div>
               ))}
             </dl>
-            <div className="andean-fret mt-6 h-3 opacity-35" />
-          </div>
-        </Reveal>
+
+            <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400 font-mono">
+              <span>UNSA SYSTEMS ENG.</span>
+              <span className="text-amber-400">QUINTO SUPERIOR</span>
+            </div>
+          </TiltCard>
+        </div>
       </div>
     </section>
   );

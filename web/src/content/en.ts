@@ -24,26 +24,28 @@ export const en: PortfolioContent = {
   },
 
   nav: {
-    about: "About",
-    work: "Work",
+    about: "Profile",
+    work: "Projects",
     architecture: "Architecture",
-    stack: "Stack",
-    credentials: "Credentials",
+    stack: "Toolkit",
+    credentials: "Proof",
+    faq: "FAQ",
     contact: "Contact",
-    cta: "Contact",
+    cta: "Discuss Project",
     menuOpen: "Open menu",
     menuClose: "Close menu",
+    statusText: "AVAILABLE Q3/Q4 2026",
   },
 
   hero: {
-    status: "OPEN TO JUNIOR DATA ENGINEER ROLES",
+    status: "OPEN TO JUNIOR DATA ENGINEER & BACKEND ROLES",
     titleLead: "I build backends that",
     titleAccent: "actually scale.",
     description:
       "Systems Engineering student crafting production-ready backend services, data pipelines and AI-powered products — turning complex problems into clear, measurable architectures.",
-    primaryCta: "View my work",
-    secondaryCta: "Get in touch",
-    scroll: "SCROLL",
+    primaryCta: "Explore Projects",
+    secondaryCta: "Initiate Contact",
+    scroll: "SCROLL TO NAVIGATE",
     stats: [
       { value: 96, suffix: "%", label: "MODEL RECALL" },
       { value: 99, suffix: "%", label: "LATENCY CUT" },
@@ -54,10 +56,10 @@ export const en: PortfolioContent = {
 
   marquee: [
     "Java 17",
-    "Spring Boot",
+    "Spring Boot 3.4",
     "NestJS",
     "Node.js",
-    "Python",
+    "Python 3.12",
     "ONNX Runtime",
     "PostgreSQL",
     "MongoDB",
@@ -65,30 +67,30 @@ export const en: PortfolioContent = {
     "JWT",
     "Docker",
     "Oracle Cloud",
-    "AWS",
+    "AWS S3 & EC2",
     "Google Cloud",
   ],
 
   about: {
-    eyebrow: "01 — PROFILE",
+    eyebrow: "01 — PROFILE & ENGINEERING PHILOSOPHY",
     heading:
       "I treat my projects like production systems — because that's the standard a team can trust.",
     paragraphs: [
       "My focus is the backend: designing scalable architectures, building reliable data pipelines and embedding machine learning where it creates real leverage. I care about latency, correctness and the small details that separate a demo from something people depend on every day.",
       "Right now I'm shipping production backend services at Fundacion CALMA with Java, Spring Boot and Node.js over relational and NoSQL databases, while steering my career toward Data Engineering with Python and advanced SQL.",
     ],
-    panelTitle: "CURRENTLY",
+    panelTitle: "OPERATIONAL TELEMETRY",
     facts: [
-      { label: "Role", value: "Backend Developer Intern" },
+      { label: "Current Role", value: "Backend Developer Intern" },
       { label: "Organization", value: "Fundacion CALMA" },
-      { label: "Focus", value: "Backend · Data · AI · Cloud" },
+      { label: "Core Tech", value: "Java · Python · SQL · ONNX" },
       { label: "Studying", value: "Systems Engineering · UNSA" },
-      { label: "Based", value: "Arequipa, Peru" },
+      { label: "Based", value: "Arequipa, Peru (UTC-5)" },
     ],
   },
 
   experience: {
-    eyebrow: "02 — TRAJECTORY",
+    eyebrow: "02 — TRAJECTORY & HISTORY",
     heading: "The path so far",
     description:
       "From data support to production backend engineering. Each stage blends real software with measurable outcomes.",
@@ -153,11 +155,11 @@ export const en: PortfolioContent = {
   },
 
   work: {
-    eyebrow: "03 — FEATURED WORK",
+    eyebrow: "03 — FEATURED WORK & CASE STUDIES",
     heading: "Systems, not screenshots",
     description: "Each project is an engineering decision with measurable outcomes.",
     featured: {
-      flag: "FLAGSHIP",
+      flag: "FLAGSHIP SYSTEM",
       category: "ENTERPRISE ML PLATFORM",
       title: "ChurnInsight",
       summary:
@@ -173,7 +175,7 @@ export const en: PortfolioContent = {
     },
     secondary: [
       {
-        badge: "1ST PLACE",
+        badge: "1ST PLACE HACKATHON",
         badgeTone: "gold",
         meta: "MVP < 48H",
         title: "NEXIA 2026",
@@ -182,7 +184,7 @@ export const en: PortfolioContent = {
         tags: ["Node.js", "NestJS", "AI APIs"],
       },
       {
-        badge: "1ST PLACE",
+        badge: "1ST PLACE UNSA FAIR",
         badgeTone: "green",
         meta: "IoT · MOBILE",
         title: "Chakrita",
@@ -191,7 +193,7 @@ export const en: PortfolioContent = {
         tags: ["Flutter", "IoT", "UX/UI"],
       },
     ],
-    comparisonTitle: "Project comparison",
+    comparisonTitle: "Technical Comparison Matrix",
     comparisonHeaders: {
       project: "Project",
       domain: "Domain",
@@ -229,20 +231,20 @@ export const en: PortfolioContent = {
   },
 
   github: {
-    eyebrow: "GITHUB — LIVE",
+    eyebrow: "04 — LIVE TELEMETRY",
     heading: "Real code, real activity",
     description:
       "Repositories loaded live from the GitHub API. What you see here is exactly what's on my account, right now.",
-    viewAll: "View all repositories",
-    updatedLabel: "Updated",
+    viewAll: "View repositories on GitHub",
+    updatedLabel: "Last push",
     reposLabel: "PUBLIC REPOS",
     followersLabel: "FOLLOWERS",
-    errorText: "Couldn't load GitHub right now.",
-    loadingText: "Querying the GitHub API…",
+    errorText: "Couldn't connect to GitHub API right now.",
+    loadingText: "Querying live GitHub telemetry…",
   },
 
   architecture: {
-    eyebrow: "04 — DATA ARCHITECTURE",
+    eyebrow: "05 — DATA ARCHITECTURE",
     heading: "How I think about a data system",
     description:
       "From source to value: a clear, measurable pipeline where every layer owns one responsibility and a defined contract.",
@@ -277,7 +279,7 @@ export const en: PortfolioContent = {
   },
 
   stack: {
-    eyebrow: "05 — TOOLKIT",
+    eyebrow: "06 — TOOLKIT & DOMAIN MATRIX",
     heading: "The stack I reach for",
     description: "The tools I use to take ideas from the data model to production.",
     groups: [
@@ -309,11 +311,11 @@ export const en: PortfolioContent = {
   },
 
   credentials: {
-    eyebrow: "06 — PROOF",
+    eyebrow: "07 — PROOF & CERTIFICATIONS",
     heading: "Earned, not claimed",
     description: "Verifiable outcomes, continuous learning and engineering-community leadership.",
-    achievementsLabel: "ACHIEVEMENTS",
-    certificationsLabel: "CERTIFICATIONS",
+    achievementsLabel: "ENGINEERING MILESTONES",
+    certificationsLabel: "VERIFIED CERTIFICATIONS",
     certificationsTotal: "51 total",
     verifyCta: "Verify credentials on Credly",
     achievements: [
@@ -344,21 +346,54 @@ export const en: PortfolioContent = {
     ],
   },
 
+  faq: {
+    eyebrow: "08 — FREQUENTLY ASKED QUESTIONS",
+    heading: "Architecture & Collaboration FAQs",
+    description:
+      "Full clarity on how I approach software engineering, latency optimization, and integration into high-performance engineering teams.",
+    items: [
+      {
+        category: "ARCHITECTURE",
+        question: "Why embed ML inference directly into the backend rather than microservices?",
+        answer:
+          "In projects like ChurnInsight, exporting the model to ONNX Runtime and executing it in-process within Java/Spring Boot eliminated network overhead and JSON serialization, cutting P99 latency from 2000ms to 20ms while having zero external infrastructure dependency.",
+      },
+      {
+        category: "AVAILABILITY",
+        question: "What is your current availability for roles and onboarding?",
+        answer:
+          "I am finishing my Systems Engineering degree at UNSA while working as a Backend Developer Intern at Fundacion CALMA. I am open to Junior Data Engineer or Backend Developer roles in remote or hybrid formats.",
+      },
+      {
+        category: "METHODOLOGY",
+        question: "How do you guarantee code quality and data contract parity?",
+        answer:
+          "I use strict type checking in TypeScript/Java, declarative database migrations (Flyway/Liquibase/SQL), OpenAPI/Swagger documentation, and automated E2E tests before every release.",
+      },
+      {
+        category: "DATA & CLOUD",
+        question: "What experience do you have with cloud platforms like Oracle or AWS?",
+        answer:
+          "I hold official certifications in Oracle Cloud Infrastructure (OCI Foundations & APEX Professional), AWS Academy Cloud Foundations, and Google Cloud Foundations. I have deployed containerized workloads with Docker on OCI and EC2 instances.",
+      },
+    ],
+  },
+
   contact: {
-    eyebrow: "07 — LET'S TALK",
+    eyebrow: "09 — LET'S TALK",
     headingLead: "Let's build something",
     headingAccent: "that scales.",
     description:
       "Open to Junior Data Engineer and Backend Engineering roles. If you're hiring engineers who sweat the details, I'd love to talk.",
-    emailCta: "Email me",
-    linkedinCta: "LinkedIn",
-    githubCta: "GitHub",
+    emailCta: "Copy Direct Email",
+    linkedinCta: "LinkedIn Profile",
+    githubCta: "GitHub Repositories",
   },
 
   footer: {
     rights: "Ower Frank Lopez Arela. All rights reserved.",
-    tagline: "Backend · Data · AI · Cloud — Arequipa, Peru",
-    builtWith: "Built with Next.js, React and Tailwind CSS",
+    tagline: "Backend · Data · AI · Cloud — Arequipa, Peru (16.40°S 71.53°W)",
+    builtWith: "Built with Next.js 15, React 19, Tailwind CSS v4 & Framer Motion",
     backToTop: "Back to top",
   },
 };

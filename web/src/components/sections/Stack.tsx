@@ -1,52 +1,122 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Cpu, Code2, Database, BrainCircuit, Cloud, CheckCircle2 } from "lucide-react";
 import type { StackContent } from "@/types/content";
-import { Reveal } from "@/components/animations/Reveal";
-import { SkillMeters } from "@/components/animations/SkillMeters";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { SkillMeters } from "@/components/animations/SkillMeters";
+
+const ICONS = [Code2, Cpu, Database, BrainCircuit, Cloud, CheckCircle2];
 
 export function Stack({ content }: { content: StackContent }) {
+  const [activeTab, setActiveTab] = useState<number | null>(null);
+
+  const filteredGroups = activeTab === null
+    ? content.groups
+    : content.groups.filter((_, idx) => idx === activeTab);
+
   return (
     <section
       id="stack"
-      className="relative z-[2] mx-auto max-w-[1180px] px-[clamp(20px,5vw,64px)] py-[clamp(60px,9vw,120px)]"
+      className="relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-12 py-24 sm:py-32"
     >
-      <Reveal>
-        <Eyebrow className="mb-4">{content.eyebrow}</Eyebrow>
-      </Reveal>
-      <Reveal as="h2" className="text-[clamp(1.9rem,4vw,3.2rem)] font-bold tracking-[-0.03em]">
-        {content.heading}
-      </Reveal>
-      <Reveal delay={100}>
-        <p className="mb-12 mt-3 max-w-[52ch] text-[1.05rem] text-[var(--color-muted)]">
-          {content.description}
-        </p>
-      </Reveal>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+        <div className="lg:col-span-6 space-y-4">
+          <Eyebrow>{content.eyebrow}</Eyebrow>
+          <h2 className="font-display text-4xl sm:text-6xl font-semibold tracking-tight text-white leading-[1.05]">
+            {content.heading}
+          </h2>
+          <p className="text-zinc-400 text-base sm:text-lg">
+            {content.description}
+          </p>
+        </div>
 
-      {/* Barras de competencia (enfoque data engineering) */}
-      <Reveal delay={120}>
-        <SkillMeters className="mb-14 rounded-[20px] border border-white/[0.07] bg-white/[0.015] p-[clamp(24px,4vw,44px)]" />
-      </Reveal>
+        <div className="lg:col-span-6">
+          <SkillMeters className="rounded-3xl border border-white/10 bg-[#09080d]/80 p-6 backdrop-blur-xl shadow-2xl" />
+        </div>
+      </div>
 
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[20px] border border-white/[0.07] bg-white/[0.07] sm:grid-cols-2 lg:grid-cols-3">
-        {content.groups.map((group, index) => (
-          <Reveal key={group.label} delay={(index % 3) * 60} className="bg-[var(--color-surface)]">
-            <div className="group relative h-full overflow-hidden p-[30px] transition-colors duration-300 hover:bg-white/[0.02]">
-              <span className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-gradient-to-b from-[var(--color-accent)] to-[var(--color-accent-cyan)] transition-transform duration-400 ease-out group-hover:scale-y-100" />
-              <div className="font-mono-token mb-[18px] text-[11px] tracking-[0.15em] text-[var(--color-accent-2)]">
-                {group.label}
-              </div>
-              <div className="flex flex-col gap-[11px] text-base text-[#d8d2c8]">
-                {group.items.map((tech) => (
-                  <span
-                    key={tech}
-                    className="transition-colors duration-200 hover:text-[var(--color-ink)]"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Reveal>
+      {/* Domain Category Filter Tabs */}
+      <div className="flex flex-wrap gap-2 mb-10 pb-4 border-b border-white/10">
+        <button
+          type="button"
+          onClick={() => setActiveTab(null)}
+          className={`rounded-full px-5 py-2 font-mono text-xs font-semibold transition-all ${
+            activeTab === null
+              ? "bg-amber-500 text-black shadow-lg shadow-amber-500/30"
+              : "border border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10"
+          }`}
+        >
+          TODOS LOS DOMINIOS
+        </button>
+
+        {content.groups.map((group, idx) => (
+          <button
+            key={group.label}
+            type="button"
+            onClick={() => setActiveTab(idx)}
+            className={`rounded-full px-5 py-2 font-mono text-xs font-semibold transition-all ${
+              activeTab === idx
+                ? "bg-amber-500 text-black shadow-lg shadow-amber-500/30"
+                : "border border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10"
+            }`}
+          >
+            {group.label}
+          </button>
         ))}
+      </div>
+
+      {/* Grid of Tech Groups */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <AnimatePresence mode="popLayout">
+          {filteredGroups.map((group, idx) => {
+            const Icon = ICONS[idx % ICONS.length] || Cpu;
+            return (
+              <motion.div
+                key={group.label}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="rounded-3xl border border-white/10 bg-[#09080d]/90 p-6 backdrop-blur-xl flex flex-col justify-between hover:border-amber-400/50 transition-all duration-300 group"
+              >
+                <div>
+                  <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest">
+                        {group.label}
+                      </span>
+                    </div>
+                    <span className="font-mono text-xs text-zinc-500">
+                      0{idx + 1}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-zinc-300 transition-all group-hover:border-white/20 group-hover:bg-white/[0.06] group-hover:text-white"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                  <span>PRODUCTION READY</span>
+                  <span className="text-emerald-400 font-semibold">VERIFICADO</span>
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
       </div>
     </section>
   );

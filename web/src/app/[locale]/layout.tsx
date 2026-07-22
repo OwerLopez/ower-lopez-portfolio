@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, JetBrains_Mono } from "next/font/google";
+import { Manrope, JetBrains_Mono, Fraunces } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 
@@ -23,6 +23,14 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   display: "swap",
   weight: ["400", "500", "600"],
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export function generateStaticParams() {
@@ -106,8 +114,13 @@ export default async function LocaleLayout({
   if (!isLocale(locale)) notFound();
 
   return (
-    <html lang={locale} className={`${manrope.variable} ${jetbrains.variable}`}>
-      <body className="relative min-h-screen overflow-x-hidden antialiased">
+    <html
+      lang={locale}
+      className={`${manrope.variable} ${jetbrains.variable} ${fraunces.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="relative min-h-screen overflow-x-hidden antialiased" suppressHydrationWarning>
+
         <MotionConfig reducedMotion="user">
           <AuroraBackground />
           <MouseSpotlight />

@@ -1,5 +1,5 @@
 /**
- * Modelo de contenido tipado del portafolio.
+ * Modelo de contenido tipado del portafolio (v3 Redesign).
  * Cada diccionario de idioma (es/en) debe satisfacer `PortfolioContent`,
  * garantizando paridad total entre versiones.
  */
@@ -10,10 +10,12 @@ export interface NavContent {
   architecture: string;
   stack: string;
   credentials: string;
+  faq: string;
   contact: string;
   cta: string;
   menuOpen: string;
   menuClose: string;
+  statusText: string;
 }
 
 export interface StatItem {
@@ -172,6 +174,19 @@ export interface CredentialsContent {
   certifications: Certification[];
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+  category: string;
+}
+
+export interface FaqContent {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  items: FaqItem[];
+}
+
 export interface ContactContent {
   eyebrow: string;
   headingLead: string;
@@ -208,6 +223,7 @@ export interface PortfolioContent {
   architecture: ArchitectureContent;
   stack: StackContent;
   credentials: CredentialsContent;
+  faq: FaqContent;
   contact: ContactContent;
   footer: FooterContent;
 }

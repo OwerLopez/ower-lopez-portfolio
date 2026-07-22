@@ -13,10 +13,8 @@ const dotStyles: Record<SecondaryProject["badgeTone"], string> = {
   green: "bg-[#4ade80] shadow-[0_0_10px_#4ade80]",
 };
 
-/** Tarjeta de proyecto secundario con inclinacion 3D, foco y borde animado. */
 export function ProjectCard({
   project,
-  delay = 0,
 }: {
   project: SecondaryProject;
   delay?: number;
@@ -24,14 +22,13 @@ export function ProjectCard({
   return (
     <TiltCard
       as="article"
-      delay={delay}
       className="group glass-panel spin-border rounded-[20px] p-[clamp(24px,3vw,38px)] transition-shadow duration-300 hover:shadow-[0_24px_60px_rgba(0,0,0,0.4)]"
     >
       <div className="mb-5 flex items-center justify-between">
         <span
           className={cn(
             "font-mono-token inline-flex items-center gap-2 text-[11px] tracking-[0.12em]",
-            toneStyles[project.badgeTone],
+            toneStyles[project.badgeTone]
           )}
         >
           <span className={cn("h-1.5 w-1.5 rounded-full", dotStyles[project.badgeTone])} />

@@ -27,26 +27,28 @@ export const es: PortfolioContent = {
   },
 
   nav: {
-    about: "Sobre mi",
+    about: "Perfil",
     work: "Proyectos",
     architecture: "Arquitectura",
     stack: "Tecnologias",
-    credentials: "Credenciales",
+    credentials: "Logros",
+    faq: "Preguntas",
     contact: "Contacto",
-    cta: "Contacto",
+    cta: "Discutir Proyecto",
     menuOpen: "Abrir menu",
     menuClose: "Cerrar menu",
+    statusText: "DISPONIBLE Q3/Q4 2026",
   },
 
   hero: {
-    status: "DISPONIBLE PARA ROLES JUNIOR DATA ENGINEER",
+    status: "DISPONIBLE PARA ROLES JUNIOR DATA ENGINEER & BACKEND",
     titleLead: "Construyo backends que",
     titleAccent: "escalan de verdad.",
     description:
       "Estudiante de Ingenieria de Sistemas construyendo servicios backend listos para produccion, pipelines de datos y productos con IA — convirtiendo problemas complejos en arquitecturas claras y medibles.",
-    primaryCta: "Ver proyectos",
-    secondaryCta: "Contactar",
-    scroll: "DESLIZA",
+    primaryCta: "Explorar Proyectos",
+    secondaryCta: "Iniciar Contacto",
+    scroll: "DESLIZA PARA NAVEGAR",
     stats: [
       { value: 96, suffix: "%", label: "RECALL DEL MODELO" },
       { value: 99, suffix: "%", label: "LATENCIA REDUCIDA" },
@@ -57,10 +59,10 @@ export const es: PortfolioContent = {
 
   marquee: [
     "Java 17",
-    "Spring Boot",
+    "Spring Boot 3.4",
     "NestJS",
     "Node.js",
-    "Python",
+    "Python 3.12",
     "ONNX Runtime",
     "PostgreSQL",
     "MongoDB",
@@ -68,30 +70,30 @@ export const es: PortfolioContent = {
     "JWT",
     "Docker",
     "Oracle Cloud",
-    "AWS",
+    "AWS S3 & EC2",
     "Google Cloud",
   ],
 
   about: {
-    eyebrow: "01 — PERFIL",
+    eyebrow: "01 — PERFIL & FILOSOFÍA DE INGENIERÍA",
     heading:
       "Trato mis proyectos como sistemas de produccion, porque ese es el estandar en el que un equipo puede confiar.",
     paragraphs: [
       "Mi foco es el backend: disenar arquitecturas escalables, construir pipelines de datos confiables e integrar machine learning donde genera valor real. Me importan la latencia, la correctitud y los detalles que separan un demo de algo de lo que la gente depende a diario.",
       "Actualmente desarrollo servicios backend en produccion en Fundacion CALMA con Java, Spring Boot y Node.js sobre bases de datos relacionales y NoSQL, mientras oriento mi carrera hacia el Data Engineering con Python y SQL avanzado.",
     ],
-    panelTitle: "AHORA MISMO",
+    panelTitle: "METRICAS DE OPERACION",
     facts: [
-      { label: "Rol", value: "Backend Developer (Practicas)" },
+      { label: "Rol Actual", value: "Backend Developer (Practicas)" },
       { label: "Organizacion", value: "Fundacion CALMA" },
-      { label: "Enfoque", value: "Backend · Data · IA · Cloud" },
+      { label: "Core Tech", value: "Java · Python · SQL · ONNX" },
       { label: "Formacion", value: "Ingenieria de Sistemas · UNSA" },
-      { label: "Ubicacion", value: "Arequipa, Peru" },
+      { label: "Ubicacion", value: "Arequipa, Peru (UTC-5)" },
     ],
   },
 
   experience: {
-    eyebrow: "02 — TRAYECTORIA",
+    eyebrow: "02 — TRAYECTORIA & HISTORIAL",
     heading: "El camino hasta aqui",
     description:
       "De soporte de datos a ingenieria backend en produccion. Cada etapa combina software real con resultados medibles.",
@@ -156,11 +158,11 @@ export const es: PortfolioContent = {
   },
 
   work: {
-    eyebrow: "03 — PROYECTOS DESTACADOS",
+    eyebrow: "03 — PROYECTOS & CASOS DE ESTUDIO",
     heading: "Sistemas, no capturas de pantalla",
     description: "Cada proyecto es una decision de ingenieria con resultados medibles.",
     featured: {
-      flag: "PRINCIPAL",
+      flag: "PROYECTO FLAGSHIP",
       category: "PLATAFORMA ML EMPRESARIAL",
       title: "ChurnInsight",
       summary:
@@ -176,7 +178,7 @@ export const es: PortfolioContent = {
     },
     secondary: [
       {
-        badge: "1ER PUESTO",
+        badge: "1ER PUESTO HACKATHON",
         badgeTone: "gold",
         meta: "MVP < 48H",
         title: "NEXIA 2026",
@@ -185,7 +187,7 @@ export const es: PortfolioContent = {
         tags: ["Node.js", "NestJS", "APIs de IA"],
       },
       {
-        badge: "1ER PUESTO",
+        badge: "1ER PUESTO FERIA UNSA",
         badgeTone: "green",
         meta: "IoT · MOVIL",
         title: "Chakrita",
@@ -194,7 +196,7 @@ export const es: PortfolioContent = {
         tags: ["Flutter", "IoT", "UX/UI"],
       },
     ],
-    comparisonTitle: "Comparativa de proyectos",
+    comparisonTitle: "Matriz de Comparacion Tecnica",
     comparisonHeaders: {
       project: "Proyecto",
       domain: "Dominio",
@@ -232,20 +234,20 @@ export const es: PortfolioContent = {
   },
 
   github: {
-    eyebrow: "GITHUB — EN VIVO",
+    eyebrow: "04 — TELEMETRÍA EN VIVO",
     heading: "Codigo real, actividad real",
     description:
       "Repositorios cargados en directo desde la API de GitHub. Lo que ves aqui es exactamente lo que hay en mi cuenta, ahora mismo.",
-    viewAll: "Ver todos los repositorios",
-    updatedLabel: "Actualizado",
-    reposLabel: "REPOS PUBLICOS",
+    viewAll: "Ver repositorios en GitHub",
+    updatedLabel: "Ultimo push",
+    reposLabel: "REPOSITORIOS PUBLICOS",
     followersLabel: "SEGUIDORES",
-    errorText: "No se pudo cargar GitHub en este momento.",
-    loadingText: "Consultando la API de GitHub…",
+    errorText: "No se pudo conectar a la API de GitHub en este momento.",
+    loadingText: "Consultando telemetria de GitHub en vivo…",
   },
 
   architecture: {
-    eyebrow: "04 — ARQUITECTURA DE DATOS",
+    eyebrow: "05 — ARQUITECTURA DE DATOS",
     heading: "Como pienso un sistema de datos",
     description:
       "Del origen al valor: una tuberia clara y medible donde cada capa tiene una responsabilidad y un contrato definido.",
@@ -280,7 +282,7 @@ export const es: PortfolioContent = {
   },
 
   stack: {
-    eyebrow: "05 — TECNOLOGIAS",
+    eyebrow: "06 — TECNOLOGÍAS & MATRIZ DE DOMINIO",
     heading: "El stack con el que trabajo",
     description:
       "Herramientas que uso para llevar ideas desde el modelo de datos hasta produccion.",
@@ -313,12 +315,12 @@ export const es: PortfolioContent = {
   },
 
   credentials: {
-    eyebrow: "06 — CREDENCIALES",
+    eyebrow: "07 — CREDENCIALES & CERTIFICACIONES",
     heading: "Ganado, no declarado",
     description:
       "Resultados verificables, formacion continua y liderazgo en la comunidad de ingenieria.",
-    achievementsLabel: "LOGROS",
-    certificationsLabel: "CERTIFICACIONES",
+    achievementsLabel: "LOGROS DE INGENIERÍA",
+    certificationsLabel: "CERTIFICACIONES VERIFICADAS",
     certificationsTotal: "51 en total",
     verifyCta: "Verificar credenciales en Credly",
     achievements: [
@@ -349,21 +351,54 @@ export const es: PortfolioContent = {
     ],
   },
 
+  faq: {
+    eyebrow: "08 — PREGUNTAS FRECUENTES & DECISIONES",
+    heading: "Decisiones de Arquitectura & Colaboracion",
+    description:
+      "Claridad total sobre como abordo la construccion de software, la optimizacion de latencia y la integracion en equipos de alto rendimiento.",
+    items: [
+      {
+        category: "ARQUITECTURA",
+        question: "¿Por que integrar inferencia ML en el backend en lugar de microservicios dedicados?",
+        answer:
+          "En proyectos como ChurnInsight, exportar el modelo a ONNX Runtime y ejecutarlo en el mismo proceso de Java/Spring Boot elimino el overhead de red y serializacion JSON, reduciendo la latencia P99 de 2000 ms a 20 ms manteniendo cero dependencia de infraestructura externa.",
+      },
+      {
+        category: "DISPONIBILIDAD",
+        question: "¿Cual es tu disponibilidad actual para roles e incorporacion?",
+        answer:
+          "Actualmente me encuentro cursando los ultimos periodos de Ingenieria de Sistemas en la UNSA y trabajando como practicante Backend en Fundacion CALMA. Estoy disponible para roles de Junior Data Engineer o Backend Developer en modalidades remotas o hibridas.",
+      },
+      {
+        category: "METODOLOGÍA",
+        question: "¿Como garantizas la calidad del codigo y la paridad de datos?",
+        answer:
+          "Utilizo chequeos estrictos de tipos en TypeScript/Java, migraciones de base de datos declarativas (Flyway/Liquibase/SQL), documentacion OpenAPI/Swagger, y pruebas E2E automatizadas antes de cada despliegue.",
+      },
+      {
+        category: "DATOS & CLOUD",
+        question: "¿Que experiencia tienes con plataformas cloud como Oracle u AWS?",
+        answer:
+          "Cuento con certificaciones oficiales de Oracle Cloud Infrastructure (OCI Foundations & APEX Professional), AWS Academy Cloud Foundations y Google Cloud Foundations. He desplegado entornos contenerizados con Docker sobre instancias OCI y EC2.",
+      },
+    ],
+  },
+
   contact: {
-    eyebrow: "07 — HABLEMOS",
+    eyebrow: "09 — HABLEMOS",
     headingLead: "Construyamos algo",
     headingAccent: "que escale.",
     description:
       "Disponible para roles Junior Data Engineer y Backend Engineering. Si buscas ingenieros que cuidan los detalles, conversemos.",
-    emailCta: "Escribeme",
-    linkedinCta: "LinkedIn",
-    githubCta: "GitHub",
+    emailCta: "Copiar Email Directo",
+    linkedinCta: "Perfil en LinkedIn",
+    githubCta: "Repositorios GitHub",
   },
 
   footer: {
     rights: "Ower Frank Lopez Arela. Todos los derechos reservados.",
-    tagline: "Backend · Data · IA · Cloud — Arequipa, Peru",
-    builtWith: "Construido con Next.js, React y Tailwind CSS",
-    backToTop: "Volver arriba",
+    tagline: "Backend · Data · IA · Cloud — Arequipa, Peru (16.40°S 71.53°W)",
+    builtWith: "Construido con Next.js 15, React 19, Tailwind CSS v4 & Framer Motion",
+    backToTop: "Volver al inicio",
   },
 };

@@ -1,67 +1,80 @@
-import type { ExperienceContent, TimelineItem } from "@/types/content";
-import { Reveal } from "@/components/animations/Reveal";
-import { TimelineLine } from "@/components/animations/TimelineLine";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { cn } from "@/lib/utils";
+"use client";
 
-function Node({ tone }: { tone: TimelineItem["tone"] }) {
-  return (
-    <span className="absolute left-[-34px] top-[6px] h-[13px] w-[13px]">
-      {tone === "accent" && (
-        <span className="absolute inset-0 animate-ping rounded-full bg-[var(--color-accent)] opacity-60" />
-      )}
-      <span
-        className={cn(
-          "absolute inset-0 rounded-full",
-          tone === "accent" &&
-            "bg-[var(--color-accent)] shadow-[0_0_0_5px_rgba(255, 171, 56,0.15),0_0_16px_var(--color-accent)]",
-          tone === "outline" && "border-2 border-[var(--color-accent)]/70 bg-[#100d16]",
-          tone === "muted" && "border-2 border-white/20 bg-[#100d16]",
-        )}
-      />
-    </span>
-  );
-}
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import type { ExperienceContent } from "@/types/content";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
 export function Experience({ content }: { content: ExperienceContent }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start 70%", "end 70%"],
+  });
+  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
   return (
     <section
       id="experience"
-      className="relative z-[2] mx-auto max-w-[1180px] px-[clamp(20px,5vw,64px)] py-[clamp(40px,7vw,90px)]"
+      className="relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-12 py-24 sm:py-32"
     >
-      <Reveal>
-        <Eyebrow className="mb-4">{content.eyebrow}</Eyebrow>
-      </Reveal>
-      <Reveal as="h2" className="text-[clamp(1.9rem,4vw,3.2rem)] font-bold tracking-[-0.03em]">
-        {content.heading}
-      </Reveal>
-      <Reveal delay={100}>
-        <p className="mt-4 max-w-[52ch] text-[1.05rem] text-[var(--color-muted)]">
-          {content.description}
-        </p>
-      </Reveal>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Left Column Heading */}
+        <div className="lg:col-span-5 sticky top-28">
+          <Eyebrow>{content.eyebrow}</Eyebrow>
+          <h2 className="font-display text-4xl sm:text-6xl font-semibold tracking-tight text-white leading-[1.05] mt-4">
+            {content.heading}
+          </h2>
+          <p className="text-zinc-400 text-base sm:text-lg mt-4 max-w-md">
+            {content.description}
+          </p>
+        </div>
 
-      <div className="relative mt-14 pl-[34px]">
-        <TimelineLine />
+        {/* Right Column Timeline */}
+        <div ref={trackRef} className="lg:col-span-7 relative pl-8 sm:pl-12">
+          {/* Vertical Track Line */}
+          <div className="absolute left-[10px] sm:left-[14px] top-2 bottom-2 w-px bg-white/10" />
+          <motion.div
+            style={{ scaleY: lineScale }}
+            className="absolute left-[10px] sm:left-[14px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-amber-400 via-cyan-400 to-emerald-400"
+          />
 
-        {content.items.map((exp, index) => (
-          <Reveal
-            key={exp.title}
-            delay={index * 80}
-            className={cn("relative", index < content.items.length - 1 && "mb-11")}
-          >
-            <Node tone={exp.tone} />
-            <div className="font-mono-token text-xs tracking-[0.05em] text-[var(--color-accent-2)]">
-              {exp.period}
-            </div>
-            <h3 className="mt-1.5 text-[1.3rem] font-semibold tracking-[-0.01em]">
-              {exp.title}
-            </h3>
-            <p className="mt-1.5 max-w-[60ch] text-base leading-relaxed text-[var(--color-muted)]">
-              {exp.description}
-            </p>
-          </Reveal>
-        ))}
+          <div className="space-y-12">
+            {content.items.map((exp, idx) => (
+              <div key={exp.title} className="relative group">
+                {/* Node Dot */}
+                <div className="absolute -left-[37px] sm:-left-[45px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-[#030305] transition-all group-hover:border-amber-400 group-hover:scale-125">
+                  <div
+                    className={`h-2 w-2 rounded-full ${
+                      exp.tone === "accent"
+                        ? "bg-amber-400 shadow-[0_0_10px_#fbbf24]"
+                        : "bg-zinc-500 group-hover:bg-amber-300"
+                    }`}
+                  />
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-[#09080d]/80 p-6 backdrop-blur-xl transition-all duration-300 group-hover:border-amber-400/40">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className="font-mono text-xs font-bold text-amber-400 tracking-wider">
+                      {exp.period}
+                    </span>
+                    <span className="font-mono text-xs text-zinc-500">
+                      0{idx + 1}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-white mb-3">
+                    {exp.title}
+                  </h3>
+
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    {exp.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

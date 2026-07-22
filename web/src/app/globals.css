@@ -1,59 +1,62 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Design tokens — "Fundición Andina de Datos"
-   Duotono cálido/eléctrico: oro andino (primario) + teal señal-de-datos
-   (secundario) sobre negro volcánico cálido. Acento rojo Perú, con moderación.
-   Tailwind v4 @theme — cambiar un valor aquí propaga a todo el sitio.
+   Design Tokens — "Obsidian Data Foundry v3"
+   Ultra-premium palette: Obsidian Pitch (#030305), Electric Amber (#FFB800),
+   Cyber Cyan (#00F2FE), and Andean Crimson accent.
+   Tailwind v4 @theme — global design system variables.
    ========================================================================== */
 @theme {
-  --color-bg: #08070a;
-  --color-surface: #0d0b11;
-  --color-ink: #f6f3ee;
-  --color-muted: #a7a0ac;
-  --color-faint: #7b7484;
-  --color-line: rgba(255, 255, 255, 0.08);
+  --color-bg: #030305;
+  --color-surface: #09080d;
+  --color-surface-elevated: #110f17;
+  --color-surface-border: rgba(255, 255, 255, 0.08);
 
-  /* Primario — oro andino / ámbar */
-  --color-accent: #ffab38;
-  --color-accent-2: #ffc978;
-  --color-accent-deep: #f0700d;
+  --color-ink: #f8f6f0;
+  --color-muted: #a19ba8;
+  --color-faint: #6c6575;
+  --color-line: rgba(255, 255, 255, 0.07);
 
-  /* Secundario — teal eléctrico (señal de datos) */
-  --color-accent-cyan: #34e6d4;
+  /* Primary Accent — Andean Gold / Electric Amber */
+  --color-accent: #ffb800;
+  --color-accent-2: #ffd270;
+  --color-accent-deep: #f06a0a;
 
-  /* Acentos Peru (bandera) — detalles y motivos andinos */
+  /* Secondary Accent — Cyber Cyan Signal */
+  --color-accent-cyan: #00f2fe;
+
+  /* Flag Accent — Peruvian Crimson Glow */
   --color-peru-red: #e11d2a;
   --color-peru-red-2: #ff4d5e;
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "JetBrains Mono", monospace;
+  --font-display: var(--font-fraunces), "Times New Roman", Georgia, serif;
 
   --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  --animate-aurora-1: aur1 22s ease-in-out infinite;
-  --animate-aurora-2: aur2 26s ease-in-out infinite;
-  --animate-aurora-3: aur3 30s ease-in-out infinite;
-  --animate-marquee: marq 42s linear infinite;
-  --animate-shimmer: shimmer 6s linear infinite;
+  --animate-aurora-1: aur1 20s ease-in-out infinite;
+  --animate-aurora-2: aur2 25s ease-in-out infinite;
+  --animate-aurora-3: aur3 28s ease-in-out infinite;
+  --animate-marquee: marq 38s linear infinite;
+  --animate-marquee-reverse: marqrev 38s linear infinite;
+  --animate-shimmer: shimmer 5s linear infinite;
   --animate-scroll-cue: cue 2s ease-in-out infinite;
-  --animate-float: floaty 6s ease-in-out infinite;
-  --animate-grid-pan: gridpan 26s linear infinite;
-  --animate-border-spin: borderspin 5s linear infinite;
+  --animate-float: floaty 5s ease-in-out infinite;
+  --animate-grid-pan: gridpan 22s linear infinite;
+  --animate-border-spin: borderspin 4s linear infinite;
   --animate-blink: blink 1.1s steps(1) infinite;
-  --animate-flow: flow 2.4s linear infinite;
-  --animate-glow: glow 4s ease-in-out infinite;
-  --animate-spin-slow: spinslow 44s linear infinite;
-  --animate-packet: packet 3.2s cubic-bezier(0.55, 0, 0.45, 1) infinite;
-  --animate-sheen: sheen 4.5s ease-in-out infinite;
-  --animate-pulse-ring: pulsering 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-flow: flow 2.2s linear infinite;
+  --animate-glow: glow 3.5s ease-in-out infinite;
+  --animate-spin-slow: spinslow 40s linear infinite;
+  --animate-pulse-ring: pulsering 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  --animate-radar: radar 4s linear infinite;
 }
 
-/* Angulo animable para bordes conicos giratorios */
 @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -62,28 +65,27 @@
 
 @keyframes aur1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(8vw, 6vh) scale(1.25); }
+  50% { transform: translate(6vw, 5vh) scale(1.3); }
 }
 @keyframes aur2 {
   0%, 100% { transform: translate(0, 0) scale(1.1); }
-  50% { transform: translate(-10vw, -4vh) scale(0.85); }
+  50% { transform: translate(-8vw, -3vh) scale(0.9); }
 }
 @keyframes aur3 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(6vw, -8vh) scale(1.3); }
+  50% { transform: translate(5vw, -6vh) scale(1.35); }
 }
 @keyframes floaty {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-@keyframes drift {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(-2%, 3%); }
-  66% { transform: translate(3%, -2%); }
+  50% { transform: translateY(-12px); }
 }
 @keyframes marq {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+@keyframes marqrev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
 @keyframes cue {
   0% { transform: translateY(0); opacity: 0; }
@@ -96,8 +98,8 @@
 }
 @keyframes sheen {
   0%, 100% { transform: translateX(-120%) skewX(-18deg); opacity: 0; }
-  45% { opacity: 0.55; }
-  55% { opacity: 0.55; }
+  45% { opacity: 0.6; }
+  55% { opacity: 0.6; }
   70%, 100% { transform: translateX(220%) skewX(-18deg); opacity: 0; }
 }
 @keyframes pulsering {
@@ -122,30 +124,12 @@
   to { stroke-dashoffset: -220; }
 }
 @keyframes glow {
-  0%, 100% { opacity: 0.45; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.45; filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.3)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 24px rgba(255, 184, 0, 0.7)); }
 }
-@keyframes packet {
-  0% { offset-distance: 0%; opacity: 0; }
-  8% { opacity: 1; }
-  92% { opacity: 1; }
-  100% { offset-distance: 100%; opacity: 0; }
-}
-@keyframes travel {
-  0% { left: 0%; opacity: 0; }
-  12% { opacity: 1; }
-  88% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
-}
-@keyframes rowin {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes travel-y {
-  0% { top: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+@keyframes radar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* ==========================================================================
@@ -167,54 +151,89 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(255, 171, 56, 0.28);
+  background: rgba(255, 184, 0, 0.3);
   color: #fff;
 }
 
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-/* Firefox / thin scrollbar aesthetics */
+/* Thin custom scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 171, 56, 0.22) transparent;
+  scrollbar-color: rgba(255, 184, 0, 0.25) transparent;
 }
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(255, 171, 56, 0.32), rgba(52, 230, 212, 0.24));
+  background: linear-gradient(180deg, rgba(255, 184, 0, 0.4), rgba(0, 242, 254, 0.3));
   border-radius: 10px;
 }
 
 /* ==========================================================================
-   Reusable component utilities
+   Component Utilities & Micro-Interactions
    ========================================================================== */
 @layer components {
   .font-mono-token {
     font-family: var(--font-mono);
   }
 
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+
+  .hud-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-faint);
+  }
+
+  .glass-card {
+    position: relative;
+    border: 1px solid var(--color-line);
+    background: rgba(13, 11, 18, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-card:hover {
+    border-color: rgba(255, 184, 0, 0.28);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -10px rgba(255, 184, 0, 0.08);
+  }
+
   .glass-panel {
     border: 1px solid var(--color-line);
-    background: rgba(255, 255, 255, 0.025);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .text-gradient-accent {
-    background: linear-gradient(110deg, var(--color-accent-2), var(--color-accent-deep) 48%, var(--color-accent-cyan));
+    background: linear-gradient(110deg, #ffffff 0%, var(--color-accent-2) 35%, var(--color-accent) 65%, var(--color-accent-cyan) 100%);
     background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .text-gradient-cyan {
+    background: linear-gradient(110deg, #ffffff 10%, var(--color-accent-cyan) 70%, #70aaff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -223,31 +242,30 @@ body {
 
   .grid-overlay {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
-    background-size: 64px 64px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 50%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 50%, transparent 100%);
   }
 
   .noise-overlay {
-    opacity: 0.05;
+    opacity: 0.04;
     mix-blend-mode: overlay;
+    pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   .marquee-mask {
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   }
 
-  /* Cifras que no "bailan" al animar el contador */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum";
   }
 
-  /* Barrido de brillo diagonal (para CTAs y paneles destacados) */
   .sheen {
     position: relative;
     overflow: hidden;
@@ -272,7 +290,6 @@ body {
     animation: sheen 1.1s ease;
   }
 
-  /* Borde conico giratorio (se ilumina al hover del contenedor .group) */
   .spin-border {
     position: relative;
     isolation: isolate;
@@ -286,9 +303,9 @@ body {
     padding: 1px;
     background: conic-gradient(
       from var(--angle),
-      transparent 52%,
-      var(--color-accent-2) 74%,
-      var(--color-accent-cyan) 88%,
+      transparent 50%,
+      var(--color-accent) 75%,
+      var(--color-accent-cyan) 90%,
       transparent 100%
     );
     -webkit-mask:
@@ -297,7 +314,7 @@ body {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
     animation: var(--animate-border-spin);
   }
   .group:hover .spin-border::before,
@@ -305,7 +322,6 @@ body {
     opacity: 1;
   }
 
-  /* Foco radial que sigue al cursor sobre una tarjeta (usa --mx / --my en %) */
   .card-spotlight::after {
     content: "";
     position: absolute;
@@ -313,58 +329,29 @@ body {
     border-radius: inherit;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.45s ease;
+    transition: opacity 0.4s ease;
     background: radial-gradient(
-      340px circle at var(--mx, 50%) var(--my, 0%),
-      rgba(255, 171, 56, 0.16),
-      transparent 60%
+      380px circle at var(--mx, 50%) var(--my, 0%),
+      rgba(255, 184, 0, 0.12),
+      transparent 65%
     );
   }
   .card-spotlight:hover::after {
     opacity: 1;
   }
 
-  /* Motivo andino (greca / fret escalonado) como cinta decorativa */
-  .andean-fret {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16' viewBox='0 0 48 16'%3E%3Cpath d='M0 15h6V9h6V3h6v6h6V3h6v6h6v6h6' fill='none' stroke='%23ffab38' stroke-width='1.4' stroke-opacity='0.55'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-position: center;
-  }
-
-  /* Texto gigante solo-contorno para divisores cinematograficos */
-  .text-outline {
-    color: transparent;
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.22);
-  }
-  .text-outline-accent {
-    color: transparent;
-    -webkit-text-stroke: 1.5px rgba(255, 201, 120, 0.42);
-  }
-
-  /* Cinta tricolor (rojo–blanco–rojo) inspirada en la bandera del Peru */
-  .peru-line {
-    background: linear-gradient(
-      90deg,
-      var(--color-peru-red),
-      var(--color-peru-red) 33%,
-      rgba(255, 255, 255, 0.85) 33%,
-      rgba(255, 255, 255, 0.85) 66%,
-      var(--color-peru-red) 66%,
-      var(--color-peru-red)
-    );
+  .peru-accent-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-peru-red);
+    box-shadow: 0 0 10px var(--color-peru-red);
   }
 }
 
-/* ==========================================================================
-   Reduced motion
-   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;

@@ -1,27 +1,26 @@
+"use client";
+
 import type { ArchitectureContent } from "@/types/content";
-import { Reveal } from "@/components/animations/Reveal";
-import { DataArchitecture } from "@/components/animations/DataArchitecture";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { DataArchitecture } from "@/components/animations/DataArchitecture";
 
 export function Architecture({ content }: { content: ArchitectureContent }) {
   return (
     <section
       id="architecture"
-      className="relative z-[2] mx-auto max-w-[1180px] px-[clamp(20px,5vw,64px)] py-[clamp(60px,9vw,120px)]"
+      className="relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-12 py-24 sm:py-32"
     >
-      <Reveal>
-        <Eyebrow className="mb-4">{content.eyebrow}</Eyebrow>
-      </Reveal>
-      <Reveal as="h2" className="text-[clamp(1.9rem,4vw,3.2rem)] font-bold tracking-[-0.03em]">
-        {content.heading}
-      </Reveal>
-      <Reveal delay={100}>
-        <p className="mb-14 mt-3 max-w-[56ch] text-[1.05rem] text-[var(--color-muted)]">
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <Eyebrow className="justify-center mb-4">{content.eyebrow}</Eyebrow>
+        <h2 className="font-display text-4xl sm:text-6xl font-semibold tracking-tight text-white leading-[1.05] mb-4">
+          {content.heading}
+        </h2>
+        <p className="text-zinc-400 text-base sm:text-lg">
           {content.description}
         </p>
-      </Reveal>
+      </div>
 
-      <div className="mx-auto max-w-[720px]">
+      <div className="mx-auto max-w-4xl">
         <DataArchitecture content={content} />
       </div>
     </section>
