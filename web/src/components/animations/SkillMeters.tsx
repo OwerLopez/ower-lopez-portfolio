@@ -39,7 +39,7 @@ export function SkillMeters({ className }: { className?: string }) {
             </div>
             <div className="relative h-[6px] overflow-hidden rounded-full bg-white/[0.06]">
               <motion.span
-                className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[var(--color-accent-deep)] via-[var(--color-accent)] to-[var(--color-accent-cyan)] shadow-[0_0_12px_rgba(91,140,255,0.5)]"
+                className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[var(--color-accent-deep)] via-[var(--color-accent)] to-[var(--color-accent-cyan)] shadow-[0_0_12px_rgba(255, 171, 56,0.5)]"
                 initial={{ width: 0 }}
                 whileInView={{ width: `${m.level}%` }}
                 viewport={{ once: true, margin: "0px 0px -12% 0px" }}

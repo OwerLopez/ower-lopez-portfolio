@@ -26,7 +26,7 @@ export default async function OpengraphImage({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#060609",
+          background: "#08070a",
           padding: "72px",
           fontFamily: "sans-serif",
         }}
@@ -40,7 +40,7 @@ export default async function OpengraphImage({
             height: 560,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(43,92,255,0.55), transparent 62%)",
+              "radial-gradient(circle, rgba(240, 112, 13,0.55), transparent 62%)",
           }}
         />
         <div
@@ -52,7 +52,7 @@ export default async function OpengraphImage({
             height: 560,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(46,166,255,0.35), transparent 62%)",
+              "radial-gradient(circle, rgba(52, 230, 212,0.35), transparent 62%)",
           }}
         />
 
@@ -62,7 +62,7 @@ export default async function OpengraphImage({
               width: 64,
               height: 64,
               borderRadius: 16,
-              background: "linear-gradient(135deg, #2b5cff, #5b8cff)",
+              background: "linear-gradient(135deg, #f0700d, #ffab38)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -73,7 +73,7 @@ export default async function OpengraphImage({
           >
             {siteConfig.initials}
           </div>
-          <div style={{ color: "#9fa1ab", fontSize: 26, letterSpacing: 4 }}>
+          <div style={{ color: "#a7a0ac", fontSize: 26, letterSpacing: 4 }}>
             {siteConfig.role[locale].toUpperCase()}
           </div>
         </div>
@@ -81,7 +81,7 @@ export default async function OpengraphImage({
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div
             style={{
-              color: "#f4f5f7",
+              color: "#f6f3ee",
               fontSize: 76,
               fontWeight: 800,
               lineHeight: 1.05,
@@ -90,7 +90,7 @@ export default async function OpengraphImage({
           >
             {content.hero.titleLead} {content.hero.titleAccent}
           </div>
-          <div style={{ color: "#9fa1ab", fontSize: 30 }}>
+          <div style={{ color: "#a7a0ac", fontSize: 30 }}>
             {siteConfig.name} · Arequipa, Peru
           </div>
         </div>
@@ -104,7 +104,7 @@ export default async function OpengraphImage({
                   border: "1px solid rgba(255,255,255,0.12)",
                   borderRadius: 999,
                   padding: "12px 24px",
-                  color: "#c9cad2",
+                  color: "#d8d2c8",
                   fontSize: 24,
                 }}
               >

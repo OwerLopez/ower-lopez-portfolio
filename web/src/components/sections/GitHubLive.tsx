@@ -273,7 +273,7 @@ export function GitHubLive({
                     <span className="inline-flex items-center gap-1.5">
                       <span
                         className="h-2 w-2 rounded-full"
-                        style={{ background: LANG_COLORS[repo.language] ?? "#8ab0ff" }}
+                        style={{ background: LANG_COLORS[repo.language] ?? "#ffc978" }}
                       />
                       <span className="font-mono-token">{repo.language}</span>
                     </span>

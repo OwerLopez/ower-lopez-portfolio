@@ -61,7 +61,7 @@ export function DataArchitecture({ content }: { content: ArchitectureContent }) 
                 className="group relative"
               >
                 {/* Nodo sobre la tuberia */}
-                <span className="absolute left-[-52px] top-4 grid h-11 w-11 place-items-center rounded-xl border border-white/12 bg-[rgba(9,9,14,0.85)] text-[var(--color-accent-2)] shadow-[0_0_20px_rgba(43,92,255,0.18)] transition-colors duration-300 group-hover:border-[var(--color-accent)]/60">
+                <span className="absolute left-[-52px] top-4 grid h-11 w-11 place-items-center rounded-xl border border-white/12 bg-[rgba(15, 13, 20,0.85)] text-[var(--color-accent-2)] shadow-[0_0_20px_rgba(240, 112, 13,0.18)] transition-colors duration-300 group-hover:border-[var(--color-accent)]/60">
                   <Icon className="h-5 w-5" />
                 </span>
 

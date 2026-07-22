@@ -187,7 +187,7 @@ export function InteractiveTerminal({ className }: { className?: string }) {
 
   const color = (k: Line["kind"]) =>
     k === "cmd"
-      ? "text-[#c9d4f5]"
+      ? "text-[#efe7d8]"
       : k === "ok"
         ? "text-[#8fe3a8]"
         : k === "err"
@@ -198,7 +198,7 @@ export function InteractiveTerminal({ className }: { className?: string }) {
     <div
       ref={boxRef}
       onClick={() => inputRef.current?.focus()}
-      className={`cursor-text overflow-hidden rounded-[18px] border border-white/[0.09] bg-[rgba(6,7,11,0.92)] shadow-[0_24px_70px_rgba(0,0,0,0.5)] ${className ?? ""}`}
+      className={`cursor-text overflow-hidden rounded-[18px] border border-white/[0.09] bg-[rgba(8, 7, 10,0.92)] shadow-[0_24px_70px_rgba(0,0,0,0.5)] ${className ?? ""}`}
     >
       {/* Barra de titulo */}
       <div className="flex items-center gap-2 border-b border-white/[0.07] bg-white/[0.02] px-4 py-3">
@@ -217,7 +217,7 @@ export function InteractiveTerminal({ className }: { className?: string }) {
         {/* Intro */}
         <div>
           <span className="select-none text-[var(--color-accent-2)]">$ </span>
-          <span className="text-[#c9d4f5]">{INTRO_CMD.slice(0, typed)}</span>
+          <span className="text-[#efe7d8]">{INTRO_CMD.slice(0, typed)}</span>
           {!booted && (
             <span className="ml-0.5 inline-block h-[14px] w-[7px] translate-y-[2px] bg-[var(--color-accent-2)] motion-safe:animate-[var(--animate-blink)]" />
           )}
@@ -248,7 +248,7 @@ export function InteractiveTerminal({ className }: { className?: string }) {
               spellCheck={false}
               autoComplete="off"
               aria-label="terminal input"
-              className="ml-1 w-full bg-transparent text-[#c9d4f5] caret-[var(--color-accent-2)] outline-none placeholder:text-white/20"
+              className="ml-1 w-full bg-transparent text-[#efe7d8] caret-[var(--color-accent-2)] outline-none placeholder:text-white/20"
               placeholder="escribe un comando… (help)"
             />
           </div>

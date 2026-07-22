@@ -16,7 +16,7 @@ export default function NotFound() {
       </p>
       <Link
         href={`/${defaultLocale}`}
-        className="mt-10 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-deep)] px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_8px_30px_rgba(43,92,255,0.4)]"
+        className="sheen mt-10 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-br from-[var(--color-accent-2)] via-[var(--color-accent)] to-[var(--color-accent-deep)] px-7 py-3.5 text-[15px] font-semibold text-[#08070a] shadow-[0_8px_30px_rgba(240,112,13,0.42)]"
       >
         <ArrowLeft className="h-4 w-4" />
         Volver al inicio

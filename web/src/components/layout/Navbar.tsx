@@ -79,7 +79,7 @@ export function Navbar({ locale, content }: NavbarProps) {
         className={cn(
           "fixed inset-x-0 top-0 z-50 flex items-center justify-between px-[clamp(20px,5vw,64px)] py-4 transition-colors duration-400",
           scrolled
-            ? "border-b border-white/[0.07] bg-[rgba(8,8,12,0.72)] backdrop-blur-xl"
+            ? "border-b border-white/[0.07] bg-[rgba(13, 11, 17,0.72)] backdrop-blur-xl"
             : "border-b border-transparent bg-transparent",
         )}
       >
@@ -88,7 +88,7 @@ export function Navbar({ locale, content }: NavbarProps) {
           className="flex items-center gap-3 text-[var(--color-ink)]"
           aria-label={siteConfig.name}
         >
-          <span className="font-mono-token grid h-[34px] w-[34px] place-items-center rounded-[9px] bg-gradient-to-br from-[var(--color-accent-deep)] to-[var(--color-accent)] text-[13px] font-semibold text-white shadow-[0_0_20px_rgba(91,140,255,0.4)]">
+          <span className="font-mono-token grid h-[34px] w-[34px] place-items-center rounded-[9px] bg-gradient-to-br from-[var(--color-accent-deep)] via-[var(--color-accent)] to-[var(--color-accent-cyan)] text-[13px] font-bold text-[#08070a] shadow-[0_0_20px_rgba(255,171,56,0.4)]">
             {siteConfig.initials}
           </span>
           <span className="text-[15px] font-semibold tracking-[-0.01em]">
@@ -152,7 +152,7 @@ export function Navbar({ locale, content }: NavbarProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col justify-center gap-2 bg-[rgba(6,6,9,0.94)] px-8 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 z-40 flex flex-col justify-center gap-2 bg-[rgba(8, 7, 10,0.94)] px-8 backdrop-blur-xl md:hidden"
           >
             {[...links, { href: "#contact", label: content.contact }].map(
               (link, index) => (

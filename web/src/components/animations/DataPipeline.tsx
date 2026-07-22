@@ -62,7 +62,7 @@ export function DataPipeline({ className }: { className?: string }) {
         {STAGES.map((stage, index) => (
           <div key={stage.label} className="contents">
             <div className="group/stage flex flex-col items-center gap-2 text-center">
-              <span className="relative grid h-11 w-11 place-items-center rounded-xl border border-white/12 bg-[rgba(9,9,14,0.7)] text-[var(--color-accent-2)] shadow-[0_0_20px_rgba(43,92,255,0.15)] transition-colors duration-300 group-hover/stage:border-[var(--color-accent)]/50">
+              <span className="relative grid h-11 w-11 place-items-center rounded-xl border border-white/12 bg-[rgba(15, 13, 20,0.7)] text-[var(--color-accent-2)] shadow-[0_0_20px_rgba(240, 112, 13,0.15)] transition-colors duration-300 group-hover/stage:border-[var(--color-accent)]/50">
                 <span className="absolute inset-0 rounded-xl bg-[var(--color-accent)]/10 opacity-0 blur-md transition-opacity duration-300 group-hover/stage:opacity-100" />
                 <stage.Icon className="h-5 w-5" />
               </span>

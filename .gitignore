@@ -41,4 +41,4 @@ web/playwright/.cache/
 # claude
 .claude/
 skills-lock.json
-
+CLAUDE.md

@@ -34,7 +34,7 @@ export function Stack({ content }: { content: StackContent }) {
               <div className="font-mono-token mb-[18px] text-[11px] tracking-[0.15em] text-[var(--color-accent-2)]">
                 {group.label}
               </div>
-              <div className="flex flex-col gap-[11px] text-base text-[#c9cad2]">
+              <div className="flex flex-col gap-[11px] text-base text-[#d8d2c8]">
                 {group.items.map((tech) => (
                   <span
                     key={tech}

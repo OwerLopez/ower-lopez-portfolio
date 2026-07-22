@@ -14,9 +14,9 @@ function Node({ tone }: { tone: TimelineItem["tone"] }) {
         className={cn(
           "absolute inset-0 rounded-full",
           tone === "accent" &&
-            "bg-[var(--color-accent)] shadow-[0_0_0_5px_rgba(91,140,255,0.15),0_0_16px_var(--color-accent)]",
-          tone === "outline" && "border-2 border-[var(--color-accent)]/70 bg-[#0b0b12]",
-          tone === "muted" && "border-2 border-white/20 bg-[#0b0b12]",
+            "bg-[var(--color-accent)] shadow-[0_0_0_5px_rgba(255, 171, 56,0.15),0_0_16px_var(--color-accent)]",
+          tone === "outline" && "border-2 border-[var(--color-accent)]/70 bg-[#100d16]",
+          tone === "muted" && "border-2 border-white/20 bg-[#100d16]",
         )}
       />
     </span>

@@ -48,25 +48,44 @@ export function CinematicDivider({
       ref={ref}
       className="relative z-[2] my-[clamp(40px,6vw,80px)] h-[clamp(320px,44vw,520px)] overflow-hidden"
     >
-      {/* Imagen con parallax */}
+      {/* Imagen con parallax + Ken Burns (zoom cinematográfico continuo) */}
       <motion.div
         style={isReduced ? undefined : { y: imgY }}
         className="absolute inset-[-14%_0]"
       >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="100vw"
-          className="object-cover"
-          quality={70}
-        />
+        <motion.div
+          className="h-full w-full"
+          animate={isReduced ? undefined : { scale: [1, 1.12], x: ["0%", "-2%"] }}
+          transition={{
+            duration: 18,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            quality={70}
+          />
+        </motion.div>
       </motion.div>
 
-      {/* Viñetas para integrarse al tema oscuro */}
-      <div className="absolute inset-0 bg-[rgba(6,6,9,0.55)]" />
+      {/* Viñetas + tinte duotono cálido/teal para integrarse al tema */}
+      <div className="absolute inset-0 bg-[rgba(8,7,10,0.5)]" />
+      <div
+        className="absolute inset-0 mix-blend-color opacity-40"
+        style={{
+          background:
+            "linear-gradient(120deg, rgba(255,171,56,0.5), rgba(52,230,212,0.4))",
+        }}
+      />
       <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-bg)] via-transparent to-[var(--color-bg)]" />
       <div className="grid-overlay absolute inset-0 opacity-60" />
+      <div className="noise-overlay absolute inset-0 opacity-[0.07]" />
 
       {/* Texto gigante delineado */}
       <motion.div
@@ -81,7 +100,7 @@ export function CinematicDivider({
             {titleAccent}
           </span>
         )}
-        <span className="font-mono-token mt-6 rounded-full border border-white/15 bg-[rgba(6,6,9,0.6)] px-4 py-2 text-[10.5px] tracking-[0.22em] text-[var(--color-muted)] backdrop-blur-sm">
+        <span className="font-mono-token mt-6 rounded-full border border-white/15 bg-[rgba(8, 7, 10,0.6)] px-4 py-2 text-[10.5px] tracking-[0.22em] text-[var(--color-muted)] backdrop-blur-sm">
           {caption}
         </span>
       </motion.div>

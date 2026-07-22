@@ -107,7 +107,7 @@ export function DataConstellation({
           const dist = Math.hypot(dx, dy);
           if (dist < linkDist) {
             const alpha = (1 - dist / linkDist) * 0.5;
-            ctx.strokeStyle = `rgba(91, 140, 255, ${alpha})`;
+            ctx.strokeStyle = `rgba(255, 171, 56, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -121,7 +121,7 @@ export function DataConstellation({
       for (const n of nodes) {
         const color = n.accent
           ? "225, 29, 42"
-          : "138, 176, 255";
+          : "255, 201, 120";
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${color}, 0.85)`;

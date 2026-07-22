@@ -36,7 +36,7 @@ export function MetricsDashboard({ className }: { className?: string }) {
       className={`grid grid-cols-1 gap-3.5 sm:grid-cols-2 ${className ?? ""}`}
     >
       {/* Carrera de latencia */}
-      <div className="rounded-[16px] border border-white/10 bg-[rgba(9,9,14,0.6)] p-5 sm:col-span-2">
+      <div className="rounded-[16px] border border-white/10 bg-[rgba(15, 13, 20,0.6)] p-5 sm:col-span-2">
         <div className="mb-4 flex items-center justify-between">
           <span className="font-mono-token text-[10px] tracking-[0.15em] text-[var(--color-faint)]">
             INFERENCE LATENCY — BEFORE / AFTER
@@ -61,7 +61,7 @@ export function MetricsDashboard({ className }: { className?: string }) {
             </div>
             <div className="h-[7px] overflow-hidden rounded-full bg-white/[0.06]">
               <motion.div
-                className={`h-full rounded-full ${bar.tone} shadow-[0_0_10px_rgba(91,140,255,0.4)]`}
+                className={`h-full rounded-full ${bar.tone} shadow-[0_0_10px_rgba(255, 171, 56,0.4)]`}
                 initial={{ width: "0%" }}
                 whileInView={{ width: `${bar.pct}%` }}
                 viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -73,7 +73,7 @@ export function MetricsDashboard({ className }: { className?: string }) {
       </div>
 
       {/* Gauge radial: recall */}
-      <div className="flex items-center gap-5 rounded-[16px] border border-white/10 bg-[rgba(9,9,14,0.6)] p-5">
+      <div className="flex items-center gap-5 rounded-[16px] border border-white/10 bg-[rgba(15, 13, 20,0.6)] p-5">
         <svg viewBox="0 0 100 100" className="h-[92px] w-[92px] flex-none -rotate-90">
           <circle cx="50" cy="50" r={R} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="8" />
           <motion.circle
@@ -111,7 +111,7 @@ export function MetricsDashboard({ className }: { className?: string }) {
       </div>
 
       {/* Sparkline throughput */}
-      <div className="rounded-[16px] border border-white/10 bg-[rgba(9,9,14,0.6)] p-5">
+      <div className="rounded-[16px] border border-white/10 bg-[rgba(15, 13, 20,0.6)] p-5">
         <div className="mb-2 flex items-center justify-between">
           <span className="font-mono-token text-[10px] tracking-[0.15em] text-[var(--color-faint)]">
             PIPELINE THROUGHPUT
@@ -124,8 +124,8 @@ export function MetricsDashboard({ className }: { className?: string }) {
         <svg viewBox="0 0 220 64" className="w-full" aria-hidden="true">
           <defs>
             <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(91,140,255,0.35)" />
-              <stop offset="100%" stopColor="rgba(91,140,255,0)" />
+              <stop offset="0%" stopColor="rgba(255, 171, 56,0.35)" />
+              <stop offset="100%" stopColor="rgba(255, 171, 56,0)" />
             </linearGradient>
           </defs>
           <motion.path

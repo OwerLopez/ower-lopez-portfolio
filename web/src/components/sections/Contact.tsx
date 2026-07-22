@@ -34,7 +34,7 @@ export function Contact({ content }: { content: ContactContent }) {
         <div className="mt-11 flex flex-wrap justify-center gap-3.5">
           <MagneticButton
             href={siteConfig.links.email}
-            className="gap-2.5 rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-deep)] px-8 py-4 text-[15px] font-semibold text-white shadow-[0_8px_30px_rgba(43,92,255,0.4)] transition-shadow hover:shadow-[0_12px_44px_rgba(43,92,255,0.6)]"
+            className="sheen gap-2.5 rounded-full bg-gradient-to-br from-[var(--color-accent-2)] via-[var(--color-accent)] to-[var(--color-accent-deep)] px-8 py-4 text-[15px] font-semibold text-[#08070a] shadow-[0_8px_30px_rgba(240,112,13,0.42)] transition-shadow hover:shadow-[0_14px_48px_rgba(255,171,56,0.55)]"
           >
             {content.emailCta}
             <ArrowRight className="h-4 w-4" />

@@ -172,9 +172,10 @@ test.describe("3. Interactive Terminal Emulator", () => {
 });
 
 test.describe("3. Interactive Terminal Emulator - Accessibility Media Query", () => {
-  test.use({ colorScheme: "dark", prefersReducedMotion: "reduce" });
+  test.use({ colorScheme: "dark" });
 
   test("reduced-motion media query skips typing animation and boots instantly", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/es");
     // Verify it is immediately booted
     const input = page.getByRole("textbox", { name: "terminal input" });

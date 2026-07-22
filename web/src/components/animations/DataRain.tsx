@@ -43,7 +43,7 @@ export function DataRain({ className }: { className?: string }) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const cols = Math.ceil(width / FONT);
       drops = Array.from({ length: cols }, () => Math.random() * -60);
-      ctx.fillStyle = "rgba(6,6,9,1)";
+      ctx.fillStyle = "rgba(8, 7, 10,1)";
       ctx.fillRect(0, 0, width, height);
     };
 
@@ -51,7 +51,7 @@ export function DataRain({ className }: { className?: string }) {
       // ~18 fps: estetica terminal y menos CPU
       if (now - last > 55) {
         last = now;
-        ctx.fillStyle = "rgba(6,6,9,0.16)";
+        ctx.fillStyle = "rgba(8, 7, 10,0.16)";
         ctx.fillRect(0, 0, width, height);
         ctx.font = `${FONT}px ui-monospace, monospace`;
 
@@ -64,7 +64,7 @@ export function DataRain({ className }: { className?: string }) {
           const head = Math.random() < 0.02;
           ctx.fillStyle = head
             ? "rgba(225,29,42,0.75)"
-            : "rgba(91,140,255,0.55)";
+            : "rgba(255, 171, 56,0.55)";
           ctx.fillText(glyph, x, y);
 
           if (y > height && Math.random() > 0.976) drops[i] = 0;
@@ -83,7 +83,7 @@ export function DataRain({ className }: { className?: string }) {
         const len = 4 + ((Math.random() * 10) | 0);
         const startY = Math.random() * height;
         for (let j = 0; j < len; j++) {
-          ctx.fillStyle = `rgba(91,140,255,${0.4 - j * 0.035})`;
+          ctx.fillStyle = `rgba(255, 171, 56,${0.4 - j * 0.035})`;
           ctx.fillText(
             GLYPHS[(Math.random() * GLYPHS.length) | 0]!,
             i * FONT,

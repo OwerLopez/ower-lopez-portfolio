@@ -32,7 +32,7 @@ export function Work({ content }: { content: WorkContent }) {
       <TiltCard
         as="article"
         max={4}
-        className="group overflow-hidden rounded-[24px] border border-white/[0.09] bg-[linear-gradient(160deg,rgba(91,140,255,0.06),rgba(255,255,255,0.015))] shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-md"
+        className="group overflow-hidden rounded-[24px] border border-white/[0.09] bg-[linear-gradient(160deg,rgba(255, 171, 56,0.06),rgba(255,255,255,0.015))] shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-md"
       >
         <div>
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
@@ -78,7 +78,7 @@ export function Work({ content }: { content: WorkContent }) {
                 {featured.metrics.map((metric) => (
                   <div
                     key={metric.label}
-                    className="rounded-[14px] border border-white/10 bg-[rgba(9,9,14,0.6)] p-5 backdrop-blur-sm"
+                    className="rounded-[14px] border border-white/10 bg-[rgba(15, 13, 20,0.6)] p-5 backdrop-blur-sm"
                   >
                     <div
                       className={cn(

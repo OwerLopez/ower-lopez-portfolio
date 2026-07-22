@@ -46,7 +46,7 @@ export function MouseSpotlight() {
       aria-hidden="true"
       className="pointer-events-none fixed left-0 top-0 z-[1] h-[640px] w-[640px] -ml-[320px] -mt-[320px] rounded-full opacity-0 mix-blend-screen transition-opacity duration-500"
       style={{
-        background: "radial-gradient(circle, rgba(91,140,255,.12), transparent 60%)",
+        background: "radial-gradient(circle, rgba(255, 171, 56,.12), transparent 60%)",
       }}
     />
   );
