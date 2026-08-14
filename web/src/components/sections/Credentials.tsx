@@ -1,82 +1,127 @@
 "use client";
 
-import { BadgeCheck, ExternalLink, Award } from "lucide-react";
-import type { CredentialsContent } from "@/types/content";
+import { ExternalLink, ShieldCheck } from "lucide-react";
+import { Reveal, Stagger } from "@/components/animations/Reveal";
+import { Counter } from "@/components/animations/Counter";
 import { siteConfig } from "@/config/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { CertCarousel } from "@/components/animations/CertCarousel";
+import type { PortfolioContent } from "@/types/content";
 
-export function Credentials({ content }: { content: CredentialsContent }) {
+const LIQUID = "/assets/texture_liquid.png";
+
+const GLOW_COLOR: Record<string, string> = {
+  flame: "#ff7a18",
+  magenta: "#e11d74",
+  violet: "#8b5cf6",
+  amber: "#fbbf24",
+};
+
+export function Credentials({ content }: { content: PortfolioContent }) {
+  const { credentials } = content;
+
   return (
-    <section
-      id="credentials"
-      className="relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-12 py-24 sm:py-32"
-    >
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
-        <div>
-          <Eyebrow>{content.eyebrow}</Eyebrow>
-          <h2 className="font-display text-4xl sm:text-6xl font-semibold tracking-tight text-white leading-[1.05] mt-4">
-            {content.heading}
-          </h2>
-        </div>
-        <p className="text-zinc-400 max-w-md text-base sm:text-lg">
-          {content.description}
+    <section id="credentials" className="relative z-10 mx-auto max-w-7xl px-5 py-24 sm:px-6 md:py-32" aria-label="Credenciales">
+      <Reveal>
+        <p className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
+          <span className="inline-block h-px w-12 bg-line-strong" />
+          {credentials.kicker}
         </p>
+      </Reveal>
+
+      <div className="mb-12 max-w-2xl">
+        <Reveal delay={80}>
+          <h2 className="font-display text-3xl leading-[1.12] font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
+            {credentials.heading}
+          </h2>
+        </Reveal>
+        <Reveal delay={140}>
+          <p className="mt-4 text-base text-muted">{credentials.description}</p>
+        </Reveal>
       </div>
 
-      {/* Engineering Achievements Cards Grid */}
-      <div className="mb-16">
-        <div className="flex items-center gap-4 mb-6 font-mono text-xs text-amber-400 uppercase tracking-widest">
-          <Award className="h-4 w-4" />
-          <span>{content.achievementsLabel}</span>
-          <div className="h-px flex-1 bg-white/10" />
-        </div>
+      {/* Muro de trofeos */}
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger stagger={0.06}>
+          {credentials.trophies.map((t, i) => {
+            const color = GLOW_COLOR[t.glow] ?? "#ff7a18";
+            return (
+              <Reveal key={t.index} delay={i * 60} variant="block">
+                <div
+                  className="hover-lift h-full rounded-2xl border border-line bg-surface p-7"
+                  style={{ boxShadow: `0 20px 60px -25px ${color}35` }}
+                >
+                  <span className="font-mono-token text-[10px] tracking-[0.3em] text-faint">{t.index}</span>
+                  <dd className="mt-4 text-4xl font-black tracking-tight tabular-nums sm:text-5xl" style={{ color }}>
+                    <Counter value={parseFloat(t.value.replace(/[^0-9.]/g, ""))} suffix={t.value.replace(/[0-9.]/g, "")} />
+                  </dd>
+                  <h3 className="mt-3 font-display text-lg font-bold tracking-tight text-ink">{t.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{t.detail}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </Stagger>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {content.achievements.map((item, idx) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border border-white/10 bg-[#09080d]/80 p-6 backdrop-blur-xl transition-all duration-300 hover:border-amber-400/50 hover:bg-white/[0.04] group"
+      {/* Certificaciones verificables */}
+      <div className="mt-16">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+          <Reveal>
+            <h3 className="font-mono-token text-xs tracking-[0.3em] text-muted">{credentials.credentialsLabel}</h3>
+          </Reveal>
+          <Reveal delay={60}>
+            <a
+              href={siteConfig.links.credly}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface px-5 py-2.5 text-sm font-medium text-ink transition-all duration-300 hover:border-[#e11d74]/50 hover:bg-surface-raised"
             >
-              <div className="flex items-center justify-between mb-4">
-                <span className="font-mono text-xs text-zinc-500">0{idx + 1}</span>
-                <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24]" />
-              </div>
-              <h3 className="font-display text-xl font-bold text-white mb-2">
-                {item.title}
-              </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                {item.detail}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Certifications Carousel */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between gap-4 mb-6 font-mono text-xs text-amber-400 uppercase tracking-widest">
-          <div className="flex items-center gap-2">
-            <BadgeCheck className="h-4 w-4 text-amber-400" />
-            <span>{content.certificationsLabel}</span>
-          </div>
-          <span className="text-zinc-400">{content.certificationsTotal}</span>
+              <ShieldCheck className="h-4 w-4 text-[#e11d74]" />
+              {credentials.verifyCta}
+              <ExternalLink className="h-3.5 w-3.5 text-faint" />
+            </a>
+          </Reveal>
         </div>
 
-        <CertCarousel items={content.certifications} />
-      </div>
-
-      <div className="text-center pt-8">
-        <a
-          href={siteConfig.links.credly}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2.5 rounded-full border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-amber-400/10 to-transparent px-8 py-3.5 text-sm font-semibold text-amber-300 transition-all duration-300 hover:border-amber-400 hover:shadow-[0_0_24px_rgba(255,184,0,0.3)] hover:text-white"
-        >
-          <BadgeCheck className="h-4 w-4 text-amber-400" />
-          <span>{content.verifyCta}</span>
-          <ExternalLink className="h-3.5 w-3.5 text-zinc-400" />
-        </a>
+        <div className="relative overflow-hidden rounded-2xl border border-line bg-surface">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-32 -top-32 h-72 w-72 select-none opacity-40"
+            style={{
+              backgroundImage: `url(${LIQUID})`,
+              backgroundSize: "cover",
+              mixBlendMode: "screen",
+            }}
+          />
+          <ul className="divide-y divide-line/60">
+            <Stagger stagger={0.06}>
+              {credentials.credentials.map((cert, i) => {
+                const color = GLOW_COLOR[cert.glow] ?? "#e11d74";
+                return (
+                  <Reveal key={cert.acronym} delay={i * 50} variant="block">
+                    <li className="flex flex-wrap items-center gap-4 px-6 py-5 transition-colors duration-300 hover:bg-surface-raised">
+                      <span
+                        className="font-mono-token inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-base text-[10px] font-bold"
+                        style={{ color, borderColor: `${color}4d` }}
+                      >
+                        {cert.acronym}
+                      </span>
+                      <span className="text-sm font-semibold text-ink">{cert.name}</span>
+                      <span className="text-xs text-muted">{cert.issuer}</span>
+                      <a
+                        href={cert.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ml-auto inline-flex items-center gap-1.5 font-mono-token text-[10px] tracking-wide text-faint transition-colors duration-300 hover:text-ink"
+                      >
+                        VERIFICAR <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </li>
+                  </Reveal>
+                );
+              })}
+            </Stagger>
+          </ul>
+        </div>
       </div>
     </section>
   );

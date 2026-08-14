@@ -1,80 +1,89 @@
 "use client";
 
-import { type ReactNode } from "react";
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Target, type TargetAndTransition } from "framer-motion";
+import type { ReactNode } from "react";
 
-type Direction = "up" | "down" | "left" | "right" | "none";
-
-const offset: Record<Direction, { x: number; y: number }> = {
-  up: { x: 0, y: 30 },
-  down: { x: 0, y: -30 },
-  left: { x: -40, y: 0 },
-  right: { x: 40, y: 0 },
-  none: { x: 0, y: 0 },
-};
-
-/** Componentes de movimiento predefinidos (evita recrear tipos en cada render). */
-const tags = {
-  div: motion.div,
-  section: motion.section,
-  h2: motion.h2,
-  h3: motion.h3,
-  p: motion.p,
-  li: motion.li,
-  span: motion.span,
-} as const;
-
-type RevealTag = keyof typeof tags;
+/**
+ * Reveal — entrada cinematográfica sobria.
+ * Sube 18px con fade mientras aparece la sección (whileInView).
+ */
+type RevealVariant = "line" | "block" | "soft";
 
 interface RevealProps {
   children: ReactNode;
-  /** Retraso en milisegundos, coherente con el diseno original. */
+  /** Retardo del grupo (ms). Default 0. */
   delay?: number;
+  /**
+   * `soft` usa fade puro (para imágenes y fondos);
+   * `line` eleva textos; `block` eleva tarjetas con escala sutil.
+   */
+  variant?: RevealVariant;
   className?: string;
-  as?: RevealTag;
-  /** Direccion de entrada. */
-  from?: Direction;
-  /** Anade un ligero desenfoque de entrada para mayor profundidad. */
-  blur?: boolean;
+  /** Desactiva la entrada al preferir reduced-motion. */
+  respectMotion?: boolean;
 }
 
-/**
- * Envuelve contenido con una animacion de aparicion al entrar en viewport
- * (ascenso + fundido, con desenfoque y direccion opcionales).
- * Se dispara una sola vez y respeta `prefers-reduced-motion`.
- */
-export function Reveal({
-  children,
-  delay = 0,
-  className,
-  as = "div",
-  from = "up",
-  blur = false,
-}: RevealProps) {
-  const MotionTag = tags[as];
-  const { x, y } = offset[from];
+type RevealVariants = {
+  hidden: Target;
+  visible: TargetAndTransition;
+};
 
-  const variants: Variants = {
-    hidden: { opacity: 0, x, y, filter: blur ? "blur(10px)" : "blur(0px)" },
-    visible: (d: number) => ({
-      opacity: 1,
-      x: 0,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: d },
-    }),
-  };
+const variants: Record<RevealVariant, RevealVariants> = {
+  line: {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  },
+  block: {
+    hidden: { opacity: 0, y: 22, scale: 0.985 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  },
+  soft: {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1.1, ease: "easeOut" } },
+  },
+};
+
+export function Reveal({ children, delay = 0, variant = "line", className, respectMotion = true }: RevealProps) {
+  const reduce = useReducedMotion();
+  const disabled = respectMotion && reduce;
+
+  // Al preferir reduced-motion, la entrada se desactiva: parte visible y sin animación.
+  const initial = disabled ? undefined : variants[variant].hidden;
+  const whileInView = disabled ? undefined : variants[variant].visible;
 
   return (
-    <MotionTag
+    <motion.div
+      {...(initial ? { initial } : {})}
+      {...(whileInView ? { whileInView } : {})}
+      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+      transition={delay ? { delay: delay / 1000 } : undefined}
       className={className}
-      variants={variants}
-      custom={delay / 1000}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
     >
       {children}
-    </MotionTag>
+    </motion.div>
+  );
+}
+
+/** Stagger container para grupos de tarjetas */
+interface StaggerProps {
+  children: ReactNode;
+  /** Espaciado entre hijos (s). Default 0.08. */
+  stagger?: number;
+  className?: string;
+}
+
+export function Stagger({ children, stagger = 0.08, className }: StaggerProps) {
+  const reduce = useReducedMotion();
+
+  return (
+    <motion.div
+      className={className}
+      initial={reduce ? false : { opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-8% 0px -8% 0px" }}
+      transition={reduce ? undefined : { duration: 0.9, ease: "easeOut", staggerChildren: stagger }}
+    >
+      {children}
+    </motion.div>
   );
 }

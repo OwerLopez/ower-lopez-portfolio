@@ -6,13 +6,29 @@ import Lenis from "lenis";
 /**
  * Scroll suave global con Lenis. Respeta `prefers-reduced-motion`
  * y sincroniza el RAF con el ciclo de render.
+ *
+ * - `mode === "deck"`: se usa en la home con navegación horizontal por escenas.
+ *   Lenis no intercepta la rueda (`smoothWheel: false`) para que el
+ *   HorizontalDeck maneje la rueda; solo se crean los recursos necesarios.
+ * - `mode === "vertical"`: comportamiento clásico de scroll suave.
  */
-export function SmoothScroll({ children }: { children: React.ReactNode }) {
+export function SmoothScroll({
+  children,
+  mode = "vertical",
+}: {
+  children: React.ReactNode;
+  mode?: "vertical" | "deck";
+}) {
   useEffect(() => {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
     if (prefersReduced) return;
+
+    if (mode === "deck") {
+      // El HorizontalDeck captura la rueda; Lenis no debe tocarla.
+      return;
+    }
 
     const lenis = new Lenis({
       duration: 1.1,
@@ -54,7 +70,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       resizeObserver.disconnect();
       lenis.destroy();
     };
-  }, []);
+  }, [mode]);
 
   return <>{children}</>;
 }

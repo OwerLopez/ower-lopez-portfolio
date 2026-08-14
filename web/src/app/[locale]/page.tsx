@@ -1,26 +1,36 @@
 import { notFound } from "next/navigation";
-import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
+import { isLocale, type Locale } from "@/i18n/config";
 import { getContent } from "@/content";
 
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { HorizontalDeck, SceneDots, type SceneInfo } from "@/components/layout/HorizontalDeck";
+import { EnergyLines } from "@/components/effects/EnergyLines";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/sections/Marquee";
-import { About } from "@/components/sections/About";
+import { Mission } from "@/components/sections/Mission";
 import { Work } from "@/components/sections/Work";
-import { GitHubLive } from "@/components/sections/GitHubLive";
 import { Architecture } from "@/components/sections/Architecture";
 import { Stack } from "@/components/sections/Stack";
-import { Experience } from "@/components/sections/Experience";
+import { Journey } from "@/components/sections/Journey";
+import { GitHubLive } from "@/components/sections/GitHubLive";
 import { Credentials } from "@/components/sections/Credentials";
+import { Philosophy } from "@/components/sections/Philosophy";
 import { Faq } from "@/components/sections/Faq";
 import { Contact } from "@/components/sections/Contact";
-import { CinematicDivider } from "@/components/animations/CinematicDivider";
-import { DataRain } from "@/components/animations/DataRain";
-import { StructuredData } from "@/components/seo/StructuredData";
-import { FluidCursor } from "@/components/animations/FluidCursor";
-import { ScrollStorytelling } from "@/components/animations/ScrollStorytelling";
+import { Footer } from "@/components/layout/Footer";
+import { SceneSection } from "@/components/layout/SceneSection";
 
+/**
+ * V5 — Deck horizontal.
+ *
+ * La home ya no es una página con scroll vertical: son 11 escenas de
+ * 100vw x 100vh que se navegan lateralmente con la rueda, el trackpad,
+ * el teclado (flechas / PageUp-Down / Home-End) o el swipe táctil.
+ * El `HorizontalDeck` captura la rueda y convierte cada "vuelta" en un
+ * salto de escena; las escenas largas (Proyectos) siguen fluyendo en
+ * vertical dentro de su propio contenedor.
+ */
 export default async function HomePage({
   params,
 }: {
@@ -28,74 +38,179 @@ export default async function HomePage({
 }) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
-  const locale: Locale = isLocale(raw) ? raw : defaultLocale;
+  const locale: Locale = raw;
   const content = getContent(locale);
+
+  const scenes: SceneInfo[] = [
+    {
+      id: "intro",
+      label: "Intro",
+      code: "E1",
+      element: (
+        <div className="relative flex h-full w-full flex-col justify-center">
+          <Hero content={content} />
+          <Marquee content={content} />
+        </div>
+      ),
+    },
+    {
+      id: "mission",
+      label: "Misión",
+      code: "E2",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <SceneSection>
+              <Mission content={content} />
+            </SceneSection>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "work",
+      label: "Proyectos",
+      code: "E3",
+      long: true,
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <Work content={content} />
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "architecture",
+      label: "Arquitectura",
+      code: "E4",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <SceneSection>
+              <Architecture content={content} />
+            </SceneSection>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "stack",
+      label: "Stack",
+      code: "E5",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <SceneSection>
+              <Stack content={content} />
+            </SceneSection>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "journey",
+      label: "Trayectoria",
+      code: "E6",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <SceneSection>
+              <Journey content={content} />
+            </SceneSection>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "github",
+      label: "GitHub",
+      code: "E7",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <SceneSection>
+              <GitHubLive content={content} />
+            </SceneSection>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "credentials",
+      label: "Logros",
+      code: "E8",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <SceneSection>
+              <Credentials content={content} />
+            </SceneSection>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "philosophy",
+      label: "Filosofía",
+      code: "E9",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <SceneSection>
+              <Philosophy content={content} />
+            </SceneSection>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "faq",
+      label: "FAQ",
+      code: "E10",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <SceneSection>
+              <Faq content={content} />
+            </SceneSection>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "contact",
+      label: "Contacto",
+      code: "E11",
+      element: (
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+            <Contact content={content} />
+            <div className="mt-16">
+              <Footer content={content} />
+            </div>
+          </div>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <>
       <StructuredData locale={locale} />
-      <FluidCursor />
-      <Navbar locale={locale} content={content.nav} />
-      <main className="relative bg-[#030305] text-[#f8f6f0] overflow-hidden">
-        {/* Section 1: Bento Hero with Fluid Water Ripple */}
-        <Hero content={content.hero} />
+      <Navbar content={content} />
 
-        {/* Section 2: Dual Infinite Tech Marquee */}
-        <Marquee items={content.marquee} />
+      {/* Fondo fijo: rejilla fina + ruido + líneas de energía */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0 grid-overlay" />
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0 noise-overlay" />
+      <EnergyLines />
 
-        {/* Section 3: Profile & Engineering Philosophy */}
-        <About content={content.about} />
-
-        {/* Section 4: Interactive Pinned Scroll Storytelling (thenextcraft.org style) */}
-        <ScrollStorytelling />
-
-        {/* Cinematic Break 1 */}
-        <CinematicDivider
-          src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=75&auto=format&fit=crop"
-          alt="Data Infrastructure"
-          title="Data"
-          titleAccent="Engineering"
-          caption="PIPELINES · SQL · IN-PROCESS ML — PRODUCTION GRADE"
-        />
-
-        {/* Section 5: Featured Showcase & Interactive Benchmark Matrix */}
-        <Work content={content.work} />
-
-        {/* Section 6: Real-Time GitHub Telemetry */}
-        <GitHubLive locale={locale} content={content.github} />
-
-        {/* Section 7: Interactive Architecture Node Flow */}
-        <Architecture content={content.architecture} />
-
-        {/* Section 8: Tech Radar Matrix */}
-        <Stack content={content.stack} />
-
-        {/* Section 9: Career Experience Roadmap */}
-        <Experience content={content.experience} />
-
-        {/* Section 10: Verified Credentials & Milestones */}
-        <Credentials content={content.credentials} />
-
-        {/* Section 11: Architecture & Collaboration FAQ */}
-        <Faq content={content.faq} />
-
-        {/* Cinematic Break 2 */}
-        <CinematicDivider
-          src="https://images.unsplash.com/photo-1526392060635-9d6019884377?w=1920&q=75&auto=format&fit=crop"
-          alt="Arequipa Peru"
-          title="Arequipa"
-          titleAccent="→ World"
-          caption="16.40°S 71.53°W — PERÚ · UTC−5"
-        />
-
-        {/* Section 12: Cinematic Contact Hub */}
-        <div className="relative">
-          <DataRain className="pointer-events-none absolute inset-0 z-0 opacity-30 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_30%,transparent_75%)]" />
-          <Contact content={content.contact} />
-        </div>
+      {/* SceneDots vive dentro de HorizontalDeck para tener acceso al contexto */}
+      <main className="relative h-screen w-screen bg-[#06040a] text-[#f2f0ea]">
+        <HorizontalDeck scenes={scenes} initial={0}>
+          <SceneDots />
+        </HorizontalDeck>
       </main>
-
-      <Footer content={content.footer} />
     </>
   );
 }

@@ -2,231 +2,245 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-import { ArrowUpRight, Command, Sparkles } from "lucide-react";
-import type { Locale } from "@/i18n/config";
-import type { NavContent } from "@/types/content";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X, Zap } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { LocaleSwitcher } from "./LocaleSwitcher";
-import { cn } from "@/lib/utils";
+import type { PortfolioContent } from "@/types/content";
 
-interface NavbarProps {
-  locale: Locale;
-  content: NavContent;
-}
+const NAV_LINKS = [
+  { id: "mission", label: "Misión", code: "E2" },
+  { id: "work", label: "Proyectos", code: "E3" },
+  { id: "architecture", label: "Arquitectura", code: "E4" },
+  { id: "stack", label: "Stack", code: "E5" },
+  { id: "journey", label: "Trayectoria", code: "E6" },
+  { id: "github", label: "GitHub", code: "E7" },
+  { id: "credentials", label: "Logros", code: "E8" },
+  { id: "philosophy", label: "Filosofía", code: "E9" },
+  { id: "faq", label: "FAQ", code: "E10" },
+  { id: "contact", label: "Contacto", code: "E11" },
+];
 
-export function Navbar({ locale, content }: NavbarProps) {
-  const [scrolled, setScrolled] = useState(false);
+/**
+ * Navbar HUD para navegación HORIZONTAL por escenas.
+ *
+ * En el deck horizontal los anchors `#id` ya no sirven (no hay scroll vertical),
+ * así que cada tick llama a `goTo(index)` del HorizontalDeck y el indicador
+ * activo se calcula a partir del índice de escena en lugar del scroll.
+ * La barra de "progreso" es ahora el avance por escenas (E01 → E11).
+ */
+export function Navbar({ content }: { content: PortfolioContent }) {
+  const { nav } = content;
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 30));
+  const [sceneIndex, setSceneIndex] = useState(0);
+  const [totalScenes, setTotalScenes] = useState(NAV_LINKS.length + 1);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    const handler = (e: CustomEvent<{ index: number; total: number }>) => {
+      setSceneIndex(e.detail.index);
+      setTotalScenes(e.detail.total);
+    };
+    window.addEventListener("deck:scene", handler as EventListener);
+    return () => window.removeEventListener("deck:scene", handler as EventListener);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-
-    const sections = ["work", "about", "architecture", "stack", "credentials", "faq", "contact"];
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
-      window.removeEventListener("scroll", handleScroll);
     };
   }, [open]);
 
-  const links = [
-    { href: "#about", id: "about", label: content.about },
-    { href: "#work", id: "work", label: content.work },
-    { href: "#architecture", id: "architecture", label: content.architecture },
-    { href: "#stack", id: "stack", label: content.stack },
-    { href: "#credentials", id: "credentials", label: content.credentials },
-    { href: "#faq", id: "faq", label: content.faq },
-    { href: "#contact", id: "contact", label: content.contact },
-  ];
+  const isHome = pathname === "/es" || pathname === "/en" || pathname === "/";
+  const otherLocale = pathname.startsWith("/en") ? "/es" : "/en";
+
+  const active = NAV_LINKS[sceneIndex - 1]?.id ?? null;
+
+  // Los ticks: E2 → índice 1 ... E11 → índice 10. El hero es el índice 0.
+  const navigate = (i: number) =>
+    window.dispatchEvent(new CustomEvent("deck:go", { detail: { index: i } }));
+
+  const progress =
+    totalScenes > 1 ? Math.round(((sceneIndex + 1) / totalScenes) * 100) : 0;
 
   return (
     <>
-      {/* Floating HUD Command Navbar */}
       <motion.header
-        initial={{ y: -30, opacity: 0 }}
+        initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-x-0 top-0 z-[60] flex justify-center px-4 pt-4 sm:pt-6 pointer-events-none"
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed inset-x-0 top-0 z-[60] ${open ? "bg-base/85 backdrop-blur-2xl" : "bg-transparent"}`}
       >
-        <div
-          className={cn(
-            "pointer-events-auto flex items-center justify-between gap-4 sm:gap-8 rounded-full border px-4 sm:px-6 py-2.5 transition-all duration-500 max-w-[1240px] w-full",
-            scrolled
-              ? "border-white/15 bg-[#030305]/80 backdrop-blur-2xl shadow-[0_16px_40px_rgba(0,0,0,0.8)] shadow-amber-500/5"
-              : "border-white/10 bg-[#09080d]/60 backdrop-blur-xl"
-          )}
-        >
-          {/* Left Brand Identity */}
-          <Link
-            href={`/${locale}`}
-            aria-label={siteConfig.name}
-            className="group flex items-center gap-3 shrink-0"
-          >
-            <div className="relative flex h-8 w-8 items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 transition-transform duration-300 group-hover:scale-105 group-hover:border-amber-400">
-              <span className="font-mono text-xs font-bold tracking-tighter">
-                {siteConfig.initials}
+        {/* Línea de progreso de fuego: avance por escenas */}
+        <div className="absolute inset-x-0 top-0 z-20 h-[3px]">
+          <div
+            className="h-full origin-left bg-gradient-to-r from-[#fbbf24] via-[#ff7a18] via-50% to-[#e11d74] shadow-[0_0_12px_rgba(255,122,24,0.7)]"
+            style={{
+              width: `${progress}%`,
+              transition: "width 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          />
+        </div>
+
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-6">
+          {/* Marca con pulso */}
+          <Link href="/es" className="group flex shrink-0 items-center gap-3">
+            <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-[#2e2e42] bg-surface font-mono-token text-xs font-bold text-[#ff7a18]">
+              {siteConfig.initials}
+              <span className="absolute inset-0 rounded-full border border-[#ff7a18]/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            </span>
+            <span className="hidden items-baseline gap-2 font-mono-token text-xs tracking-[0.25em] text-ink sm:flex">
+              {siteConfig.shortName}
+              <span className="text-[#8b5cf6]">/</span>
+              <span className="text-[10px] uppercase tracking-[0.18em] text-[#6a6978] md:inline">
+                {nav.statusText}
               </span>
-              <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-            </div>
-            <div className="hidden flex-col md:flex">
-              <span className="text-[13.5px] font-semibold tracking-tight text-white transition-colors group-hover:text-amber-300">
-                {siteConfig.shortName}
-              </span>
-              <span className="font-mono text-[10px] tracking-widest text-zinc-400 uppercase">
-                {content.statusText}
-              </span>
-            </div>
+            </span>
           </Link>
 
-          {/* Center Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-1 rounded-full border border-white/5 bg-white/[0.03] p-1.5 backdrop-blur-md">
-            {links.map((link) => {
-              const isActive = activeSection === link.id;
+          {/* Ticks de escena → saltan lateralmente */}
+          <nav className="hidden items-center gap-4 xl:flex">
+            {NAV_LINKS.map((link, i) => {
+              const isActive = active === link.id;
               return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "relative px-3.5 py-1.5 text-xs font-medium tracking-wide transition-all duration-300 rounded-full",
-                    isActive
-                      ? "text-amber-400 font-semibold"
-                      : "text-zinc-400 hover:text-white hover:bg-white/5"
-                  )}
+                <button
+                  key={link.id}
+                  type="button"
+                  onClick={() => navigate(i + 1)}
+                  className="group relative flex items-center gap-1.5 py-1"
                 >
-                  {isActive && (
-                    <motion.span
-                      layoutId="activeNavTab"
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500/20 to-cyan-500/20 border border-amber-400/30"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">{link.label}</span>
-                </a>
+                  <motion.span
+                    animate={{ width: isActive ? 14 : 6, background: isActive ? "#ff7a18" : "#2e2e42" }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute -top-1 h-[2px] rounded-full"
+                  />
+                  <span
+                    className={`font-mono-token text-[9px] transition-colors duration-300 ${
+                      isActive ? "text-[#ff7a18]" : "text-[#6a6978] group-hover:text-[#e11d74]"
+                    }`}
+                  >
+                    {link.code}
+                  </span>
+                  <span
+                    className={`text-[12px] font-medium transition-colors duration-300 ${
+                      isActive ? "text-ink" : "text-[#a9a8b8] group-hover:text-ink"
+                    }`}
+                  >
+                    {link.label}
+                  </span>
+                </button>
               );
             })}
           </nav>
 
-          {/* Right Action Controls */}
-          <div className="flex items-center gap-2.5 shrink-0">
-            <div className={open ? "pointer-events-none opacity-0" : "opacity-100 transition-opacity"}>
-              <LocaleSwitcher current={locale} />
-            </div>
-
-            <a
-              href="#contact"
-              className="hidden sm:inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-amber-400/10 to-transparent px-4 py-1.5 text-xs font-semibold text-amber-300 transition-all duration-300 hover:border-amber-400 hover:shadow-[0_0_20px_rgba(255,184,0,0.3)] hover:text-white"
+          <div className="flex shrink-0 items-center gap-3">
+            <span className="font-mono-token hidden rounded-full border border-[#1e1e2e] bg-surface px-2.5 py-1 text-[9px] tabular-nums text-[#6a6978] md:block">
+              {`E${String(sceneIndex + 1).padStart(2, "0")}`}
+            </span>
+            {isHome && (
+              <Link
+                href={otherLocale}
+                className="font-mono-token hidden rounded-full border border-[#1e1e2e] bg-surface px-3 py-1.5 text-[10px] tracking-[0.2em] text-muted transition-colors duration-300 hover:border-[#e11d74]/40 hover:text-ink sm:block"
+              >
+                {pathname.startsWith("/en") ? "ES" : "EN"}
+              </Link>
+            )}
+            <button
+              type="button"
+              onClick={() => navigate(NAV_LINKS.length)}
+              className="group relative hidden overflow-hidden rounded-full px-5 py-2 text-[11px] font-semibold text-white sm:block"
             >
-              <Sparkles className="h-3.5 w-3.5 text-amber-400 animate-pulse" />
-              <span>{content.cta}</span>
-            </a>
-
-            {/* Mobile Menu Trigger */}
+              <span className="absolute inset-0 bg-gradient-to-r from-[#ff7a18] to-[#e11d74] transition-transform duration-500 group-hover:scale-110" />
+              <span className="relative flex items-center gap-1.5">
+                <Zap className="h-3 w-3" />
+                {nav.cta}
+              </span>
+            </button>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
-              aria-label={open ? content.menuClose : content.menuOpen}
-              className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] p-2 sm:px-3.5 sm:py-1.5 text-xs font-medium text-white transition-all hover:border-amber-500/50 hover:bg-white/10 lg:hidden"
+              aria-label={open ? nav.menuClose : nav.menuOpen}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2e2e42] bg-surface text-ink xl:hidden"
             >
-              <Command className="h-3.5 w-3.5 text-amber-400" />
-              <span className="hidden sm:inline font-mono text-[11px] tracking-wider text-zinc-300">
-                {open ? content.menuClose : content.menuOpen}
-              </span>
+              {open ? <X className="h-4 w-4 text-[#e11d74]" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </div>
+
       </motion.header>
 
-      {/* Immersive Mobile Navigation Overlay */}
+      {/* Panel móvil: cuerpo completo con ticks grandes */}
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[55] flex flex-col justify-between overflow-y-auto bg-[#030305]/98 px-6 pb-8 pt-28 backdrop-blur-3xl lg:hidden"
+          <motion.nav
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-[55] flex flex-col bg-base/98 pt-20 backdrop-blur-2xl xl:hidden"
           >
-            {/* Background Ambient Glow */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-[20%] top-[15%] h-[50vh] w-[50vh] rounded-full opacity-30 blur-[120px]"
-              style={{
-                background: "radial-gradient(circle, rgba(255,184,0,0.25), transparent 70%)",
-              }}
-            />
-
-            <nav className="relative mx-auto flex w-full max-w-lg flex-col gap-2 my-auto">
-              {links.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
+            <div className="mx-auto my-auto flex w-full max-w-lg flex-col px-6">
+              <button
+                type="button"
+                onClick={() => { setOpen(false); navigate(0); }}
+                className="group flex items-baseline justify-between border-b border-[#1e1e2e] py-4 transition-colors hover:border-[#e11d74]/40"
+              >
+                <div className="flex items-baseline gap-4">
+                  <span className="font-mono-token text-xs text-[#e11d74]">E1</span>
+                  <span className="text-xl font-medium tracking-tight text-ink">Intro</span>
+                </div>
+                <span className="font-mono-token text-[10px] text-[#6a6978]">01/{String(totalScenes).padStart(2, "0")}</span>
+              </button>
+              {NAV_LINKS.map((link, i) => (
+                <motion.button
+                  key={link.id}
+                  type="button"
+                  onClick={() => { setOpen(false); navigate(i + 1); }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.35, delay: i * 0.05 }}
-                  className="group flex items-center justify-between border-b border-white/10 py-3.5 text-left transition-colors hover:border-amber-400/50"
+                  exit={{ opacity: 0, x: -16 }}
+                  transition={{ duration: 0.3, delay: i * 0.04 }}
+                  className="group flex items-baseline justify-between border-b border-[#1e1e2e] py-4 transition-colors hover:border-[#e11d74]/40"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-bold text-amber-400">0{i + 1}</span>
-                    <span className="font-display text-2xl font-medium tracking-tight text-zinc-300 transition-colors group-hover:text-white">
-                      {link.label}
-                    </span>
+                  <div className="flex items-baseline gap-4">
+                    <span className="font-mono-token text-xs text-[#e11d74]">{link.code}</span>
+                    <span className="text-xl font-medium tracking-tight text-ink">{link.label}</span>
                   </div>
-                  <ArrowUpRight className="h-5 w-5 text-amber-400 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                </motion.a>
+                  <span className="font-mono-token text-[10px] text-[#6a6978]">
+                    {String(i + 2).padStart(2, "0")}/{String(totalScenes).padStart(2, "0")}
+                  </span>
+                </motion.button>
               ))}
-            </nav>
+            </div>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="relative mx-auto flex w-full max-w-lg flex-col gap-4 border-t border-white/10 pt-6 text-xs text-zinc-400"
+              transition={{ delay: 0.35 }}
+              className="mx-auto flex w-full max-w-lg flex-col gap-4 border-t border-[#1e1e2e] px-6 pb-10 pt-6 font-mono-token text-xs text-muted"
             >
-              <div className="flex justify-between items-center">
-                <span className="font-mono tracking-wider text-amber-400">{siteConfig.location.es}</span>
-                <span className="font-mono">{siteConfig.email}</span>
+              <div className="flex items-center justify-between">
+                <span className="text-[#ff7a18]">{siteConfig.location.es}</span>
+                <span>{siteConfig.email}</span>
               </div>
-              <div className="flex items-center justify-between gap-4 pt-2 border-t border-white/5">
-                <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
-                <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
-                <a href={siteConfig.links.credly} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Credly</a>
+              <div className="flex items-center justify-between gap-4 border-t border-[#1e1e2e] pt-2">
+                <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ink">
+                  GitHub
+                </a>
+                <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ink">
+                  LinkedIn
+                </a>
+                <a href={siteConfig.links.credly} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ink">
+                  Credly
+                </a>
               </div>
             </motion.div>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </>

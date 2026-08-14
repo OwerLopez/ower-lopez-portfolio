@@ -1,51 +1,33 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
 
-interface CounterProps {
-  value: number;
-  suffix?: string;
-  duration?: number;
-  className?: string;
-}
-
-/** Contador numerico con easing que se dispara al entrar en viewport. */
+/** Cuenta animada hasta `value` al entrar en vista; `suffix` opcional. */
 export function Counter({
   value,
-  suffix = "",
-  duration = 1500,
-  className,
-}: CounterProps) {
+  suffix,
+}: {
+  value: number;
+  suffix?: string;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const inView = useInView(ref, { once: true, margin: "-20% 0px" });
+  const raw = useMotionValue(0);
+  const smooth = useSpring(raw, { stiffness: 90, damping: 40 });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setDisplay(value);
-      return;
-    }
-
-    let raf = 0;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(Math.round(value * eased));
-      if (progress < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, value, duration]);
+    raw.set(value);
+    const unsub = smooth.on("change", (v) => setDisplay(Math.round(v)));
+    return () => unsub();
+  }, [inView, value, raw, smooth]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref}>
       {display}
-      {suffix}
+      {suffix ?? ""}
     </span>
   );
 }

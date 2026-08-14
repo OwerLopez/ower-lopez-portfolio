@@ -6,10 +6,8 @@ import "../globals.css";
 import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/config";
 import { getContent } from "@/content";
 import { siteConfig } from "@/config/site";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { AuroraBackground } from "@/components/animations/AuroraBackground";
-import { MouseSpotlight } from "@/components/animations/MouseSpotlight";
-import { ScrollProgress } from "@/components/animations/ScrollProgress";
+import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
+import { MotionConfig } from "framer-motion";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -95,13 +93,11 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  themeColor: "#08070a",
+  themeColor: "#08080a",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
-
-import { MotionConfig } from "framer-motion";
 
 export default async function LocaleLayout({
   children,
@@ -120,12 +116,8 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="relative min-h-screen overflow-x-hidden antialiased" suppressHydrationWarning>
-
         <MotionConfig reducedMotion="user">
-          <AuroraBackground />
-          <MouseSpotlight />
-          <ScrollProgress />
-          <SmoothScroll>{children}</SmoothScroll>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </MotionConfig>
       </body>
     </html>

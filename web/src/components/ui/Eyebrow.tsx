@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-/** Etiqueta monoespaciada que precede a cada seccion (ej. "01 — PERFIL"). */
+/** Etiqueta editorial monoespaciada que precede a cada seccion (ej. "01 — Perfil"). */
 export function Eyebrow({
   children,
   className,
@@ -13,17 +13,19 @@ export function Eyebrow({
   return (
     <div
       className={cn(
-        "font-mono-token inline-flex items-center gap-3 text-xs tracking-[0.22em]",
-        tone === "accent" ? "text-[var(--color-accent)]" : "text-[var(--color-faint)]",
+        "font-mono-token inline-flex items-center gap-3 text-xs font-medium tracking-[0.18em] uppercase",
+        tone === "accent"
+          ? "text-[var(--color-accent)]"
+          : "text-[var(--color-faint)]",
         className,
       )}
     >
       <span
         aria-hidden="true"
         className={cn(
-          "h-px w-8",
+          "h-px w-10",
           tone === "accent"
-            ? "bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-cyan)]"
+            ? "bg-[var(--color-accent)]"
             : "bg-[var(--color-line)]",
         )}
       />

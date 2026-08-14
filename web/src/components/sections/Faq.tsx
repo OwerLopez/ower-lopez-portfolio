@@ -1,85 +1,74 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle, Layers } from "lucide-react";
-import type { FaqContent } from "@/types/content";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Reveal } from "@/components/animations/Reveal";
+import type { PortfolioContent } from "@/types/content";
 
-export function Faq({ content }: { content: FaqContent }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggle = (idx: number) => {
-    setOpenIndex((prev) => (prev === idx ? null : idx));
-  };
+function FaqItem({ item }: { item: NonNullable<PortfolioContent["faq"]["items"]>[number] }) {
+  const [open, setOpen] = useState(false);
 
   return (
-    <section
-      id="faq"
-      className="relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-12 py-24 sm:py-32"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        {/* Left Column Intro */}
-        <div className="lg:col-span-5 sticky top-28">
-          <Eyebrow>{content.eyebrow}</Eyebrow>
-          <h2 className="font-display text-4xl sm:text-6xl font-semibold tracking-tight text-white leading-[1.05] mt-4">
-            {content.heading}
-          </h2>
-          <p className="text-zinc-400 text-base sm:text-lg mt-4 max-w-md">
-            {content.description}
-          </p>
-        </div>
-
-        {/* Right Column Interactive Accordion */}
-        <div className="lg:col-span-7 space-y-4">
-          {content.items.map((item, idx) => {
-            const isOpen = openIndex === idx;
-            return (
-              <div
-                key={item.question}
-                className="rounded-2xl border border-white/10 bg-[#09080d]/80 overflow-hidden backdrop-blur-xl transition-all duration-300 hover:border-amber-400/40"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggle(idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-display font-medium text-lg sm:text-xl text-white hover:text-amber-400 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-bold text-amber-400">
-                      0{idx + 1}
-                    </span>
-                    <span>{item.question}</span>
-                  </div>
-                  <ChevronDown
-                    className={`h-5 w-5 text-amber-400 shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <div className="px-6 pb-6 pt-2 border-t border-white/5 text-zinc-300 text-sm sm:text-base leading-relaxed">
-                        <div className="font-mono text-[11px] text-amber-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                          <Layers className="h-3.5 w-3.5" />
-                          <span>CATEGORÍA: {item.category}</span>
-                        </div>
-                        {item.answer}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+    <li className="border-b border-line/60 last:border-b-0">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        className="flex w-full items-baseline gap-4 py-5 text-left transition-colors duration-300 hover:bg-surface"
+      >
+        <span className="font-mono-token text-[10px] tracking-[0.25em] text-faint">{item.index}</span>
+        <span className="flex-1 text-sm font-semibold text-ink sm:text-base">{item.question}</span>
+        <span className="font-mono-token text-xs text-[#ff7a18]">{open ? "−" : "+"}</span>
+      </button>
+      <div
+        className="grid transition-[grid-template-rows] duration-300 ease-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+      >
+        <div className="overflow-hidden">
+          <p className="px-10 pb-5 text-sm leading-relaxed text-muted">{item.answer}</p>
+          {item.questions && item.questions.length > 0 && (
+            <ul className="space-y-3 px-10 pb-6">
+              {item.questions.map((q) => (
+                <li key={q.question} className="border-l-2 border-[#8b5cf6]/50 pl-4">
+                  <p className="text-xs font-semibold text-ink">{q.question}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted">{q.answer}</p>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
+    </li>
+  );
+}
+
+export function Faq({ content }: { content: PortfolioContent }) {
+  const { faq } = content;
+
+  return (
+    <section id="faq" className="relative z-10 mx-auto max-w-3xl px-5 py-24 sm:px-6 md:py-32" aria-label="Preguntas frecuentes">
+      <Reveal>
+        <p className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
+          <span className="inline-block h-px w-12 bg-line-strong" />
+          {faq.kicker}
+        </p>
+      </Reveal>
+
+      <Reveal delay={80}>
+        <h2 className="font-display text-3xl leading-[1.12] font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
+          {faq.heading}
+        </h2>
+      </Reveal>
+      <Reveal delay={140}>
+        <p className="mt-4 text-base text-muted">{faq.description}</p>
+      </Reveal>
+
+      <Reveal delay={200} variant="block">
+        <ul className="mt-10 rounded-2xl border border-line bg-surface px-6 sm:px-8">
+          {faq.items.map((item) => (
+            <FaqItem key={item.index} item={item} />
+          ))}
+        </ul>
+      </Reveal>
     </section>
   );
 }

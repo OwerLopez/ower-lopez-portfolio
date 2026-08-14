@@ -13,7 +13,7 @@ export default async function OpengraphImage({
 }: {
   params: { locale: string };
 }) {
-  const raw = params.locale;
+  const raw = (await Promise.resolve(params)).locale;
   const locale: Locale = isLocale(raw) ? raw : defaultLocale;
   const content = getContent(locale);
 
@@ -88,7 +88,7 @@ export default async function OpengraphImage({
               letterSpacing: -2,
             }}
           >
-            {content.hero.titleLead} {content.hero.titleAccent}
+            {content.intro.titleLines.join(" ")} {content.intro.titleAccent}
           </div>
           <div style={{ color: "#a7a0ac", fontSize: 30 }}>
             {siteConfig.name} · Arequipa, Peru

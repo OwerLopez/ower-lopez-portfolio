@@ -1,14 +1,16 @@
 import type { PortfolioContent } from "@/types/content";
 
 /**
- * English content (secondary locale). Mirrors `es` exactly in structure.
+ * English content (secondary locale). Version 6 — Fire Aurora.
+ * Mirrors the es.ts structure field-for-field; typecheck enforces parity.
  */
 export const en: PortfolioContent = {
   meta: {
     title: "Ower Frank Lopez Arela — Backend, Data & AI Engineering",
     description:
-      "Systems Engineering student focused on backend, data engineering and applied AI. I build REST APIs, data pipelines and embedded ML models with Java, Spring Boot, Node.js and Python.",
-    ogAlt: "Portfolio of Ower Frank Lopez Arela — Backend, Data & AI Engineering",
+      "Systems Engineer focused on backend, data engineering and applied AI. Building REST APIs, data pipelines and embedded ML models with Java, Spring Boot, Node.js and Python.",
+    ogAlt:
+      "Portfolio of Ower Frank Lopez Arela — Backend, Data & AI Engineering",
     keywords: [
       "Backend Developer",
       "Data Engineer",
@@ -24,177 +26,132 @@ export const en: PortfolioContent = {
   },
 
   nav: {
-    about: "Profile",
+    mission: "Mission",
     work: "Projects",
     architecture: "Architecture",
-    stack: "Toolkit",
-    credentials: "Proof",
-    faq: "FAQ",
+    stack: "Stack",
+    journey: "Journey",
+    github: "GitHub",
+    credentials: "Trophies",
+    philosophy: "Philosophy",
+    faq: "Questions",
     contact: "Contact",
-    cta: "Discuss Project",
+    cta: "Ignite Project",
     menuOpen: "Open menu",
     menuClose: "Close menu",
-    statusText: "AVAILABLE Q3/Q4 2026",
+    statusText: "Available Q3/Q4 2026",
   },
 
-  hero: {
-    status: "OPEN TO JUNIOR DATA ENGINEER & BACKEND ROLES",
-    titleLead: "I build backends that",
-    titleAccent: "actually scale.",
+  intro: {
+    status: "Available for Junior Data Engineer & Backend roles",
+    kicker: "INTRO / SCENE 01 — AREQUIPA, PERU",
+    titleLines: ["Every millisecond", "is a decision"],
+    titleAccent: "I take seriously.",
     description:
-      "Systems Engineering student crafting production-ready backend services, data pipelines and AI-powered products — turning complex problems into clear, measurable architectures.",
-    primaryCta: "Explore Projects",
-    secondaryCta: "Initiate Contact",
-    scroll: "SCROLL TO NAVIGATE",
-    stats: [
-      { value: 96, suffix: "%", label: "MODEL RECALL" },
-      { value: 99, suffix: "%", label: "LATENCY CUT" },
-      { value: 2, suffix: "", label: "FIRST-PLACE WINS" },
-      { value: 51, suffix: "", label: "CERTIFICATIONS" },
-    ],
+      "Systems Engineering student at UNSA (9th semester) doing pre-professional internships as a Backend Developer. Backend, data pipelines and embedded ML in production, with 25+ projects documented on GitHub. Where speed is not promised — it is measured.",
+    primaryCta: "See the proof",
+    primaryTarget: "#work",
+    secondaryCta: "Copy email",
+    copiedFeedback: "Email copied to clipboard.",
+    scrollCue: "Scroll down. The best is coming.",
+    frameLabel: "REC · LIVE",
   },
 
   marquee: [
-    "Java 17",
-    "Spring Boot 3.4",
-    "NestJS",
-    "Node.js",
-    "Python 3.12",
-    "ONNX Runtime",
-    "PostgreSQL",
-    "MongoDB",
-    "SQL Server",
-    "JWT",
-    "Docker",
-    "Oracle Cloud",
-    "AWS S3 & EC2",
-    "Google Cloud",
+    { name: "Java 17", category: "Backend" },
+    { name: "Spring Boot 3.4", category: "Backend" },
+    { name: "NestJS", category: "Backend" },
+    { name: "Node.js", category: "Backend" },
+    { name: "Python 3.12", category: "Data" },
+    { name: "ONNX Runtime", category: "AI" },
+    { name: "PostgreSQL", category: "Data" },
+    { name: "MongoDB", category: "Data" },
+    { name: "SQL Server", category: "Data" },
+    { name: "JWT", category: "Security" },
+    { name: "Docker", category: "DevOps" },
+    { name: "Oracle Cloud", category: "Cloud" },
+    { name: "AWS", category: "Cloud" },
+    { name: "Google Cloud", category: "Cloud" },
   ],
 
-  about: {
-    eyebrow: "01 — PROFILE & ENGINEERING PHILOSOPHY",
-    heading:
-      "I treat my projects like production systems — because that's the standard a team can trust.",
+  mission: {
+    kicker: "SCENE 02 — THE OBSESSION",
+    headingLead: "I don't write code.",
+    headingAccent: "I ignite engines.",
     paragraphs: [
-      "My focus is the backend: designing scalable architectures, building reliable data pipelines and embedding machine learning where it creates real leverage. I care about latency, correctness and the small details that separate a demo from something people depend on every day.",
-      "Right now I'm shipping production backend services at Fundacion CALMA with Java, Spring Boot and Node.js over relational and NoSQL databases, while steering my career toward Data Engineering with Python and advanced SQL.",
+      "A demo gets shown for thirty seconds. A system in production earns trust for years. The difference is not in lines of code: it is in the obsession with every millisecond, every API contract and every piece of data that arrives clean and leaves correct.",
+      "From supporting 2,000+ applicants with data operations to backend services running in production, my method is the same: rigorous architecture, clean data and results you can measure with a stopwatch.",
     ],
-    panelTitle: "OPERATIONAL TELEMETRY",
     facts: [
-      { label: "Current Role", value: "Backend Developer Intern" },
-      { label: "Organization", value: "Fundacion CALMA" },
-      { label: "Core Tech", value: "Java · Python · SQL · ONNX" },
-      { label: "Studying", value: "Systems Engineering · UNSA" },
-      { label: "Based", value: "Arequipa, Peru (UTC-5)" },
-    ],
-  },
-
-  experience: {
-    eyebrow: "02 — TRAJECTORY & HISTORY",
-    heading: "The path so far",
-    description:
-      "From data support to production backend engineering. Each stage blends real software with measurable outcomes.",
-    items: [
-      {
-        period: "FEB 2026 → NOW",
-        title: "Backend Developer Intern — Fundacion CALMA",
-        description:
-          "Building and maintaining backend services with REST APIs, business logic, JWT authentication and access control. Managing and optimizing PostgreSQL, MySQL, SQL Server and MongoDB databases, with technical documentation and a Scrum workflow.",
-        tone: "accent",
-      },
-      {
-        period: "2026",
-        title: "Winner — NEXIA “Build with AI” Hackathon",
-        description:
-          "First place. An educational-innovation MVP built in under 48 hours with Node.js, NestJS and AI API integration. Backend engineering and AI integration under pressure. Hosted by IBM, GDG Arequipa and JAKU Emprende UNSA.",
-        tone: "accent",
-      },
-      {
-        period: "NOV 2025",
-        title: "IT Operator — Universidad ESAN · Beca 18",
-        description:
-          "IT support for registration, verification and data management for 2000+ regional applicants. Systems operation and data control under strict precision and confidentiality standards.",
-        tone: "outline",
-      },
-      {
-        period: "2024",
-        title: "Winner — UNSA Engineering Project Fair (Advanced)",
-        description:
-          "First place with Chakrita, a sustainable-agriculture mobile app in Flutter with IoT and sensor integration. Led UX/UI design and user-centered interfaces.",
-        tone: "outline",
-      },
-      {
-        period: "2024 — 2025",
-        title: "IT Operator — CTK · PRONABEC (Beca 18)",
-        description:
-          "Support and data management for 2000+ applicants during the National Pre-selection Exam, operating critical systems and assessment platforms with high data-integrity standards.",
-        tone: "muted",
-      },
-      {
-        period: "2023 — 2024",
-        title: "Academic Monitor — CEPRUNSA (3 terms)",
-        description:
-          "Coordinated teams of monitors and teachers, attendance control and tracking on the education platform across three consecutive terms.",
-        tone: "muted",
-      },
-      {
-        period: "2023",
-        title: "Programmer Intern — I.E.P. Linus Pauling",
-        description:
-          "Built and maintained attendance and payment registration systems with dynamic reports. Automated administrative processes, debugging and module integration, training end users.",
-        tone: "outline",
-      },
-      {
-        period: "COMMUNITY",
-        title: "Secretary, ACM · Volunteer, IEEE Computer Society",
-        description:
-          "Board secretary of the ACM Student Chapter UNSA (2024–2025), coordinating workshops on AI, cybersecurity and competitive programming. Volunteer on IEEE Computer Society marketing and design. Upper Fifth: top 20% of the cohort.",
-        tone: "muted",
-      },
+      { key: "Obsession", value: "P99 latency of 20 ms" },
+      { key: "Method", value: "Architecture + data + ML" },
+      { key: "Standard", value: "Production, not demos" },
+      { key: "Zone", value: "Arequipa, Peru · UTC-5" },
     ],
   },
 
   work: {
-    eyebrow: "03 — FEATURED WORK & CASE STUDIES",
-    heading: "Systems, not screenshots",
-    description: "Each project is an engineering decision with measurable outcomes.",
+    kicker: "SCENE 03 — THE PROOF",
+    heading: "Projects that shout numbers",
+    description:
+      "No decorative screenshots: verifiable results you can audit on GitHub.",
+    featuredLabel: "Main piece — 03.01",
     featured: {
-      flag: "FLAGSHIP SYSTEM",
-      category: "ENTERPRISE ML PLATFORM",
+      flag: "Flagship",
+      category: "Enterprise ML platform",
       title: "ChurnInsight",
       summary:
-        "A customer-churn prediction platform that embeds ML inference directly inside the backend — no external hops, no network tax, no vendor lock-in.",
+        "Customer churn prediction with ML inference embedded inside the backend — no external calls, no network overhead, no third-party dependency.",
       tags: ["Java 17", "Spring Boot 3.4", "ONNX Runtime", "Random Forest", "MySQL"],
-      note: "Moving inference in-process cut latency from 2000ms to 20ms. The model runs where the data already lives, secured with JWT and versioned with migrations. Random Forest optimized to 96% recall with Explainable AI (XAI).",
+      note: "Moving inference into the same process cut latency from 2000 ms to 20 ms. The model runs where the data already lives, protected by JWT and versioned with migrations. Random Forest optimized to 96% recall with Explainable AI (XAI).",
       metrics: [
-        { value: "96%", label: "RECALL" },
-        { value: "99%", label: "LATENCY CUT" },
-        { value: "20ms", label: "P99 INFERENCE", highlight: true },
-        { value: "0", label: "EXTERNAL ML CALLS", highlight: true },
+        { value: "96%", label: "Recall", highlight: true },
+        { value: "20 ms", label: "Inference P99", highlight: true },
+        { value: "99%", label: "Latency reduced" },
+        { value: "0", label: "External ML calls" },
+      ],
+      links: [
+        { label: "View on GitHub", href: "https://github.com/OwerLopez", external: true },
+        { label: "Read the case", href: "#architecture" },
       ],
     },
-    secondary: [
+    logLabel: "Mission log — 03.02",
+    log: [
       {
-        badge: "1ST PLACE HACKATHON",
-        badgeTone: "gold",
-        meta: "MVP < 48H",
+        index: "03.02",
+        tone: "gold",
         title: "NEXIA 2026",
         description:
-          "Winner of the “Build with AI” hackathon. An educational-innovation MVP shipped end-to-end in under two days as backend engineer and AI integrator.",
+          "Winner of the \u201cBuild with AI\u201d hackathon. End-to-end MVP for educational innovation delivered in under 48 hours with Node.js, NestJS and AI API integration.",
         tags: ["Node.js", "NestJS", "AI APIs"],
       },
       {
-        badge: "1ST PLACE UNSA FAIR",
-        badgeTone: "green",
-        meta: "IoT · MOBILE",
+        index: "03.03",
+        tone: "emerald",
         title: "Chakrita",
         description:
-          "A sustainable-agriculture IoT mobile app, winner of the 2024 UNSA Systems Engineering Project Fair. Led UX/UI and Flutter development end to end.",
+          "Sustainable agriculture mobile app with IoT, first place at the 2024 UNSA Systems Engineering Project Fair. Led UX/UI design and Flutter development.",
         tags: ["Flutter", "IoT", "UX/UI"],
       },
+      {
+        index: "03.04",
+        tone: "violet",
+        title: "VisionTransit AI",
+        description:
+          "Real-time computer vision pipeline for public transit monitoring: 6 decoupled layers with FastAPI, YOLO11 and WebSocket, sustaining 28.7 FPS on CPU.",
+        tags: ["Python", "FastAPI", "YOLO11"],
+      },
+      {
+        index: "03.05",
+        tone: "gold",
+        title: "GestorTareasPro",
+        description:
+          "Native Android app with Clean Architecture and an immutable progress calendar: 100% offline-first, guaranteed persistence and a streak-based motivation system.",
+        tags: ["Kotlin", "Jetpack Compose", "Offline-first"],
+      },
     ],
-    comparisonTitle: "Technical Comparison Matrix",
-    comparisonHeaders: {
+    matrixTitle: "Technical comparison matrix",
+    matrixHeaders: {
       project: "Project",
       domain: "Domain",
       stack: "Core stack",
@@ -202,10 +159,10 @@ export const en: PortfolioContent = {
       role: "Role",
       year: "Year",
     },
-    comparison: [
+    matrix: [
       {
         project: "ChurnInsight",
-        domain: "ML / Data platform",
+        domain: "ML platform / Data",
         stack: "Java 17 · Spring Boot · ONNX",
         result: "Latency 2000ms → 20ms · 96% recall",
         role: "Backend + Data Science",
@@ -221,179 +178,361 @@ export const en: PortfolioContent = {
       },
       {
         project: "Chakrita",
-        domain: "IoT / Mobile agtech",
+        domain: "IoT / Agtech mobile",
         stack: "Flutter · IoT · Sensors",
-        result: "1st place, UNSA Fair",
+        result: "1st place UNSA Fair",
         role: "UX/UI + Flutter",
         year: "2024",
+      },
+      {
+        project: "VisionTransit AI",
+        domain: "Computer vision / Data",
+        stack: "Python · FastAPI · YOLO11",
+        result: "28.7 FPS real-time · 6 layers",
+        role: "Data Engineering + ML",
+        year: "2025",
+      },
+      {
+        project: "GestorTareasPro",
+        domain: "Mobile Android",
+        stack: "Kotlin · Jetpack Compose",
+        result: "100% offline-first · Clean Arch",
+        role: "Android Developer",
+        year: "2025",
+      },
+    ],
+  },
+
+  architecture: {
+    kicker: "SCENE 04 — THE CIRCUIT",
+    headingLead: "From raw data",
+    headingAccent: "to business value.",
+    description:
+      "Five stages, one responsibility each. This is how I think through any data system before writing a single line of code.",
+    stages: [
+      {
+        index: "E1",
+        label: "Sources",
+        detail: "Operational & external",
+        tech: "PostgreSQL · MySQL · SQL Server · MongoDB · APIs",
+        power: "INGEST 100%",
+      },
+      {
+        index: "E2",
+        label: "Ingestion / ETL",
+        detail: "Extraction & cleaning",
+        tech: "Python · Pandas · SQL · BULK INSERT",
+        power: "PURIFYING",
+      },
+      {
+        index: "E3",
+        label: "Storage",
+        detail: "Modeling & quality",
+        tech: "Logical/physical modeling · CTEs · Window fns",
+        power: "DATA PARITY",
+      },
+      {
+        index: "E4",
+        label: "Process / ML",
+        detail: "Analytics & inference",
+        tech: "NumPy · Random Forest · ONNX · XAI",
+        power: "INFERENCE LIVE",
+      },
+      {
+        index: "E5",
+        label: "Service",
+        detail: "APIs & visualization",
+        tech: "Spring Boot · JWT · Power BI",
+        power: "PRODUCTION AIRBORNE",
+      },
+    ],
+    note: "Embedded inference: the model runs where the data lives — no external calls, 20 ms P99 latency.",
+  },
+
+  stack: {
+    kicker: "SCENE 05 — THE CONSTELLATION",
+    heading: "Every technology orbits a domain",
+    description:
+      "I don't collect tools: I master the ones that carry a system from data model to production.",
+    groups: [
+      { name: "Backend", glow: "flame", items: ["Java 17", "Spring Boot 3.4", "NestJS", "Node.js", "REST APIs · Swagger"] },
+      { name: "Data", glow: "magenta", items: ["PostgreSQL", "MySQL · SQL Server", "MongoDB", "Pandas · NumPy", "Power BI"] },
+      { name: "AI / Machine Learning", glow: "violet", items: ["ONNX Runtime", "Random Forest", "XAI (explainability)", "Embedded inference"] },
+      { name: "Cloud & DevOps", glow: "flame", items: ["Oracle Cloud (OCI)", "AWS EC2 · S3", "Google Cloud", "Docker", "Oracle APEX"] },
+      { name: "Engineering", glow: "amber", items: ["Git", "Scrum · Kanban", "API security", "System architecture"] },
+    ],
+    note: "Domains where I make architecture decisions: backend, data, AI/ML, cloud and engineering practices.",
+  },
+
+  journey: {
+    kicker: "SCENE 06 — THE ASCENT",
+    heading: "Three years rising in fire",
+    description:
+      "From data support to production backend engineering. Every stage combines real software with measurable results.",
+    items: [
+      {
+        period: "Feb 2026 → today",
+        title: "Backend Developer (intern) — Fundacion CALMA",
+        description:
+          "Development and maintenance of backend services with REST APIs, business logic, JWT authentication and access control. Managing and optimizing PostgreSQL, MySQL, SQL Server and MongoDB databases, with technical documentation and Scrum methodology.",
+        tone: "flame",
+      },
+      {
+        period: "2026",
+        title: "First place — NEXIA \u201cBuild with AI\u201d hackathon",
+        description:
+          "First place. Educational innovation MVP built in under 48 hours with Node.js, NestJS and AI API integration. Backend engineering and AI integration under pressure. Organized by IBM, GDG Arequipa and JAKU Emprende UNSA.",
+        tone: "flame",
+      },
+      {
+        period: "Nov 2025",
+        title: "IT Operator — ESAN University · Beca 18",
+        description:
+          "IT support in registration, verification and data management for over 2,000 regional applicants. Systems operation and data control under strict precision and confidentiality criteria.",
+        tone: "glow",
+      },
+      {
+        period: "2024",
+        title: "First place — UNSA Project Fair (advanced)",
+        description:
+          "First place with Chakrita, a sustainable agriculture mobile app in Flutter with IoT and sensor integration. UX/UI design and user-centered interfaces.",
+        tone: "glow",
+      },
+      {
+        period: "2024 — 2025",
+        title: "IT Operator — CTK · PRONABEC (Beca 18)",
+        description:
+          "Support and management for over 2,000 applicants during the National Preselection Exam, operating critical systems and evaluation platforms with high data-integrity standards.",
+        tone: "muted",
+      },
+      {
+        period: "2023 — 2024",
+        title: "Academic Tutor — CEPRUNSA (3 terms)",
+        description:
+          "Coordination of tutor and teacher teams, attendance control and verification on the educational platform. Syllabus tracking across three consecutive processes.",
+        tone: "muted",
+      },
+      {
+        period: "2023",
+        title: "Programmer (intern) — I.E.P. Linus Pauling",
+        description:
+          "Development and maintenance of attendance and payment tracking systems with dynamic reports. Administrative process automation, debugging, module integration and user training.",
+        tone: "glow",
+      },
+      {
+        period: "Community",
+        title: "ACM Chapter Secretary · IEEE Computer Society volunteer",
+        description:
+          "Secretary of the ACM Student Chapter UNSA board (2024–2025), coordinating AI, cybersecurity and competitive programming workshops. Volunteer in marketing and design at IEEE Computer Society. Upper Fifth: top 20% of the cohort.",
+        tone: "muted",
       },
     ],
   },
 
   github: {
-    eyebrow: "04 — LIVE TELEMETRY",
-    heading: "Real code, real activity",
+    kicker: "SCENE 07 — TELEMETRY",
+    heading: "Activity that cannot be faked",
     description:
-      "Repositories loaded live from the GitHub API. What you see here is exactly what's on my account, right now.",
+      "Loaded directly from the GitHub API. What you see here is exactly what is on my account right now.",
+    metrics: [
+      { label: "Public repositories" },
+      { label: "Followers" },
+      { label: "Latest push" },
+    ],
     viewAll: "View repositories on GitHub",
-    updatedLabel: "Last push",
-    reposLabel: "PUBLIC REPOS",
-    followersLabel: "FOLLOWERS",
-    errorText: "Couldn't connect to GitHub API right now.",
-    loadingText: "Querying live GitHub telemetry…",
-  },
-
-  architecture: {
-    eyebrow: "05 — DATA ARCHITECTURE",
-    heading: "How I think about a data system",
-    description:
-      "From source to value: a clear, measurable pipeline where every layer owns one responsibility and a defined contract.",
-    layers: [
-      {
-        label: "Sources",
-        detail: "Operational & external",
-        tech: "PostgreSQL · MySQL · SQL Server · MongoDB · APIs",
-      },
-      {
-        label: "Ingest / ETL",
-        detail: "Extract & clean",
-        tech: "Python · Pandas · SQL · BULK INSERT",
-      },
-      {
-        label: "Store",
-        detail: "Modeling & quality",
-        tech: "Logical/physical modeling · CTEs · Window Fns",
-      },
-      {
-        label: "Process / ML",
-        detail: "Analytics & inference",
-        tech: "NumPy · Random Forest · ONNX · XAI",
-      },
-      {
-        label: "Serve",
-        detail: "APIs & visualization",
-        tech: "Spring Boot · JWT · Power BI",
-      },
-    ],
-    note: "Embedded inference: the model runs where the data lives — no external calls, with a 20ms P99 latency.",
-  },
-
-  stack: {
-    eyebrow: "06 — TOOLKIT & DOMAIN MATRIX",
-    heading: "The stack I reach for",
-    description: "The tools I use to take ideas from the data model to production.",
-    groups: [
-      {
-        label: "LANGUAGES",
-        items: ["Java 17", "Python", "JavaScript / TypeScript", "SQL · C++"],
-      },
-      {
-        label: "BACKEND",
-        items: ["Spring Boot · JPA", "NestJS", "Node.js", "REST APIs · JWT · Swagger"],
-      },
-      {
-        label: "DATA",
-        items: ["PostgreSQL · MySQL", "SQL Server · MongoDB", "Pandas · NumPy", "Power BI"],
-      },
-      {
-        label: "AI / ML",
-        items: ["ONNX Runtime", "Machine Learning", "Random Forest · XAI", "Embedded inference"],
-      },
-      {
-        label: "CLOUD",
-        items: ["Oracle Cloud (OCI)", "AWS (EC2, S3)", "Google Cloud", "Oracle APEX"],
-      },
-      {
-        label: "PRACTICES",
-        items: ["System architecture", "Git · Docker", "Scrum · Kanban", "API security"],
-      },
-    ],
+    updatedLabel: "Live updated",
+    errorText: "Could not connect to the GitHub API at this moment.",
+    loadingText: "Querying live GitHub activity…",
+    logTitle: "Activity log",
+    logEmpty: "Waiting for API data…",
   },
 
   credentials: {
-    eyebrow: "07 — PROOF & CERTIFICATIONS",
-    heading: "Earned, not claimed",
-    description: "Verifiable outcomes, continuous learning and engineering-community leadership.",
-    achievementsLabel: "ENGINEERING MILESTONES",
-    certificationsLabel: "VERIFIED CERTIFICATIONS",
-    certificationsTotal: "51 total",
-    verifyCta: "Verify credentials on Credly",
-    achievements: [
-      { title: "1st Place — NEXIA 2026", detail: "Build with AI hackathon" },
-      { title: "1st Place — UNSA Fair 2024", detail: "Engineering Project Fair, Advanced" },
-      { title: "Upper Fifth", detail: "Top 20% of the cohort" },
-      { title: "Oracle Next Education", detail: "Data Science program (440h)" },
-      { title: "Secretary — ACM Chapter", detail: "Student leadership at UNSA" },
-      { title: "IEEE Computer Society", detail: "Volunteer, marketing & design" },
+    kicker: "SCENE 08 — THE TROPHY WALL",
+    heading: "Earned in battle",
+    description:
+      "First-place wins, intensive training and community leadership — all verifiable, nothing declared.",
+    trophies: [
+      { index: "01", title: "1st place — NEXIA 2026", detail: "Build with AI hackathon", value: "1", suffix: "", glow: "flame" },
+      { index: "02", title: "1st place — UNSA Fair 2024", detail: "Project Fair, Advanced category", value: "1", suffix: "", glow: "emerald" },
+      { index: "03", title: "Upper Fifth", detail: "Top 20% of the cohort", value: "20", suffix: "%", glow: "magenta" },
+      { index: "04", title: "Oracle Next Education", detail: "Data Science training", value: "440", suffix: "h", glow: "flame" },
+      { index: "05", title: "Secretary — ACM Chapter", detail: "UNSA student leadership", value: "1", suffix: "", glow: "violet" },
+      { index: "06", title: "IEEE Computer Society", detail: "Volunteer, marketing & design", value: "1", suffix: "", glow: "amber" },
     ],
-    certifications: [
-      { name: "Oracle Cloud Infrastructure 2025 Foundations", issuer: "Oracle" },
-      { name: "Oracle APEX Cloud Developer Professional", issuer: "Oracle" },
-      { name: "Google Cloud Computing Foundations", issuer: "Google Cloud" },
-      { name: "AWS Academy Graduate — Cloud Foundations", issuer: "AWS" },
-      { name: "Microsoft SQL Server Specialization (Advanced)", issuer: "Datux Peru" },
-      { name: "Microsoft Power BI Specialization (Advanced)", issuer: "Datux Peru" },
-      { name: "ONE Tech — Data Science (440h)", issuer: "Alura Latam" },
-      { name: "Python Programming & Development (80h)", issuer: "Univ. Continental" },
-      { name: "SAP S/4HANA MM — Key User", issuer: "SUMMA Center" },
-      { name: "Business Intelligence Foundation (BIFPC)", issuer: "CertiProf" },
-      { name: "Scrum Foundation (SFPC)", issuer: "CertiProf" },
-      { name: "Lean Six Sigma White Belt (LSSWBPC)", issuer: "CertiProf" },
-      { name: "Machine Learning · Classification & Regression", issuer: "Alura Latam" },
-      { name: "Statistics · Probability & Sampling", issuer: "Alura Latam" },
-      { name: "Professional Office Suite — Advanced (90h)", issuer: "ITEC" },
-      { name: "Gamified Ethical Hacking", issuer: "HackerMentor" },
+    credentialsLabel: "Verified certifications",
+    credentials: [
+      { name: "Oracle Cloud Infrastructure 2025 Foundations", issuer: "Oracle", acronym: "OCI", href: "https://www.credly.com/search?q=Oracle%20Cloud%20Infrastructure%202025%20Foundations", glow: "flame" },
+      { name: "Oracle APEX Cloud Developer Professional", issuer: "Oracle", acronym: "APEX", href: "https://www.credly.com/search?q=Oracle%20APEX%20Cloud%20Developer%20Professional", glow: "flame" },
+      { name: "Google Cloud Computing Foundations", issuer: "Google Cloud", acronym: "GCP", href: "https://www.credly.com/search?q=Google%20Cloud%20Computing%20Foundations", glow: "magenta" },
+      { name: "AWS Academy Graduate — Cloud Foundations", issuer: "AWS", acronym: "AWS", href: "https://www.credly.com/search?q=AWS%20Academy%20Graduate%20—%20Cloud%20Foundations", glow: "magenta" },
+      { name: "Microsoft SQL Server Specialization (advanced)", issuer: "Datux Peru", acronym: "SQL", href: "https://www.credly.com/search?q=Microsoft%20SQL%20Server%20Specialization%20(advanced)", glow: "violet" },
+      { name: "Microsoft Power BI Specialization (advanced)", issuer: "Datux Peru", acronym: "PBI", href: "https://www.credly.com/search?q=Microsoft%20Power%20BI%20Specialization%20(advanced)", glow: "violet" },
+      { name: "ONE Tech — Data Science (440h)", issuer: "Alura Latam", acronym: "ONE", href: "https://www.credly.com/search?q=ONE%20Tech%20—%20Data%20Science%20(440h)", glow: "flame" },
+      { name: "Programming & Development with Python (80h)", issuer: "Univ. Continental", acronym: "PY", href: "https://www.credly.com/search?q=Programming%20&%20Development%20with%20Python%20(80h)", glow: "amber" },
+      { name: "SAP S/4HANA MM — Key User", issuer: "SUMMA Center", acronym: "SAP", href: "https://www.credly.com/search?q=SAP%20S/4HANA%20MM%20—%20Key%20User", glow: "violet" },
+      { name: "Business Intelligence Foundation (BIFPC)", issuer: "CertiProf", acronym: "BI", href: "https://www.credly.com/search?q=Business%20Intelligence%20Foundation%20(BIFPC)", glow: "flame" },
+      { name: "Scrum Foundation (SFPC)", issuer: "CertiProf", acronym: "SCR", href: "https://www.credly.com/search?q=Scrum%20Foundation%20(SFPC)", glow: "magenta" },
+      { name: "Lean Six Sigma White Belt (LSSWBPC)", issuer: "CertiProf", acronym: "LSS", href: "https://www.credly.com/search?q=Lean%20Six%20Sigma%20White%20Belt%20(LSSWBPC)", glow: "amber" },
+      { name: "Machine Learning · Classification & Regression", issuer: "Alura Latam", acronym: "ML", href: "https://www.credly.com/search?q=Machine%20Learning%20·%20Classification%20&%20Regression", glow: "violet" },
+      { name: "Statistics · Probability & Sampling", issuer: "Alura Latam", acronym: "STAT", href: "https://www.credly.com/search?q=Statistics%20·%20Probability%20&%20Sampling", glow: "amber" },
+      { name: "Professional Office Suite, Advanced (90h)", issuer: "ITEC", acronym: "OFI", href: "https://www.credly.com/search?q=Professional%20Office%20Suite,%20Advanced%20(90h)", glow: "magenta" },
+      { name: "Gamified Ethical Hacking", issuer: "HackerMentor", acronym: "SEC", href: "https://www.credly.com/search?q=Gamified%20Ethical%20Hacking", glow: "violet" },
     ],
+    verifyCta: "Verify on Credly",
+  },
+
+  philosophy: {
+    kicker: "SCENE 09 — THE BRAIN",
+    headingLead: "A demo gets shown.",
+    headingAccent: "A system earns trust.",
+    description:
+      "Backend Developer in pre-professional internships and final-year Systems Engineering student at UNSA. Over three years building real software: from data support for 2,000+ applicants to backend services in production. My method combines rigorous architecture, clean data and measurable results in every delivery.",
+    principles: [
+      {
+        index: "01",
+        title: "Sub-second latency",
+        detail: "Embedded ML inference optimized to a 20 ms P99. When the system does not wait, neither does the user.",
+      },
+      {
+        index: "02",
+        title: "Data parity",
+        detail: "Declarative schemas and strict contracts between layers. Data arrives clean and leaves correct.",
+      },
+      {
+        index: "03",
+        title: "Production-ready",
+        detail: "Resilient ETL, JWT-secured APIs and OpenAPI documentation. The standard is what a team can trust daily.",
+      },
+    ],
+    panelTitle: "Operating profile",
+    facts: [
+      { key: "Current role", value: "Backend Developer (intern)" },
+      { key: "Organization", value: "Fundacion CALMA" },
+      { key: "Core tech", value: "Java · Python · SQL · ONNX" },
+      { key: "Education", value: "Systems Engineering · UNSA" },
+      { key: "Location", value: "Arequipa, Peru (UTC-5)" },
+    ],
+    panelFooter: { left: "UNSA · Systems Engineering", right: "Upper Fifth" },
   },
 
   faq: {
-    eyebrow: "08 — FREQUENTLY ASKED QUESTIONS",
-    heading: "Architecture & Collaboration FAQs",
+    kicker: "SCENE 10 — QUESTIONS",
+    heading: "Architecture decisions & collaboration",
     description:
-      "Full clarity on how I approach software engineering, latency optimization, and integration into high-performance engineering teams.",
+      "Full clarity on how I approach building software, optimizing latency and integrating into high-performance teams.",
     items: [
       {
-        category: "ARCHITECTURE",
-        question: "Why embed ML inference directly into the backend rather than microservices?",
+        index: "F1",
+        category: "Architecture",
+        question: "Why embed ML inference in the backend instead of dedicated microservices?",
         answer:
-          "In projects like ChurnInsight, exporting the model to ONNX Runtime and executing it in-process within Java/Spring Boot eliminated network overhead and JSON serialization, cutting P99 latency from 2000ms to 20ms while having zero external infrastructure dependency.",
+          "In projects like ChurnInsight, exporting the model to ONNX Runtime and running it in the same Java/Spring Boot process removed network and JSON serialization overhead, cutting P99 latency from 2000 ms to 20 ms with zero external infrastructure dependency.",
+        questions: [
+          {
+            category: "Latency",
+            question: "What impact does embedded inference have on user experience?",
+            answer:
+              "P99 latency drops from 2000 ms to 20 ms: predictions are served where the data lives, with no external calls or network overhead.",
+          },
+          {
+            category: "Cost",
+            question: "Does it cut costs versus external ML APIs?",
+            answer:
+              "It removes third-party calls from the critical path: zero per-inference cost and zero external availability dependency.",
+          },
+        ],
       },
       {
-        category: "AVAILABILITY",
-        question: "What is your current availability for roles and onboarding?",
+        index: "F2",
+        category: "Availability",
+        question: "What is your current availability for roles and start date?",
         answer:
-          "I am finishing my Systems Engineering degree at UNSA while working as a Backend Developer Intern at Fundacion CALMA. I am open to Junior Data Engineer or Backend Developer roles in remote or hybrid formats.",
+          "I am currently finishing my last terms of Systems Engineering at UNSA and working as a Backend intern at Fundacion CALMA. I am available for Junior Data Engineer or Backend Developer roles, remote or hybrid.",
+        questions: [
+          {
+            category: "Mode",
+            question: "Do you work remote or on-site?",
+            answer:
+              "Remote and hybrid, fully available in the America/Lima timezone (UTC-5).",
+          },
+        ],
       },
       {
-        category: "METHODOLOGY",
-        question: "How do you guarantee code quality and data contract parity?",
+        index: "F3",
+        category: "Methodology",
+        question: "How do you guarantee code quality and data parity?",
         answer:
-          "I use strict type checking in TypeScript/Java, declarative database migrations (Flyway/Liquibase/SQL), OpenAPI/Swagger documentation, and automated E2E tests before every release.",
+          "I use strict type checks in TypeScript/Java, declarative database migrations (Flyway/Liquibase/SQL), OpenAPI/Swagger documentation and automated E2E tests before every deployment.",
       },
       {
-        category: "DATA & CLOUD",
-        question: "What experience do you have with cloud platforms like Oracle or AWS?",
+        index: "F4",
+        category: "Data & Cloud",
+        question: "What cloud experience do you have, e.g., Oracle or AWS?",
         answer:
-          "I hold official certifications in Oracle Cloud Infrastructure (OCI Foundations & APEX Professional), AWS Academy Cloud Foundations, and Google Cloud Foundations. I have deployed containerized workloads with Docker on OCI and EC2 instances.",
+          "I hold official certifications in Oracle Cloud Infrastructure (OCI Foundations & APEX Professional), AWS Academy Cloud Foundations and Google Cloud Foundations. I have deployed containerized environments with Docker on OCI and EC2 instances.",
       },
     ],
   },
 
   contact: {
-    eyebrow: "09 — LET'S TALK",
-    headingLead: "Let's build something",
-    headingAccent: "that scales.",
+    kicker: "FINAL SCENE — CONTACT",
+    headingLead: "Let's ignite something",
+    headingAccent: "that leaves a mark.",
     description:
-      "Open to Junior Data Engineer and Backend Engineering roles. If you're hiring engineers who sweat the details, I'd love to talk.",
-    emailCta: "Copy Direct Email",
-    linkedinCta: "LinkedIn Profile",
-    githubCta: "GitHub Repositories",
+      "Available for Junior Data Engineer and Backend Engineering roles. If you need someone who cares about details down to the millisecond, write to me.",
+    terminalTitle: "terminal@ower.dev",
+    greeting: "$ start — conversation",
+    context:
+      "> If you have a product that processes data, an API that needs to scale or an ML model that should live in production — let's talk.",
+    request:
+      "> One email is enough. I respond with technical context, not templates.",
+    emailLabel: "Direct email",
+    copyLabel: "Copy",
+    copiedFeedback: "Copied",
+    responseTime: "response < 24 h on business days",
+    cards: [
+      { label: "GitHub", value: "github.com/OwerLopez", href: "https://github.com/OwerLopez" },
+      { label: "LinkedIn", value: "linkedin.com/in/owerlopez", href: "https://www.linkedin.com/in/owerlopez/" },
+      { label: "Credly", value: "Verified credentials", href: "https://www.credly.com/users/ower-frank-lopez-arela" },
+    ],
+    channels: [
+      { kind: "link", label: "GitHub", handle: "@OwerLopez", href: "https://github.com/OwerLopez", external: true },
+      { kind: "link", label: "LinkedIn", handle: "Ower Frank Lopez Arela", href: "https://www.linkedin.com/in/owerlopez/", external: true },
+      { kind: "link", label: "Credly", handle: "credly.com", href: "https://www.credly.com/users/ower-frank-lopez-arela", external: true },
+      { kind: "location", label: "Location", handle: "Arequipa, Peru · UTC-5", href: "https://maps.google.com/?q=Arequipa+Peru", external: true },
+    ],
   },
 
   footer: {
+    copyright: "© 2026 Ower Frank Lopez Arela",
     rights: "Ower Frank Lopez Arela. All rights reserved.",
     tagline: "Backend · Data · AI · Cloud — Arequipa, Peru (16.40°S 71.53°W)",
-    builtWith: "Built with Next.js 15, React 19, Tailwind CSS v4 & Framer Motion",
-    backToTop: "Back to top",
+    credit: "Design & development — Ower F. Lopez Arela",
+    location: "Arequipa, Peru",
+    timezone: "UTC-5",
+    navLabel: "Main navigation",
+    navTitle: "Scenes",
+    navItems: {
+      mission: "Mission",
+          work: "Projects",
+          architecture: "Architecture",
+          stack: "Stack",
+          journey: "Journey",
+          github: "GitHub",
+          credentials: "Trophies",
+          philosophy: "Philosophy",
+          faq: "Questions",
+          contact: "Contact",
+        },
+    contactTitle: "Channels",
+    contactItems: [
+      { href: "https://github.com/OwerLopez", label: "github.com/OwerLopez", external: true },
+      { href: "https://www.linkedin.com/in/owerlopez/", label: "linkedin.com/in/owerlopez", external: true },
+      { href: "https://www.credly.com/users/ower-frank-lopez-arela", label: "credly.com — Credentials", external: true },
+    ],
+    githubLabel: "GitHub",
+    linkedinLabel: "LinkedIn",
+    credlyLabel: "Credly",
   },
 };

@@ -1,120 +1,191 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, Mail, CheckCircle2, Linkedin, Github, BadgeCheck, Terminal } from "lucide-react";
-import type { ContactContent } from "@/types/content";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, CheckCircle2, Copy } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { ReactionBar } from "@/components/animations/ReactionBar";
+import type { PortfolioContent } from "@/types/content";
 
-export function Contact({ content }: { content: ContactContent }) {
-  const [copied, setCopied] = useState(false);
+function TerminalPrompt({ text, delay, done }: { text: string; delay: number; done: () => void }) {
+  const [visible, setVisible] = useState("");
+  const reduce = useReducedMotion();
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(siteConfig.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
+  useEffect(() => {
+    if (reduce) {
+      setVisible(text);
+      done();
+      return;
+    }
+    let frame: number;
+    const t0 = window.setTimeout(() => {
+      let i = 0;
+      const tick = () => {
+        i += 1;
+        setVisible(text.slice(0, i));
+        if (i < text.length) frame = window.setTimeout(tick, 38);
+        else done();
+      };
+      tick();
+    }, delay);
+    return () => {
+      window.clearTimeout(t0);
+      window.clearTimeout(frame);
+    };
+  }, [text, delay, done, reduce]);
 
   return (
-    <section
-      id="contact"
-      className="relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-12 py-24 sm:py-36"
-    >
-      <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-[#09080d]/90 via-[#050408]/95 to-[#030305] p-8 sm:p-16 backdrop-blur-2xl shadow-2xl relative overflow-hidden text-center">
-        {/* Ambient Glow */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-gradient-to-r from-amber-500/10 via-cyan-500/10 to-transparent blur-[140px]" />
+    <p className="font-mono-token text-sm leading-7 text-muted">
+      <span className="text-[#e11d74]">$&nbsp;</span>
+      {visible}
+      {visible.length < text.length && <span className="terminal-cursor" aria-hidden />}
+    </p>
+  );
+}
 
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <Eyebrow className="justify-center mb-6">{content.eyebrow}</Eyebrow>
+export function Contact({ content }: { content: PortfolioContent }) {
+  const { contact } = content;
+  const [copied, setCopied] = useState(false);
+  const [step, setStep] = useState(0);
 
-          <h2 className="font-display text-4xl sm:text-7xl font-bold tracking-tight text-white leading-[1.05] mb-6">
-            {content.headingLead}{" "}
-            <span className="text-gradient-accent italic block sm:inline">
-              {content.headingAccent}
-            </span>
-          </h2>
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(siteConfig.email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      /* clipboard no disponible */
+    }
+  };
 
-          <p className="text-zinc-300 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-            {content.description}
-          </p>
+  const lines = [contact.greeting, contact.context, contact.request];
 
-          {/* Email Copy Card Terminal */}
-          <div className="rounded-2xl border border-white/10 bg-[#09080d] p-6 max-w-xl mx-auto mb-10 text-left shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4 font-mono text-xs text-zinc-400">
-              <div className="flex items-center gap-2">
-                <Terminal className="h-4 w-4 text-amber-400" />
-                <span>DIRECT_COMMUNICATION_LINK</span>
-              </div>
-              <span className="text-emerald-400">STATUS: OPEN</span>
-            </div>
+  return (
+    <section id="contact" className="relative z-10 mx-auto max-w-7xl px-5 pb-10 pt-24 sm:px-6 md:pb-20 md:pt-32" aria-label="Contacto">
+      <motion.p
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted"
+      >
+        <span className="inline-block h-px w-12 bg-line-strong" />
+        {contact.kicker}
+      </motion.p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-white/[0.03] p-4 rounded-xl border border-white/5">
-              <div className="font-mono text-sm sm:text-base text-amber-300 font-semibold truncate">
-                {siteConfig.email}
-              </div>
+      {/* CTA monumental */}
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="font-display max-w-4xl text-4xl leading-[1.05] font-extrabold tracking-tight text-ink sm:text-6xl md:text-[5rem]"
+      >
+        {contact.headingLead}{" "}
+        <span className="text-gradient-flame">{contact.headingAccent}</span>
+      </motion.h2>
 
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-6 max-w-xl text-base text-muted sm:text-lg"
+      >
+        {contact.description}
+      </motion.p>
+
+      {/* Terminal */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        className="border-gradient mt-12 overflow-hidden rounded-2xl bg-surface-raised"
+      >
+        <div className="flex items-center gap-3 border-b border-line px-6 py-4">
+          <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-[#e11d74]/60" />
+          <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-[#fbbf24]/60" />
+          <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-[#34d399]/60" />
+          <span className="font-mono-token ml-2 text-[10px] tracking-[0.3em] text-faint">{contact.terminalTitle}</span>
+        </div>
+        <div className="space-y-2 px-6 py-8">
+          {lines.map((line, i) => (
+            <TerminalPrompt
+              key={i}
+              text={line}
+              delay={400 + i * 1800}
+              done={() => setStep((s) => Math.max(s, i + 1))}
+            />
+          ))}
+          {step >= lines.length && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="font-mono-token mt-2 text-sm text-ink"
+            >
+              <span className="text-[#e11d74]">→&nbsp;</span>
+              {contact.emailLabel}{" "}
               <button
                 type="button"
-                onClick={handleCopy}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 font-mono text-xs font-bold text-black transition-all hover:bg-amber-400 hover:scale-105 shrink-0"
+                onClick={copyEmail}
+                className="inline-flex items-center gap-2 border-b border-dashed border-line-strong pb-0.5 transition-colors duration-300 hover:border-[#ff7a18] hover:text-[#ff7a18]"
               >
+                {siteConfig.email}
                 {copied ? (
-                  <>
-                    <CheckCircle2 className="h-4 w-4 text-black" />
-                    <span>COPIADO</span>
-                  </>
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#34d399]" />
                 ) : (
-                  <>
-                    <Mail className="h-4 w-4 text-black" />
-                    <span>COPIAR EMAIL</span>
-                  </>
+                  <Copy className="h-3.5 w-3.5 text-faint" />
                 )}
               </button>
-            </div>
-          </div>
-
-          {/* Direct Social Cards */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
-            <a
-              href={siteConfig.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-6 py-3 font-mono text-xs font-semibold text-white transition-all hover:border-amber-400 hover:bg-white/10 hover:scale-105"
-            >
-              <Linkedin className="h-4 w-4 text-cyan-400" />
-              <span>{content.linkedinCta}</span>
-              <ArrowRight className="h-3.5 w-3.5 text-zinc-500" />
-            </a>
-
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-6 py-3 font-mono text-xs font-semibold text-white transition-all hover:border-amber-400 hover:bg-white/10 hover:scale-105"
-            >
-              <Github className="h-4 w-4 text-amber-400" />
-              <span>{content.githubCta}</span>
-              <ArrowRight className="h-3.5 w-3.5 text-zinc-500" />
-            </a>
-
-            <a
-              href={siteConfig.links.credly}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-6 py-3 font-mono text-xs font-semibold text-white transition-all hover:border-amber-400 hover:bg-white/10 hover:scale-105"
-            >
-              <BadgeCheck className="h-4 w-4 text-emerald-400" />
-              <span>CREDLY VERIFIED</span>
-              <ArrowRight className="h-3.5 w-3.5 text-zinc-500" />
-            </a>
-          </div>
-
-          <div className="pt-6 border-t border-white/10 flex justify-center">
-            <ReactionBar />
-          </div>
+              <span className="text-faint">&nbsp;· {contact.responseTime}</span>
+            </motion.p>
+          )}
         </div>
+      </motion.div>
+
+      {/* Tarjetas de canal */}
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {contact.cards.map((card, i) => (
+          <motion.a
+            key={card.label}
+            href={card.href}
+            {...(card.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.35 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            className="hover-lift group rounded-2xl border border-line bg-surface p-5"
+          >
+            <p className="font-mono-token text-[10px] tracking-[0.25em] text-faint">{card.label}</p>
+            <p className="mt-2 flex items-center justify-between text-sm font-semibold text-ink">
+              {card.value}
+              <ArrowUpRight className="h-4 w-4 text-faint transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#ff7a18]" />
+            </p>
+          </motion.a>
+        ))}
       </div>
+
+      {/* Canales alternativos */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-10 flex flex-wrap items-center gap-3 text-xs text-muted"
+      >
+        {contact.channels.map((ch) => (
+          <a
+            key={ch.label}
+            href={ch.href}
+            {...(ch.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 transition-all duration-300 hover:border-[#e11d74]/50 hover:text-ink"
+          >
+            <span className="font-mono-token text-[10px] uppercase tracking-[0.2em] text-faint">{ch.kind}</span>
+            {ch.handle}
+          </a>
+        ))}
+      </motion.div>
     </section>
   );
 }
