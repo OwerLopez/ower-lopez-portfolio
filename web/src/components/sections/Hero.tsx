@@ -57,7 +57,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
 
   return (
     <section className="relative overflow-hidden scene-glow-flame" aria-label="Intro">
-      {/* Arte de fondo generado con IA */}
+      {/* Arte de fondo atmosférico */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 select-none"
@@ -65,36 +65,22 @@ export function Hero({ content }: { content: PortfolioContent }) {
           backgroundImage: `url(${AURORA})`,
           backgroundSize: "cover",
           backgroundPosition: "center 75%",
-          opacity: 0.75,
+          opacity: 0.35,
           mixBlendMode: "screen",
         }}
       />
-      {/* Lluvia de chispas animadas */}
-      <ParticleRain count={58} />
+      {/* Lluvia sutil de chispas */}
+      <ParticleRain count={20} />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base via-transparent to-base" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-base to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-base to-transparent" />
 
-      {/* Rueda cónica orbital decorativa */}
-      {!reduce && (
-        <div
-          aria-hidden
-          className="animate-orbit pointer-events-none absolute -right-44 top-1/4 h-[520px] w-[520px] opacity-60 md:right-0"
-          style={{
-            background:
-              "conic-gradient(from 0deg, transparent 0deg, rgba(225,29,116,0.4) 55deg, transparent 115deg, rgba(139,92,246,0.32) 235deg, transparent 300deg)",
-            WebkitMaskImage: "radial-gradient(circle, transparent 52%, #000 72%)",
-            maskImage: "radial-gradient(circle, transparent 52%, #000 72%)",
-          }}
-        />
-      )}
-
-      <div className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-40 sm:px-8 sm:pb-28 sm:pt-48 md:pt-56 md:pb-32">
+      <div className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-20 pb-8 sm:pt-24 sm:pb-10 md:pt-28 md:pb-12 flex flex-col justify-center min-h-[85vh]">
         {/* Barra de estado */}
         <motion.div
           initial={reduce ? undefined : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease }}
-          className="mb-12 flex flex-wrap items-center gap-3"
+          className="mb-6 sm:mb-8 flex flex-wrap items-center gap-3"
         >
           <span className="rec-blink flex items-center gap-2.5 rounded-full border border-line-strong bg-surface-raised px-4 py-1.5 text-[11px] tracking-[0.18em] text-muted">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e11d74]" />
@@ -110,12 +96,12 @@ export function Hero({ content }: { content: PortfolioContent }) {
           initial={reduce ? undefined : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease }}
-          className="font-mono-token mb-7 text-xs tracking-[0.38em] text-flame"
+          className="font-mono-token mb-4 text-xs tracking-[0.38em] text-flame"
         >
           {intro.kicker}
         </motion.p>
 
-        <h1 className="max-w-4xl font-display text-[13vw] leading-[0.94] font-extrabold tracking-tight text-ink sm:text-[8.5vw] md:text-[5.4rem]">
+        <h1 className="max-w-4xl font-display text-[11vw] leading-[0.96] font-extrabold tracking-tight text-ink sm:text-[7vw] md:text-[4.5rem]">
           {intro.titleLines.map((line, i) => (
             <motion.span
               key={i}
@@ -151,7 +137,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
           initial={reduce ? undefined : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.62, ease }}
-          className="mt-8 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
+          className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
         >
           {intro.description}
         </motion.p>
@@ -161,7 +147,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
           initial={reduce ? undefined : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.74, ease }}
-          className="mt-11 flex flex-wrap items-center gap-4"
+          className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
         >
           <a
             href={intro.primaryTarget}
@@ -196,7 +182,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
           initial={reduce ? undefined : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.9, delay: 1.05, ease }}
-          className="mt-20 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-line pt-6 text-faint"
+          className="mt-10 sm:mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-line pt-5 text-faint"
         >
           <span className="font-mono-token flex items-center gap-3 text-[11px] tracking-[0.3em]">
             <motion.span

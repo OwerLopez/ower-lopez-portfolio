@@ -7,9 +7,9 @@ import { useEffect, useRef } from "react";
  * Colores: ámbar → naranja → magenta (paleta Aurora de Fuego).
  */
 export function ParticleRain({
-  count = 55,
+  count = 24,
   accent = "#ff7a18",
-  mid = "#e11d74",
+  mid = "#fbbf24",
 }: {
   count?: number;
   accent?: string;
@@ -84,14 +84,14 @@ export function ParticleRain({
         ctx.moveTo(s.x, s.y);
         ctx.lineTo(s.x - s.vx * 6, s.y - s.len);
         ctx.strokeStyle = color;
-        ctx.globalAlpha = 0.22 * t;
-        ctx.lineWidth = s.size * 0.6;
+        ctx.globalAlpha = 0.12 * t;
+        ctx.lineWidth = s.size * 0.5;
         ctx.stroke();
         // Cabeza brillante
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fillStyle = color;
-        ctx.globalAlpha = 0.85 * t;
+        ctx.globalAlpha = 0.45 * t;
         ctx.fill();
       }
       ctx.globalAlpha = 1;

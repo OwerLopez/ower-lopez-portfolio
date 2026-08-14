@@ -17,21 +17,21 @@ export function Philosophy({ content }: { content: PortfolioContent }) {
           backgroundImage: `url(${NEURAL})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          opacity: 0.35,
+          opacity: 0.15,
           mixBlendMode: "screen",
         }}
       />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base via-base/85 to-base" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-8 sm:py-12">
         <Reveal>
-          <p className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
+          <p className="font-mono-token mb-4 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
             <span className="inline-block h-px w-12 bg-line-strong" />
             {philosophy.kicker}
           </p>
         </Reveal>
 
-        <div className="grid gap-14 lg:grid-cols-12">
+        <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Reveal delay={80}>
               <h2 className="font-display text-3xl leading-[1.12] font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
@@ -40,10 +40,10 @@ export function Philosophy({ content }: { content: PortfolioContent }) {
               </h2>
             </Reveal>
             <Reveal delay={150}>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-muted">{philosophy.description}</p>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted">{philosophy.description}</p>
             </Reveal>
 
-            <div className="mt-12 space-y-px border border-line bg-line">
+            <div className="mt-8 space-y-px border border-line bg-line">
               <Stagger stagger={0.07}>
                 {philosophy.principles.map((p, i) => (
                   <Reveal key={p.index} delay={i * 70} variant="block">

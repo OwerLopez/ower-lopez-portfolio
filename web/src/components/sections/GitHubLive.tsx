@@ -76,15 +76,15 @@ export function GitHubLive({ content }: { content: PortfolioContent }) {
       : undefined;
 
   return (
-    <section id="github" className="relative z-10 mx-auto max-w-7xl px-5 py-24 sm:px-6 sm:py-32" aria-label="GitHub en vivo">
+    <section id="github" className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-8 sm:py-12" aria-label="GitHub en vivo">
       <Reveal>
-        <p className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
+        <p className="font-mono-token mb-4 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
           <span className="inline-block h-px w-12 bg-line-strong" />
           {github.kicker}
         </p>
       </Reveal>
 
-      <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-2xl">
           <Reveal delay={80}>
             <h2 className="font-display text-3xl leading-[1.12] font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
@@ -92,7 +92,7 @@ export function GitHubLive({ content }: { content: PortfolioContent }) {
             </h2>
           </Reveal>
           <Reveal delay={140}>
-            <p className="mt-4 text-base text-muted">{github.description}</p>
+            <p className="mt-3 text-base text-muted">{github.description}</p>
           </Reveal>
         </div>
         <Reveal delay={200}>
@@ -110,7 +110,7 @@ export function GitHubLive({ content }: { content: PortfolioContent }) {
 
       {/* Panel de telemetría */}
       <Reveal delay={220} variant="block">
-        <div className="border-gradient relative overflow-hidden rounded-2xl bg-surface-raised p-7 sm:p-10">
+        <div className="border-gradient relative overflow-hidden rounded-2xl bg-surface-raised p-6 sm:p-8">
           <div
             aria-hidden
             className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-[#8b5cf6]/12 blur-[80px]"

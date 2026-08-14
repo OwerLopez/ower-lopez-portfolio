@@ -93,7 +93,7 @@ export function WorkCarousel({ content }: { content: WorkSection }) {
       <div
         ref={trackRef}
         onScroll={onDragUpdate}
-        className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {slides.map((slide, i) => {
           const isFeatured = slide.type === "featured";
@@ -106,10 +106,10 @@ export function WorkCarousel({ content }: { content: WorkSection }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "0px 0px -8% 0px" }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative w-[420px] shrink-0 snap-center overflow-hidden rounded-2xl border border-[#1e1e2e] bg-[#0c0c14]/80 backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:border-[#2e2e42] hover:shadow-[0_28px_80px_-20px_rgba(225,29,116,0.4)]"
+              className="group relative w-[300px] sm:w-[380px] md:w-[400px] shrink-0 snap-center overflow-hidden rounded-2xl border border-[#1e1e2e] bg-[#0c0c14]/80 backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:border-[#2e2e42] hover:shadow-[0_28px_80px_-20px_rgba(225,29,116,0.4)]"
             >
               <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${color}, transparent)` }} />
-              <div className="p-7">
+              <div className="p-5 sm:p-6">
                 <div className="flex items-center justify-between">
                   <span className="font-mono-token text-[10px] uppercase tracking-[0.25em] text-[#6a6978]">
                     {isFeatured ? content.featuredLabel : (p as LogEntry).index}

@@ -19,42 +19,42 @@ export function Credentials({ content }: { content: PortfolioContent }) {
   const { credentials } = content;
 
   return (
-    <section id="credentials" className="relative z-10 mx-auto max-w-7xl px-5 py-24 sm:px-6 md:py-32" aria-label="Credenciales">
+    <section id="credentials" className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-8 sm:py-12" aria-label="Credenciales">
       <Reveal>
-        <p className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
+        <p className="font-mono-token mb-4 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
           <span className="inline-block h-px w-12 bg-line-strong" />
           {credentials.kicker}
         </p>
       </Reveal>
 
-      <div className="mb-12 max-w-2xl">
+      <div className="mb-8 max-w-2xl">
         <Reveal delay={80}>
           <h2 className="font-display text-3xl leading-[1.12] font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
             {credentials.heading}
           </h2>
         </Reveal>
         <Reveal delay={140}>
-          <p className="mt-4 text-base text-muted">{credentials.description}</p>
+          <p className="mt-3 text-base text-muted">{credentials.description}</p>
         </Reveal>
       </div>
 
       {/* Muro de trofeos */}
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Stagger stagger={0.06}>
           {credentials.trophies.map((t, i) => {
             const color = GLOW_COLOR[t.glow] ?? "#ff7a18";
             return (
               <Reveal key={t.index} delay={i * 60} variant="block">
                 <div
-                  className="hover-lift h-full rounded-2xl border border-line bg-surface p-7"
+                  className="hover-lift h-full rounded-2xl border border-line bg-surface p-5 sm:p-6"
                   style={{ boxShadow: `0 20px 60px -25px ${color}35` }}
                 >
                   <span className="font-mono-token text-[10px] tracking-[0.3em] text-faint">{t.index}</span>
-                  <dd className="mt-4 text-4xl font-black tracking-tight tabular-nums sm:text-5xl" style={{ color }}>
+                  <dd className="mt-3 text-3xl font-black tracking-tight tabular-nums sm:text-4xl" style={{ color }}>
                     <Counter value={parseFloat(t.value.replace(/[^0-9.]/g, ""))} suffix={t.value.replace(/[0-9.]/g, "")} />
                   </dd>
-                  <h3 className="mt-3 font-display text-lg font-bold tracking-tight text-ink">{t.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{t.detail}</p>
+                  <h3 className="mt-2.5 font-display text-base font-bold tracking-tight text-ink">{t.title}</h3>
+                  <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted">{t.detail}</p>
                 </div>
               </Reveal>
             );
@@ -63,7 +63,7 @@ export function Credentials({ content }: { content: PortfolioContent }) {
       </div>
 
       {/* Certificaciones verificables */}
-      <div className="mt-16">
+      <div className="mt-10">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <Reveal>
             <h3 className="font-mono-token text-xs tracking-[0.3em] text-muted">{credentials.credentialsLabel}</h3>
@@ -85,7 +85,7 @@ export function Credentials({ content }: { content: PortfolioContent }) {
         <div className="relative overflow-hidden rounded-2xl border border-line bg-surface">
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-32 -top-32 h-72 w-72 select-none opacity-40"
+            className="pointer-events-none absolute -right-32 -top-32 h-72 w-72 select-none opacity-15"
             style={{
               backgroundImage: `url(${LIQUID})`,
               backgroundSize: "cover",

@@ -18,16 +18,16 @@ export function Mission({ content }: { content: PortfolioContent }) {
           backgroundImage: `url(${NEURAL})`,
           backgroundSize: "cover",
           backgroundPosition: "center right",
-          opacity: 0.5,
+          opacity: 0.2,
           mixBlendMode: "screen",
           WebkitMaskImage: "linear-gradient(to right, transparent 0%, #000 42%)",
           maskImage: "linear-gradient(to right, transparent 0%, #000 42%)",
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-8 sm:py-12">
         <Reveal>
-          <p className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
+          <p className="font-mono-token mb-4 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
             <span className="inline-block h-px w-12 bg-line-strong" />
             {mission.kicker}
           </p>
@@ -41,7 +41,7 @@ export function Mission({ content }: { content: PortfolioContent }) {
             </h2>
           </Reveal>
 
-          <div className="mt-8 space-y-5">
+          <div className="mt-5 space-y-4">
             {mission.paragraphs.map((p, i) => (
               <Reveal key={i} delay={140 + i * 80}>
                 <p className="text-base leading-relaxed text-muted sm:text-lg">{p}</p>
@@ -51,7 +51,7 @@ export function Mission({ content }: { content: PortfolioContent }) {
 
           {/* Ficha operativa */}
           <Reveal delay={320}>
-            <dl className="mt-12 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
+            <dl className="mt-8 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
               {mission.facts.map((fact) => (
                 <div
                   key={fact.key}

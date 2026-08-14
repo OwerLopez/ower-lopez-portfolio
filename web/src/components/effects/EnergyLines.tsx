@@ -8,14 +8,10 @@ import { motion, useReducedMotion } from "framer-motion";
  * y pulsos que viajan hacia abajo como si la página fuera un circuito vivo.
  */
 const LINES = [
-  { left: "6%", color: "flame", height: "42%", top: "12%", opacity: 0.5, delay: 0 },
-  { left: "12%", color: "magenta", height: "30%", top: "26%", opacity: 0.35, delay: 0.8 },
-  { left: "88%", color: "flame", height: "36%", top: "18%", opacity: 0.5, delay: 0.4 },
-  { left: "94%", color: "violet", height: "44%", top: "32%", opacity: 0.35, delay: 1.2 },
-  { left: "4%", color: "violet", height: "28%", top: "58%", opacity: 0.4, delay: 2.0 },
-  { left: "92%", color: "magenta", height: "32%", top: "62%", opacity: 0.4, delay: 1.6 },
-  { left: "8%", color: "amber", height: "22%", top: "74%", opacity: 0.3, delay: 2.6 },
-  { left: "96%", color: "amber", height: "20%", top: "80%", opacity: 0.3, delay: 3.0 },
+  { left: "5%", color: "flame", height: "35%", top: "15%", opacity: 0.2, delay: 0 },
+  { left: "95%", color: "violet", height: "40%", top: "25%", opacity: 0.2, delay: 1.0 },
+  { left: "8%", color: "amber", height: "25%", top: "65%", opacity: 0.15, delay: 2.0 },
+  { left: "92%", color: "magenta", height: "30%", top: "60%", opacity: 0.15, delay: 1.5 },
 ];
 
 const COLOR_MAP: Record<string, string> = {

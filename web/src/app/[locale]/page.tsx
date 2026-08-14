@@ -58,8 +58,8 @@ export default async function HomePage({
       label: "Misión",
       code: "E2",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <SceneSection>
               <Mission content={content} />
             </SceneSection>
@@ -73,8 +73,8 @@ export default async function HomePage({
       code: "E3",
       long: true,
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <Work content={content} />
           </div>
         </div>
@@ -85,8 +85,8 @@ export default async function HomePage({
       label: "Arquitectura",
       code: "E4",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <SceneSection>
               <Architecture content={content} />
             </SceneSection>
@@ -99,8 +99,8 @@ export default async function HomePage({
       label: "Stack",
       code: "E5",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <SceneSection>
               <Stack content={content} />
             </SceneSection>
@@ -113,8 +113,8 @@ export default async function HomePage({
       label: "Trayectoria",
       code: "E6",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <SceneSection>
               <Journey content={content} />
             </SceneSection>
@@ -127,8 +127,8 @@ export default async function HomePage({
       label: "GitHub",
       code: "E7",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <SceneSection>
               <GitHubLive content={content} />
             </SceneSection>
@@ -141,8 +141,8 @@ export default async function HomePage({
       label: "Logros",
       code: "E8",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <SceneSection>
               <Credentials content={content} />
             </SceneSection>
@@ -155,8 +155,8 @@ export default async function HomePage({
       label: "Filosofía",
       code: "E9",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <SceneSection>
               <Philosophy content={content} />
             </SceneSection>
@@ -169,8 +169,8 @@ export default async function HomePage({
       label: "FAQ",
       code: "E10",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <SceneSection>
               <Faq content={content} />
             </SceneSection>
@@ -183,10 +183,10 @@ export default async function HomePage({
       label: "Contacto",
       code: "E11",
       element: (
-        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto max-w-7xl px-5 pt-20 pb-32 sm:px-8">
+        <div data-deck-scroll="long" className="h-full w-full overflow-y-auto px-4 sm:px-8 py-10 sm:py-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto max-w-6xl w-full">
             <Contact content={content} />
-            <div className="mt-16">
+            <div className="mt-12">
               <Footer content={content} />
             </div>
           </div>

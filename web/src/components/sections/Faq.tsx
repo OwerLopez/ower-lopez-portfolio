@@ -45,9 +45,9 @@ export function Faq({ content }: { content: PortfolioContent }) {
   const { faq } = content;
 
   return (
-    <section id="faq" className="relative z-10 mx-auto max-w-3xl px-5 py-24 sm:px-6 md:py-32" aria-label="Preguntas frecuentes">
+    <section id="faq" className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 py-8 sm:py-12" aria-label="Preguntas frecuentes">
       <Reveal>
-        <p className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
+        <p className="font-mono-token mb-4 flex items-center gap-4 text-xs tracking-[0.35em] text-muted">
           <span className="inline-block h-px w-12 bg-line-strong" />
           {faq.kicker}
         </p>
@@ -59,11 +59,11 @@ export function Faq({ content }: { content: PortfolioContent }) {
         </h2>
       </Reveal>
       <Reveal delay={140}>
-        <p className="mt-4 text-base text-muted">{faq.description}</p>
+        <p className="mt-3 text-base text-muted">{faq.description}</p>
       </Reveal>
 
       <Reveal delay={200} variant="block">
-        <ul className="mt-10 rounded-2xl border border-line bg-surface px-6 sm:px-8">
+        <ul className="mt-8 rounded-2xl border border-line bg-surface px-6 sm:px-8">
           {faq.items.map((item) => (
             <FaqItem key={item.index} item={item} />
           ))}

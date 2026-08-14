@@ -60,13 +60,13 @@ export function Contact({ content }: { content: PortfolioContent }) {
   const lines = [contact.greeting, contact.context, contact.request];
 
   return (
-    <section id="contact" className="relative z-10 mx-auto max-w-7xl px-5 pb-10 pt-24 sm:px-6 md:pb-20 md:pt-32" aria-label="Contacto">
+    <section id="contact" className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-8 pb-10 sm:pt-12 sm:pb-12" aria-label="Contacto">
       <motion.p
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="font-mono-token mb-8 flex items-center gap-4 text-xs tracking-[0.35em] text-muted"
+        className="font-mono-token mb-4 flex items-center gap-4 text-xs tracking-[0.35em] text-muted"
       >
         <span className="inline-block h-px w-12 bg-line-strong" />
         {contact.kicker}
@@ -78,7 +78,7 @@ export function Contact({ content }: { content: PortfolioContent }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="font-display max-w-4xl text-4xl leading-[1.05] font-extrabold tracking-tight text-ink sm:text-6xl md:text-[5rem]"
+        className="font-display max-w-4xl text-3xl leading-[1.05] font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl"
       >
         {contact.headingLead}{" "}
         <span className="text-gradient-flame">{contact.headingAccent}</span>
@@ -89,7 +89,7 @@ export function Contact({ content }: { content: PortfolioContent }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-6 max-w-xl text-base text-muted sm:text-lg"
+        className="mt-4 max-w-xl text-base text-muted sm:text-lg"
       >
         {contact.description}
       </motion.p>
@@ -100,7 +100,7 @@ export function Contact({ content }: { content: PortfolioContent }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="border-gradient mt-12 overflow-hidden rounded-2xl bg-surface-raised"
+        className="border-gradient mt-8 overflow-hidden rounded-2xl bg-surface-raised"
       >
         <div className="flex items-center gap-3 border-b border-line px-6 py-4">
           <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-[#e11d74]/60" />
