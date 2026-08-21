@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, JetBrains_Mono, Fraunces } from "next/font/google";
+import { Manrope, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 
@@ -21,14 +21,6 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   display: "swap",
   weight: ["400", "500", "600"],
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
 });
 
 export function generateStaticParams() {
@@ -93,7 +85,7 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  themeColor: "#08080a",
+  themeColor: "#09090b",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -112,10 +104,10 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${manrope.variable} ${jetbrains.variable} ${fraunces.variable}`}
+      className={`${manrope.variable} ${jetbrains.variable}`}
       suppressHydrationWarning
     >
-      <body className="relative min-h-screen overflow-x-hidden antialiased" suppressHydrationWarning>
+      <body className="relative min-h-screen overflow-x-hidden antialiased bg-[var(--color-base)] text-[var(--color-ink)]" suppressHydrationWarning>
         <MotionConfig reducedMotion="user">
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </MotionConfig>

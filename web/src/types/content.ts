@@ -16,15 +16,10 @@
  */
 
 export interface NavContent {
-  mission: string;
   work: string;
-  architecture: string;
-  stack: string;
-  journey: string;
-  github: string;
-  credentials: string;
-  philosophy: string;
-  faq: string;
+  expertise: string;
+  experience: string;
+  about: string;
   contact: string;
   cta: string;
   menuOpen: string;
@@ -265,18 +260,20 @@ export interface FooterSection {
   credit: string;
   location: string;
   timezone: string;
+  systemStatus: {
+    availabilityLabel: string;
+    availabilityValue: string;
+    zoneLabel: string;
+    modeLabel: string;
+    modeValue: string;
+  };
   navLabel: string;
   navTitle: string;
   navItems: {
-    mission: string;
     work: string;
-    architecture: string;
-    stack: string;
-    journey: string;
-    github: string;
-    credentials: string;
-    philosophy: string;
-    faq: string;
+    expertise: string;
+    experience: string;
+    about: string;
     contact: string;
   };
   contactTitle: string;

@@ -26,17 +26,12 @@ export const en: PortfolioContent = {
   },
 
   nav: {
-    mission: "Mission",
     work: "Projects",
-    architecture: "Architecture",
-    stack: "Stack",
-    journey: "Journey",
-    github: "GitHub",
-    credentials: "Trophies",
-    philosophy: "Philosophy",
-    faq: "Questions",
+    expertise: "Expertise",
+    experience: "Experience",
+    about: "About",
     contact: "Contact",
-    cta: "Ignite Project",
+    cta: "Let's talk",
     menuOpen: "Open menu",
     menuClose: "Close menu",
     statusText: "Available Q3/Q4 2026",
@@ -44,7 +39,7 @@ export const en: PortfolioContent = {
 
   intro: {
     status: "Available for Junior Data Engineer & Backend roles",
-    kicker: "INTRO / SCENE 01 — AREQUIPA, PERU",
+    kicker: "BACKEND ENGINEERING & DATA PIPELINES · AREQUIPA, PERU",
     titleLines: ["Every millisecond", "is a decision"],
     titleAccent: "I take seriously.",
     description:
@@ -75,7 +70,7 @@ export const en: PortfolioContent = {
   ],
 
   mission: {
-    kicker: "SCENE 02 — THE OBSESSION",
+    kicker: "ENGINEERING PHILOSOPHY",
     headingLead: "I don't write code.",
     headingAccent: "I ignite engines.",
     paragraphs: [
@@ -91,11 +86,11 @@ export const en: PortfolioContent = {
   },
 
   work: {
-    kicker: "SCENE 03 — THE PROOF",
+    kicker: "CASE STUDIES & PRODUCTION",
     heading: "Projects that shout numbers",
     description:
       "No decorative screenshots: verifiable results you can audit on GitHub.",
-    featuredLabel: "Main piece — 03.01",
+    featuredLabel: "Featured Project",
     featured: {
       flag: "Flagship",
       category: "Enterprise ML platform",
@@ -204,257 +199,257 @@ export const en: PortfolioContent = {
   },
 
   architecture: {
-    kicker: "SCENE 04 — THE CIRCUIT",
+    kicker: "SYSTEMS & ML ARCHITECTURE",
     headingLead: "From raw data",
     headingAccent: "to business value.",
     description:
-      "Five stages, one responsibility each. This is how I think through any data system before writing a single line of code.",
+      "Five stages, one responsibility each. This is how I approach any data system before writing code.",
     stages: [
       {
         index: "E1",
         label: "Sources",
-        detail: "Operational & external",
+        detail: "Operational and external",
         tech: "PostgreSQL · MySQL · SQL Server · MongoDB · APIs",
-        power: "INGEST 100%",
+        power: "INGESTION 100%",
       },
       {
         index: "E2",
         label: "Ingestion / ETL",
-        detail: "Extraction & cleaning",
+        detail: "Extraction and cleaning",
         tech: "Python · Pandas · SQL · BULK INSERT",
         power: "PURIFYING",
       },
       {
         index: "E3",
-        label: "Storage",
-        detail: "Modeling & quality",
-        tech: "Logical/physical modeling · CTEs · Window fns",
+        label: "Warehouse",
+        detail: "Modeling and quality",
+        tech: "Logical/Physical modeling · CTEs · Window Fns",
         power: "DATA PARITY",
       },
       {
         index: "E4",
         label: "Process / ML",
-        detail: "Analytics & inference",
+        detail: "Analytics and inference",
         tech: "NumPy · Random Forest · ONNX · XAI",
-        power: "INFERENCE LIVE",
+        power: "ACTIVE INFERENCE",
       },
       {
         index: "E5",
         label: "Service",
-        detail: "APIs & visualization",
+        detail: "APIs and visualization",
         tech: "Spring Boot · JWT · Power BI",
-        power: "PRODUCTION AIRBORNE",
+        power: "LIVE PRODUCTION",
       },
     ],
-    note: "Embedded inference: the model runs where the data lives — no external calls, 20 ms P99 latency.",
+    note: "Embedded inference: the model runs where data lives — without external calls, at 20 ms P99 latency.",
   },
 
   stack: {
-    kicker: "SCENE 05 — THE CONSTELLATION",
+    kicker: "TECH STACK & DOMAINS",
     heading: "Every technology orbits a domain",
     description:
-      "I don't collect tools: I master the ones that carry a system from data model to production.",
+      "I don't collect tools: I master those that take a system from data model to production.",
     groups: [
       { name: "Backend", glow: "flame", items: ["Java 17", "Spring Boot 3.4", "NestJS", "Node.js", "REST APIs · Swagger"] },
       { name: "Data", glow: "magenta", items: ["PostgreSQL", "MySQL · SQL Server", "MongoDB", "Pandas · NumPy", "Power BI"] },
       { name: "AI / Machine Learning", glow: "violet", items: ["ONNX Runtime", "Random Forest", "XAI (explainability)", "Embedded inference"] },
       { name: "Cloud & DevOps", glow: "flame", items: ["Oracle Cloud (OCI)", "AWS EC2 · S3", "Google Cloud", "Docker", "Oracle APEX"] },
-      { name: "Engineering", glow: "amber", items: ["Git", "Scrum · Kanban", "API security", "System architecture"] },
+      { name: "Engineering", glow: "amber", items: ["Git", "Scrum · Kanban", "API Security", "Systems architecture"] },
     ],
-    note: "Domains where I make architecture decisions: backend, data, AI/ML, cloud and engineering practices.",
+    note: "Domains where I make architecture decisions: backend, data, AI/ML, cloud, and engineering practices.",
   },
 
   journey: {
-    kicker: "SCENE 06 — THE ASCENT",
+    kicker: "PROFESSIONAL TRAJECTORY",
     heading: "Three years rising in fire",
     description:
-      "From data support to production backend engineering. Every stage combines real software with measurable results.",
+      "From data support to backend engineering in production. Every milestone combines real software with measurable results.",
     items: [
       {
-        period: "Feb 2026 → today",
-        title: "Backend Developer (intern) — Fundacion CALMA",
+        period: "Feb 2026 → Present",
+        title: "Backend Developer (Intern) — Fundacion CALMA",
         description:
-          "Development and maintenance of backend services with REST APIs, business logic, JWT authentication and access control. Managing and optimizing PostgreSQL, MySQL, SQL Server and MongoDB databases, with technical documentation and Scrum methodology.",
+          "Development and maintenance of backend services with REST APIs, business logic, JWT authentication, and access control. Management and optimization of PostgreSQL, MySQL, SQL Server, and MongoDB databases, with technical documentation under Scrum methodology.",
         tone: "flame",
       },
       {
         period: "2026",
-        title: "First place — NEXIA \u201cBuild with AI\u201d hackathon",
+        title: "1st Place — Hackathon NEXIA \u201cBuild with AI\u201d",
         description:
-          "First place. Educational innovation MVP built in under 48 hours with Node.js, NestJS and AI API integration. Backend engineering and AI integration under pressure. Organized by IBM, GDG Arequipa and JAKU Emprende UNSA.",
+          "First place winner. Built an end-to-end educational innovation MVP in under 48 hours with Node.js, NestJS, and AI API integration. Backend engineering and AI integration delivered under pressure. Organized by IBM, GDG Arequipa, and JAKU Emprende UNSA.",
         tone: "flame",
       },
       {
         period: "Nov 2025",
-        title: "IT Operator — ESAN University · Beca 18",
+        title: "IT Operator — Universidad ESAN · Beca 18",
         description:
-          "IT support in registration, verification and data management for over 2,000 regional applicants. Systems operation and data control under strict precision and confidentiality criteria.",
+          "IT support in registration, verification, and data management for 2,000+ applicants across the region. System operation and data control under strict precision and confidentiality criteria.",
         tone: "glow",
       },
       {
         period: "2024",
-        title: "First place — UNSA Project Fair (advanced)",
+        title: "1st Place — UNSA Projects Fair (Advanced)",
         description:
-          "First place with Chakrita, a sustainable agriculture mobile app in Flutter with IoT and sensor integration. UX/UI design and user-centered interfaces.",
+          "First place with Chakrita, a sustainable agriculture mobile application built with Flutter, IoT, and sensors. UX/UI design lead and user-centered interface architecture.",
         tone: "glow",
       },
       {
         period: "2024 — 2025",
         title: "IT Operator — CTK · PRONABEC (Beca 18)",
         description:
-          "Support and management for over 2,000 applicants during the National Preselection Exam, operating critical systems and evaluation platforms with high data-integrity standards.",
+          "Operational and technical support for 2,000+ applicants during the National Preselection Exam, operating mission-critical systems and evaluation platforms with high data-integrity standards.",
         tone: "muted",
       },
       {
         period: "2023 — 2024",
-        title: "Academic Tutor — CEPRUNSA (3 terms)",
+        title: "Academic Monitor — CEPRUNSA (3 cycles)",
         description:
-          "Coordination of tutor and teacher teams, attendance control and verification on the educational platform. Syllabus tracking across three consecutive processes.",
+          "Coordination of monitor and instructor teams, attendance tracking, and verification across educational platforms. Syllabus progression tracking across three consecutive admission cycles.",
         tone: "muted",
       },
       {
         period: "2023",
-        title: "Programmer (intern) — I.E.P. Linus Pauling",
+        title: "Programmer (Intern) — I.E.P. Linus Pauling",
         description:
-          "Development and maintenance of attendance and payment tracking systems with dynamic reports. Administrative process automation, debugging, module integration and user training.",
+          "Development and maintenance of attendance and payment tracking systems with dynamic reporting. Administrative process automation, module debugging, and user training.",
         tone: "glow",
       },
       {
         period: "Community",
-        title: "ACM Chapter Secretary · IEEE Computer Society volunteer",
+        title: "ACM Chapter Secretary · IEEE Computer Society Volunteer",
         description:
-          "Secretary of the ACM Student Chapter UNSA board (2024–2025), coordinating AI, cybersecurity and competitive programming workshops. Volunteer in marketing and design at IEEE Computer Society. Upper Fifth: top 20% of the cohort.",
+          "Secretary on the board of the ACM Student Chapter UNSA (2024–2025), coordinating AI, cybersecurity, and competitive programming workshops. Volunteer in marketing and design for IEEE Computer Society. Top 20% of graduating class (Quinto Superior).",
         tone: "muted",
       },
     ],
   },
 
   github: {
-    kicker: "SCENE 07 — TELEMETRY",
-    heading: "Activity that cannot be faked",
+    kicker: "GITHUB ACTIVITY",
+    heading: "Activity you can't fake",
     description:
-      "Loaded directly from the GitHub API. What you see here is exactly what is on my account right now.",
+      "Loaded live from the GitHub API. What you see here is precisely what is in my account right now.",
     metrics: [
-      { label: "Public repositories" },
+      { label: "Public repos" },
       { label: "Followers" },
       { label: "Latest push" },
     ],
     viewAll: "View repositories on GitHub",
-    updatedLabel: "Live updated",
-    errorText: "Could not connect to the GitHub API at this moment.",
+    updatedLabel: "Live update",
+    errorText: "Could not reach the GitHub API at this moment.",
     loadingText: "Querying live GitHub activity…",
     logTitle: "Activity log",
-    logEmpty: "Waiting for API data…",
+    logEmpty: "Awaiting API response…",
   },
 
   credentials: {
-    kicker: "SCENE 08 — THE TROPHY WALL",
+    kicker: "AWARDS & CREDENTIALS",
     heading: "Earned in battle",
     description:
-      "First-place wins, intensive training and community leadership — all verifiable, nothing declared.",
+      "First places, intensive training, and community leadership — everything verifiable, nothing merely claimed.",
     trophies: [
-      { index: "01", title: "1st place — NEXIA 2026", detail: "Build with AI hackathon", value: "1", suffix: "", glow: "flame" },
-      { index: "02", title: "1st place — UNSA Fair 2024", detail: "Project Fair, Advanced category", value: "1", suffix: "", glow: "emerald" },
-      { index: "03", title: "Upper Fifth", detail: "Top 20% of the cohort", value: "20", suffix: "%", glow: "magenta" },
-      { index: "04", title: "Oracle Next Education", detail: "Data Science training", value: "440", suffix: "h", glow: "flame" },
-      { index: "05", title: "Secretary — ACM Chapter", detail: "UNSA student leadership", value: "1", suffix: "", glow: "violet" },
-      { index: "06", title: "IEEE Computer Society", detail: "Volunteer, marketing & design", value: "1", suffix: "", glow: "amber" },
+      { index: "01", title: "1st Place — NEXIA 2026", detail: "Hackathon Build with AI", value: "1", suffix: "", glow: "flame" },
+      { index: "02", title: "1st Place — UNSA Fair 2024", detail: "Projects Fair, Advanced Category", value: "1", suffix: "", glow: "emerald" },
+      { index: "03", title: "Top 20% Class Rank", detail: "Quinto Superior in Systems Engineering", value: "20", suffix: "%", glow: "magenta" },
+      { index: "04", title: "Oracle Next Education", detail: "Data Science Specialization", value: "440", suffix: "h", glow: "flame" },
+      { index: "05", title: "ACM Chapter Secretary", detail: "UNSA Student Leadership", value: "1", suffix: "", glow: "violet" },
+      { index: "06", title: "IEEE Computer Society", detail: "Volunteer, Marketing & Design", value: "1", suffix: "", glow: "amber" },
     ],
-    credentialsLabel: "Verified certifications",
+    credentialsLabel: "Verified Credentials",
     credentials: [
       { name: "Oracle Cloud Infrastructure 2025 Foundations", issuer: "Oracle", acronym: "OCI", href: "https://www.credly.com/search?q=Oracle%20Cloud%20Infrastructure%202025%20Foundations", glow: "flame" },
       { name: "Oracle APEX Cloud Developer Professional", issuer: "Oracle", acronym: "APEX", href: "https://www.credly.com/search?q=Oracle%20APEX%20Cloud%20Developer%20Professional", glow: "flame" },
       { name: "Google Cloud Computing Foundations", issuer: "Google Cloud", acronym: "GCP", href: "https://www.credly.com/search?q=Google%20Cloud%20Computing%20Foundations", glow: "magenta" },
       { name: "AWS Academy Graduate — Cloud Foundations", issuer: "AWS", acronym: "AWS", href: "https://www.credly.com/search?q=AWS%20Academy%20Graduate%20—%20Cloud%20Foundations", glow: "magenta" },
-      { name: "Microsoft SQL Server Specialization (advanced)", issuer: "Datux Peru", acronym: "SQL", href: "https://www.credly.com/search?q=Microsoft%20SQL%20Server%20Specialization%20(advanced)", glow: "violet" },
-      { name: "Microsoft Power BI Specialization (advanced)", issuer: "Datux Peru", acronym: "PBI", href: "https://www.credly.com/search?q=Microsoft%20Power%20BI%20Specialization%20(advanced)", glow: "violet" },
+      { name: "Microsoft SQL Server Advanced Specialization", issuer: "Datux Peru", acronym: "SQL", href: "https://www.credly.com/search?q=Especializacion%20Microsoft%20SQL%20Server%20(avanzado)", glow: "violet" },
+      { name: "Microsoft Power BI Advanced Specialization", issuer: "Datux Peru", acronym: "PBI", href: "https://www.credly.com/search?q=Especializacion%20Microsoft%20Power%20BI%20(avanzado)", glow: "violet" },
       { name: "ONE Tech — Data Science (440h)", issuer: "Alura Latam", acronym: "ONE", href: "https://www.credly.com/search?q=ONE%20Tech%20—%20Data%20Science%20(440h)", glow: "flame" },
-      { name: "Programming & Development with Python (80h)", issuer: "Univ. Continental", acronym: "PY", href: "https://www.credly.com/search?q=Programming%20&%20Development%20with%20Python%20(80h)", glow: "amber" },
+      { name: "Python Programming and Development (80h)", issuer: "Univ. Continental", acronym: "PY", href: "https://www.credly.com/search?q=Programacion%20y%20Desarrollo%20con%20Python%20(80h)", glow: "amber" },
       { name: "SAP S/4HANA MM — Key User", issuer: "SUMMA Center", acronym: "SAP", href: "https://www.credly.com/search?q=SAP%20S/4HANA%20MM%20—%20Key%20User", glow: "violet" },
       { name: "Business Intelligence Foundation (BIFPC)", issuer: "CertiProf", acronym: "BI", href: "https://www.credly.com/search?q=Business%20Intelligence%20Foundation%20(BIFPC)", glow: "flame" },
       { name: "Scrum Foundation (SFPC)", issuer: "CertiProf", acronym: "SCR", href: "https://www.credly.com/search?q=Scrum%20Foundation%20(SFPC)", glow: "magenta" },
       { name: "Lean Six Sigma White Belt (LSSWBPC)", issuer: "CertiProf", acronym: "LSS", href: "https://www.credly.com/search?q=Lean%20Six%20Sigma%20White%20Belt%20(LSSWBPC)", glow: "amber" },
-      { name: "Machine Learning · Classification & Regression", issuer: "Alura Latam", acronym: "ML", href: "https://www.credly.com/search?q=Machine%20Learning%20·%20Classification%20&%20Regression", glow: "violet" },
-      { name: "Statistics · Probability & Sampling", issuer: "Alura Latam", acronym: "STAT", href: "https://www.credly.com/search?q=Statistics%20·%20Probability%20&%20Sampling", glow: "amber" },
-      { name: "Professional Office Suite, Advanced (90h)", issuer: "ITEC", acronym: "OFI", href: "https://www.credly.com/search?q=Professional%20Office%20Suite,%20Advanced%20(90h)", glow: "magenta" },
-      { name: "Gamified Ethical Hacking", issuer: "HackerMentor", acronym: "SEC", href: "https://www.credly.com/search?q=Gamified%20Ethical%20Hacking", glow: "violet" },
+      { name: "Machine Learning · Classification & Regression", issuer: "Alura Latam", acronym: "ML", href: "https://www.credly.com/search?q=Machine%20Learning%20·%20Clasificacion%20y%20Regresion", glow: "violet" },
+      { name: "Statistics · Probability and Sampling", issuer: "Alura Latam", acronym: "STAT", href: "https://www.credly.com/search?q=Estadistica%20·%20Probabilidad%20y%20Muestreo", glow: "amber" },
+      { name: "Advanced Professional Office Automation (90h)", issuer: "ITEC", acronym: "OFI", href: "https://www.credly.com/search?q=Ofimatica%20Profesional%20Nivel%20Avanzado%20(90h)", glow: "magenta" },
+      { name: "Gamified Ethical Hacking", issuer: "HackerMentor", acronym: "SEC", href: "https://www.credly.com/search?q=Hacking%20Etico%20Gamificado", glow: "violet" },
     ],
     verifyCta: "Verify on Credly",
   },
 
   philosophy: {
-    kicker: "SCENE 09 — THE BRAIN",
+    kicker: "ENGINEERING PRINCIPLES",
     headingLead: "A demo gets shown.",
     headingAccent: "A system earns trust.",
     description:
-      "Backend Developer in pre-professional internships and final-year Systems Engineering student at UNSA. Over three years building real software: from data support for 2,000+ applicants to backend services in production. My method combines rigorous architecture, clean data and measurable results in every delivery.",
+      "Backend Developer intern and graduating Systems Engineering student at UNSA. Three-plus years building production-grade software: from operational data pipelines with 2,000+ applicants to live backend services. My approach pairs strict architectural contracts with clean data pipelines and measurable SLAs.",
     principles: [
       {
         index: "01",
-        title: "Sub-second latency",
-        detail: "Embedded ML inference optimized to a 20 ms P99. When the system does not wait, neither does the user.",
+        title: "Subsecond latency",
+        detail: "Embedded ML inference optimized to 20 ms P99. When the backend doesn't wait, the user doesn't either.",
       },
       {
         index: "02",
         title: "Data parity",
-        detail: "Declarative schemas and strict contracts between layers. Data arrives clean and leaves correct.",
+        detail: "Declarative schemas and strict API contracts across layers. Data enters clean and exits correct.",
       },
       {
         index: "03",
-        title: "Production-ready",
-        detail: "Resilient ETL, JWT-secured APIs and OpenAPI documentation. The standard is what a team can trust daily.",
+        title: "Production ready",
+        detail: "Zero-downtime ETL, JWT-authenticated endpoints, and OpenAPI specs. Production is what a team can rely on daily.",
       },
     ],
     panelTitle: "Operating profile",
     facts: [
-      { key: "Current role", value: "Backend Developer (intern)" },
+      { key: "Current role", value: "Backend Developer (Intern)" },
       { key: "Organization", value: "Fundacion CALMA" },
       { key: "Core tech", value: "Java · Python · SQL · ONNX" },
       { key: "Education", value: "Systems Engineering · UNSA" },
       { key: "Location", value: "Arequipa, Peru (UTC-5)" },
     ],
-    panelFooter: { left: "UNSA · Systems Engineering", right: "Upper Fifth" },
+    panelFooter: { left: "UNSA · Systems Engineering", right: "Top 20% Class Rank" },
   },
 
   faq: {
-    kicker: "SCENE 10 — QUESTIONS",
+    kicker: "TECHNICAL DECISIONS",
     heading: "Architecture decisions & collaboration",
     description:
-      "Full clarity on how I approach building software, optimizing latency and integrating into high-performance teams.",
+      "Full clarity on how I approach software design, latency optimization, and integration into high-velocity engineering teams.",
     items: [
       {
         index: "F1",
         category: "Architecture",
-        question: "Why embed ML inference in the backend instead of dedicated microservices?",
+        question: "Why integrate ML inference inside the backend rather than using dedicated microservices?",
         answer:
-          "In projects like ChurnInsight, exporting the model to ONNX Runtime and running it in the same Java/Spring Boot process removed network and JSON serialization overhead, cutting P99 latency from 2000 ms to 20 ms with zero external infrastructure dependency.",
+          "In systems like ChurnInsight, exporting the model to ONNX Runtime and executing it directly within the Java/Spring Boot process eliminated network overhead and JSON serialization, dropping P99 latency from 2,000 ms to 20 ms while removing external infrastructure dependencies.",
         questions: [
           {
             category: "Latency",
             question: "What impact does embedded inference have on user experience?",
             answer:
-              "P99 latency drops from 2000 ms to 20 ms: predictions are served where the data lives, with no external calls or network overhead.",
+              "P99 latency drops from 2,000 ms to 20 ms: predictions are served directly where the data lives, with zero external network hops.",
           },
           {
             category: "Cost",
-            question: "Does it cut costs versus external ML APIs?",
+            question: "Does it reduce costs compared to external ML APIs?",
             answer:
-              "It removes third-party calls from the critical path: zero per-inference cost and zero external availability dependency.",
+              "It removes third-party API calls from the critical path: zero cost per inference and zero dependency on external availability.",
           },
         ],
       },
       {
         index: "F2",
         category: "Availability",
-        question: "What is your current availability for roles and start date?",
+        question: "What is your current availability for engineering roles and onboarding?",
         answer:
-          "I am currently finishing my last terms of Systems Engineering at UNSA and working as a Backend intern at Fundacion CALMA. I am available for Junior Data Engineer or Backend Developer roles, remote or hybrid.",
+          "I am currently in the final stages of my Systems Engineering degree at UNSA and working as a Backend Developer Intern at Fundacion CALMA. I am available for Junior Data Engineer or Backend Developer roles under remote or hybrid arrangements.",
         questions: [
           {
-            category: "Mode",
-            question: "Do you work remote or on-site?",
+            category: "Arrangement",
+            question: "Do you work remotely or on-site?",
             answer:
-              "Remote and hybrid, fully available in the America/Lima timezone (UTC-5).",
+              "Remote and hybrid, with full availability in the America/Lima timezone (UTC-5).",
           },
         ],
       },
@@ -463,24 +458,24 @@ export const en: PortfolioContent = {
         category: "Methodology",
         question: "How do you guarantee code quality and data parity?",
         answer:
-          "I use strict type checks in TypeScript/Java, declarative database migrations (Flyway/Liquibase/SQL), OpenAPI/Swagger documentation and automated E2E tests before every deployment.",
+          "I use strict type validation in TypeScript and Java, declarative database schema migrations (Flyway/Liquibase/SQL), automated OpenAPI documentation, and end-to-end integration tests before any deployment.",
       },
       {
         index: "F4",
         category: "Data & Cloud",
-        question: "What cloud experience do you have, e.g., Oracle or AWS?",
+        question: "What experience do you have with cloud platforms like Oracle and AWS?",
         answer:
-          "I hold official certifications in Oracle Cloud Infrastructure (OCI Foundations & APEX Professional), AWS Academy Cloud Foundations and Google Cloud Foundations. I have deployed containerized environments with Docker on OCI and EC2 instances.",
+          "I hold official certifications from Oracle Cloud Infrastructure (OCI Foundations & APEX Professional), AWS Academy Cloud Foundations, and Google Cloud Foundations. I have deployed containerized environments with Docker on both OCI and AWS EC2 instances.",
       },
     ],
   },
 
   contact: {
-    kicker: "FINAL SCENE — CONTACT",
-    headingLead: "Let's ignite something",
+    kicker: "DIRECT COMMUNICATION",
+    headingLead: "Let's build something",
     headingAccent: "that leaves a mark.",
     description:
-      "Available for Junior Data Engineer and Backend Engineering roles. If you need someone who cares about details down to the millisecond, write to me.",
+      "Available for Junior Data Engineer and Backend Engineering roles. If you are looking for an engineer who measures down to the millisecond, get in touch.",
     terminalTitle: "terminal@ower.dev",
     greeting: "$ start — conversation",
     context:
@@ -511,20 +506,22 @@ export const en: PortfolioContent = {
     credit: "Design & development — Ower F. Lopez Arela",
     location: "Arequipa, Peru",
     timezone: "UTC-5",
+    systemStatus: {
+      availabilityLabel: "availability",
+      availabilityValue: "Q3/Q4 2026 · seeking mission",
+      zoneLabel: "zone",
+      modeLabel: "mode",
+      modeValue: "active · receiving signals",
+    },
     navLabel: "Main navigation",
-    navTitle: "Scenes",
+    navTitle: "Sections",
     navItems: {
-      mission: "Mission",
-          work: "Projects",
-          architecture: "Architecture",
-          stack: "Stack",
-          journey: "Journey",
-          github: "GitHub",
-          credentials: "Trophies",
-          philosophy: "Philosophy",
-          faq: "Questions",
-          contact: "Contact",
-        },
+      work: "Projects",
+      expertise: "Expertise",
+      experience: "Experience",
+      about: "About",
+      contact: "Contact",
+    },
     contactTitle: "Channels",
     contactItems: [
       { href: "https://github.com/OwerLopez", label: "github.com/OwerLopez", external: true },

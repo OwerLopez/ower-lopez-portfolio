@@ -9,12 +9,12 @@ export default function manifest(): MetadataRoute.Manifest {
       "Portafolio de ingenieria — Backend, Data & AI. Ower Frank Lopez Arela.",
     start_url: "/es",
     display: "standalone",
-    background_color: "#08070a",
-    theme_color: "#08070a",
+    background_color: "#09090b",
+    theme_color: "#09090b",
     lang: "es",
     icons: [
       {
-        src: "/icon",
+        src: "/icon.svg",
         sizes: "any",
         type: "image/svg+xml",
       },

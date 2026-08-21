@@ -28,17 +28,12 @@ export const es: PortfolioContent = {
   },
 
   nav: {
-    mission: "Mision",
     work: "Proyectos",
-    architecture: "Arquitectura",
-    stack: "Stack",
-    journey: "Trayectoria",
-    github: "GitHub",
-    credentials: "Trofeos",
-    philosophy: "Filosofia",
-    faq: "Preguntas",
+    expertise: "Expertise",
+    experience: "Experiencia",
+    about: "Sobre mi",
     contact: "Contacto",
-    cta: "Encender Proyecto",
+    cta: "Hablemos",
     menuOpen: "Abrir menu",
     menuClose: "Cerrar menu",
     statusText: "Disponible Q3/Q4 2026",
@@ -46,7 +41,7 @@ export const es: PortfolioContent = {
 
   intro: {
     status: "Disponible para roles Junior Data Engineer & Backend",
-    kicker: "INTRO / ESCENA 01 — AREQUIPA, PERU",
+    kicker: "INGENIERIA BACKEND & DATA PIPELINES · AREQUIPA, PERU",
     titleLines: ["Cada milisegundo", "es una decision"],
     titleAccent: "que tomo en serio.",
     description:
@@ -77,7 +72,7 @@ export const es: PortfolioContent = {
   ],
 
   mission: {
-    kicker: "ESCENA 02 — LA OBSESION",
+    kicker: "FILOSOFIA DE INGENIERIA",
     headingLead: "No escribo codigo.",
     headingAccent: "Enciendo motores.",
     paragraphs: [
@@ -93,11 +88,11 @@ export const es: PortfolioContent = {
   },
 
   work: {
-    kicker: "ESCENA 03 — LA PRUEBA",
+    kicker: "CASOS DE ESTUDIO & PRODUCCION",
     heading: "Proyectos que gritan numeros",
     description:
       "Sin capturas de pantalla decorativas: resultados verificables que se pueden auditar en GitHub.",
-    featuredLabel: "Pieza principal — 03.01",
+    featuredLabel: "Proyecto Destacado",
     featured: {
       flag: "Flagship",
       category: "Plataforma ML empresarial",
@@ -206,7 +201,7 @@ export const es: PortfolioContent = {
   },
 
   architecture: {
-    kicker: "ESCENA 04 — EL CIRCUITO",
+    kicker: "ARQUITECTURA DE SISTEMAS & ML",
     headingLead: "Del dato crudo",
     headingAccent: "al valor de negocio.",
     description:
@@ -252,7 +247,7 @@ export const es: PortfolioContent = {
   },
 
   stack: {
-    kicker: "ESCENA 05 — LA CONSTELACION",
+    kicker: "STACK TECNOLOGICO & DOMINIOS",
     heading: "Cada tecnologia orbita un dominio",
     description:
       "No colecciono herramientas: domino las que llevan un sistema desde el modelo de datos hasta produccion.",
@@ -267,7 +262,7 @@ export const es: PortfolioContent = {
   },
 
   journey: {
-    kicker: "ESCENA 06 — EL ASCENSO",
+    kicker: "TRAYECTORIA PROFESIONAL",
     heading: "Tres anos subiendo en fuego",
     description:
       "De soporte de datos a ingenieria backend en produccion. Cada etapa combina software real con resultados medibles.",
@@ -332,7 +327,7 @@ export const es: PortfolioContent = {
   },
 
   github: {
-    kicker: "ESCENA 07 — TELEMETRIA",
+    kicker: "ACTIVIDAD EN GITHUB",
     heading: "Actividad que no se puede fingir",
     description:
       "Cargado directamente desde la API de GitHub. Lo que ves aqui es exactamente lo que hay en mi cuenta ahora mismo.",
@@ -350,7 +345,7 @@ export const es: PortfolioContent = {
   },
 
   credentials: {
-    kicker: "ESCENA 08 — EL MURO DE TROFEOS",
+    kicker: "PREMIOS & CREDENCIALES",
     heading: "Ganado en batalla",
     description:
       "Primeros puestos, formacion intensiva y liderazgo en la comunidad — todo verificable, nada declarado.",
@@ -385,7 +380,7 @@ export const es: PortfolioContent = {
   },
 
   philosophy: {
-    kicker: "ESCENA 09 — EL CEREBRO",
+    kicker: "PRINCIPIOS DE INGENIERIA",
     headingLead: "Un demo se muestra.",
     headingAccent: "Un sistema se confia.",
     description:
@@ -419,7 +414,7 @@ export const es: PortfolioContent = {
   },
 
   faq: {
-    kicker: "ESCENA 10 — PREGUNTAS",
+    kicker: "DECISIONES TECNICAS",
     heading: "Decisiones de arquitectura & colaboracion",
     description:
       "Claridad total sobre como abordo la construccion de software, la optimizacion de latencia y la integracion en equipos de alto rendimiento.",
@@ -478,7 +473,7 @@ export const es: PortfolioContent = {
   },
 
   contact: {
-    kicker: "ESCENA FINAL — CONTACTO",
+    kicker: "COMUNICACION DIRECTA",
     headingLead: "Encendamos algo",
     headingAccent: "que deje huella.",
     description:
@@ -513,20 +508,22 @@ export const es: PortfolioContent = {
     credit: "Diseño y desarrollo — Ower F. Lopez Arela",
     location: "Arequipa, Peru",
     timezone: "UTC-5",
+    systemStatus: {
+      availabilityLabel: "disponibilidad",
+      availabilityValue: "Q3/Q4 2026 · en busca de mision",
+      zoneLabel: "zona",
+      modeLabel: "modo",
+      modeValue: "activo · recibiendo señales",
+    },
     navLabel: "Navegación principal",
-    navTitle: "Escenas",
+    navTitle: "Secciones",
     navItems: {
-      mission: "Mision",
-          work: "Proyectos",
-          architecture: "Arquitectura",
-          stack: "Stack",
-          journey: "Trayectoria",
-          github: "GitHub",
-          credentials: "Trofeos",
-          philosophy: "Filosofia",
-          faq: "Preguntas",
-          contact: "Contacto",
-        },
+      work: "Proyectos",
+      expertise: "Expertise",
+      experience: "Experiencia",
+      about: "Sobre mi",
+      contact: "Contacto",
+    },
     contactTitle: "Canales",
     contactItems: [
       { href: "https://github.com/OwerLopez", label: "github.com/OwerLopez", external: true },

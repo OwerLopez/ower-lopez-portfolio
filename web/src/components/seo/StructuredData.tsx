@@ -2,7 +2,7 @@ import type { Locale } from "@/i18n/config";
 import { siteConfig } from "@/config/site";
 import { getContent } from "@/content";
 
-/** JSON-LD (schema.org/Person) para enriquecer los resultados de busqueda. */
+/** JSON-LD (schema.org/Person) for rich search engine indexing. */
 export function StructuredData({ locale }: { locale: Locale }) {
   const content = getContent(locale);
 
@@ -19,16 +19,23 @@ export function StructuredData({ locale }: { locale: Locale }) {
       addressLocality: "Arequipa",
       addressCountry: "PE",
     },
-    sameAs: [siteConfig.links.github, siteConfig.links.linkedin],
+    sameAs: [
+      siteConfig.links.github,
+      siteConfig.links.linkedin,
+      siteConfig.links.credly,
+    ],
     knowsAbout: [
       "Backend Development",
       "Data Engineering",
       "Machine Learning",
+      "ONNX Runtime",
       "Java",
       "Spring Boot",
       "Python",
       "SQL",
       "Cloud Computing",
+      "PostgreSQL",
+      "Docker",
     ],
     alumniOf: {
       "@type": "CollegeOrUniversity",
@@ -39,7 +46,6 @@ export function StructuredData({ locale }: { locale: Locale }) {
   return (
     <script
       type="application/ld+json"
-      // El contenido es estatico y controlado; seguro para inyectar.
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
   );

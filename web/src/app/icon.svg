@@ -1,12 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f0700d"/>
-      <stop offset="0.6" stop-color="#ffab38"/>
-      <stop offset="1" stop-color="#34e6d4"/>
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="16" fill="#08070a"/>
-  <rect x="6" y="6" width="52" height="52" rx="13" fill="url(#g)"/>
-  <text x="32" y="42" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="26" font-weight="700" fill="#08070a" text-anchor="middle">OF</text>
+  <rect width="64" height="64" rx="16" fill="#09090b"/>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#g)"/>
+  <text x="32" y="41" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="24" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-1">OF</text>
 </svg>

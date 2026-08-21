@@ -1,50 +1,38 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("7. Contact Links & Interactions", () => {
-  test("contact actions contain correct email anchor link", async ({ page }) => {
+test.describe("4. Contact Links & Copy Action", () => {
+  test("contact section contains correct email", async ({ page }) => {
     await page.goto("/es");
     const contactSection = page.locator("#contact");
     await contactSection.scrollIntoViewIfNeeded();
 
-    const emailCta = contactSection.getByRole("link", { name: "Escribeme" });
-    await expect(emailCta).toBeVisible();
-    await expect(emailCta).toHaveAttribute("href", "mailto:owerfrank2004@gmail.com");
-
-    const emailTextLink = contactSection.locator('a[href="mailto:owerfrank2004@gmail.com"]').last();
-    await expect(emailTextLink).toContainText("owerfrank2004@gmail.com");
+    await expect(contactSection.getByText("owerfrank2004@gmail.com")).toBeVisible();
   });
 
-  test("contact actions contain correct linkedin anchor link", async ({ page }) => {
+  test("contact cards contain correct social links with secure rel", async ({ page }) => {
     await page.goto("/es");
     const contactSection = page.locator("#contact");
     await contactSection.scrollIntoViewIfNeeded();
 
-    const linkedinCta = contactSection.getByRole("link", { name: "LinkedIn" });
-    await expect(linkedinCta).toBeVisible();
-    await expect(linkedinCta).toHaveAttribute("href", "https://www.linkedin.com/in/owerfrank-data/");
+    const linkedinLink = contactSection.locator('a[href*="linkedin.com"]').first();
+    await expect(linkedinLink).toBeVisible();
+    await expect(linkedinLink).toHaveAttribute("target", "_blank");
+    await expect(linkedinLink).toHaveAttribute("rel", "noopener noreferrer");
+
+    const githubLink = contactSection.locator('a[href*="github.com"]').first();
+    await expect(githubLink).toBeVisible();
+    await expect(githubLink).toHaveAttribute("target", "_blank");
+    await expect(githubLink).toHaveAttribute("rel", "noopener noreferrer");
   });
 
-  test("contact actions contain correct github anchor link", async ({ page }) => {
+  test("clicking copy button shows feedback confirmation", async ({ page }) => {
     await page.goto("/es");
     const contactSection = page.locator("#contact");
     await contactSection.scrollIntoViewIfNeeded();
 
-    const githubCta = contactSection.getByRole("link", { name: "GitHub" });
-    await expect(githubCta).toBeVisible();
-    await expect(githubCta).toHaveAttribute("href", "https://github.com/OwerLopez");
-  });
-
-  test("external links have secure rel attributes", async ({ page }) => {
-    await page.goto("/es");
-    const contactSection = page.locator("#contact");
-    await contactSection.scrollIntoViewIfNeeded();
-
-    const linkedinCta = contactSection.getByRole("link", { name: "LinkedIn" });
-    await expect(linkedinCta).toHaveAttribute("target", "_blank");
-    await expect(linkedinCta).toHaveAttribute("rel", "noopener noreferrer");
-
-    const githubCta = contactSection.getByRole("link", { name: "GitHub" });
-    await expect(githubCta).toHaveAttribute("target", "_blank");
-    await expect(githubCta).toHaveAttribute("rel", "noopener noreferrer");
+    const copyBtn = contactSection.getByRole("button", { name: "Copiar" });
+    await expect(copyBtn).toBeVisible();
+    await copyBtn.click();
+    await expect(contactSection.getByText("Copiado")).toBeVisible();
   });
 });

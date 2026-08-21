@@ -22,7 +22,7 @@ export const siteConfig = {
   githubUser: "OwerLopez",
   links: {
     github: "https://github.com/OwerLopez",
-    linkedin: "https://www.linkedin.com/in/owerfrank-data/",
+    linkedin: "https://www.linkedin.com/in/owerlopez/",
     credly: "https://www.credly.com/users/ower-frank-lopez-arela",
     email: "mailto:owerfrank2004@gmail.com",
   },

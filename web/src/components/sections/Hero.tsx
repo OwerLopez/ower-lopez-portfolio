@@ -1,200 +1,194 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { CheckCircle2, Copy } from "lucide-react";
+import { CheckCircle2, Copy, ArrowDown, Sparkles, Terminal, ShieldCheck, Zap } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { ParticleRain } from "@/components/effects/ParticleRain";
 import type { PortfolioContent } from "@/types/content";
+import { InteractiveRuntimeHUD } from "@/components/ui/InteractiveRuntimeHUD";
 
-const AURORA = "/assets/hero_aurora.png";
-
-function LiveClock() {
-  const [time, setTime] = useState("--:--:--");
-  useEffect(() => {
-    const tick = () =>
-      setTime(
-        new Intl.DateTimeFormat("es-PE", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-          timeZone: "America/Lima",
-        }).format(new Date())
-      );
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return <span className="tabular-nums text-muted">{time}</span>;
-}
-
+/**
+ * Hero section — 2026 High-Impact 2-Column Split.
+ * Left: Recruiter hook, value proposition, quick-stats, glowing CTAs.
+ * Right: Live Interactive JVM + ONNX Runtime HUD & benchmark simulator.
+ */
 export function Hero({ content }: { content: PortfolioContent }) {
-  const { nav, intro } = content;
+  const { intro, footer } = content;
   const reduce = useReducedMotion();
   const [copied, setCopied] = useState(false);
   const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(siteConfig.email);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2200);
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(siteConfig.email);
+      }
     } catch {
-      /* noop */
+      /* ignore clipboard permission errors */
     }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2200);
   };
 
-  useEffect(() => {
-    document.title = content.meta.title;
-    for (const tag of document.head.querySelectorAll('meta[name="description"]')) tag.remove();
-    const desc = document.createElement("meta");
-    desc.setAttribute("name", "description");
-    desc.content = content.meta.description;
-    document.head.appendChild(desc);
-    return () => desc.remove();
-  }, [content.meta.title, content.meta.description]);
-
   return (
-    <section className="relative overflow-hidden scene-glow-flame" aria-label="Intro">
-      {/* Arte de fondo atmosférico */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 select-none"
-        style={{
-          backgroundImage: `url(${AURORA})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center 75%",
-          opacity: 0.35,
-          mixBlendMode: "screen",
-        }}
-      />
-      {/* Lluvia sutil de chispas */}
-      <ParticleRain count={20} />
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base via-transparent to-base" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-base to-transparent" />
-
-      <div className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-20 pb-8 sm:pt-24 sm:pb-10 md:pt-28 md:pb-12 flex flex-col justify-center min-h-[85vh]">
-        {/* Barra de estado */}
-        <motion.div
-          initial={reduce ? undefined : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease }}
-          className="mb-6 sm:mb-8 flex flex-wrap items-center gap-3"
-        >
-          <span className="rec-blink flex items-center gap-2.5 rounded-full border border-line-strong bg-surface-raised px-4 py-1.5 text-[11px] tracking-[0.18em] text-muted">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e11d74]" />
-            {intro.status}
-          </span>
-          <span className="font-mono-token rounded-full border border-line bg-surface px-4 py-1.5 text-[11px] tracking-[0.22em] text-faint">
-            {intro.frameLabel}
-          </span>
-        </motion.div>
-
-        {/* Titular cinematográfico */}
-        <motion.p
-          initial={reduce ? undefined : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease }}
-          className="font-mono-token mb-4 text-xs tracking-[0.38em] text-flame"
-        >
-          {intro.kicker}
-        </motion.p>
-
-        <h1 className="max-w-4xl font-display text-[11vw] leading-[0.96] font-extrabold tracking-tight text-ink sm:text-[7vw] md:text-[4.5rem]">
-          {intro.titleLines.map((line, i) => (
-            <motion.span
-              key={i}
-              initial={reduce ? undefined : { opacity: 0, y: 28, filter: "blur(12px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.8, delay: 0.2 + i * 0.15, ease }}
-              className="block"
+    <section
+      className="relative min-h-[90vh] flex flex-col justify-center px-5 sm:px-8 py-16 sm:py-24"
+      aria-label="Intro"
+    >
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column: Thesis & Hook */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Status badge with animated green radar pulse */}
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease }}
             >
-              {line.split(" ").map((token, ti) => (
+              <span className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-mono tracking-wide text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                {intro.status}
+              </span>
+            </motion.div>
+
+            {/* Kicker */}
+            <motion.p
+              initial={reduce ? undefined : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08, ease }}
+              className="mono-label text-[var(--color-accent-cyan)] font-semibold flex items-center gap-2"
+            >
+              <Terminal className="h-3.5 w-3.5" />
+              {intro.kicker}
+            </motion.p>
+
+            {/* Main heading */}
+            <h1 className="text-[clamp(2.5rem,5.5vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] text-[var(--color-ink)]">
+              {intro.titleLines.map((line, i) => (
                 <motion.span
-                  key={ti}
-                  initial={reduce ? undefined : { opacity: 0, y: 10 }}
+                  key={i}
+                  initial={reduce ? undefined : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.35 + i * 0.15 + ti * 0.06, ease }}
-                  style={{ display: "inline-block", marginRight: "0.28em" }}
+                  transition={{ duration: 0.7, delay: 0.15 + i * 0.12, ease }}
+                  className="block"
                 >
-                  {token}
+                  {line}
                 </motion.span>
               ))}
-            </motion.span>
-          ))}
-          <motion.span
-            initial={reduce ? undefined : { opacity: 0, y: 28, filter: "blur(12px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.8, delay: 0.5, ease }}
-            className="block text-gradient-flame"
-          >
-            {intro.titleAccent}
-          </motion.span>
-        </h1>
+              <motion.span
+                initial={reduce ? undefined : { opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.4, ease }}
+                className="block text-accent-gradient drop-shadow-[0_0_25px_rgba(59,130,246,0.3)]"
+              >
+                {intro.titleAccent}
+              </motion.span>
+            </h1>
 
-        <motion.p
-          initial={reduce ? undefined : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.62, ease }}
-          className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
-        >
-          {intro.description}
-        </motion.p>
+            {/* Description */}
+            <motion.p
+              initial={reduce ? undefined : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55, ease }}
+              className="max-w-xl text-base sm:text-lg text-[var(--color-muted)] leading-relaxed"
+            >
+              {intro.description}
+            </motion.p>
 
-        {/* CTAs */}
-        <motion.div
-          initial={reduce ? undefined : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.74, ease }}
-          className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
-        >
-          <a
-            href={intro.primaryTarget}
-            className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#ff7a18] via-[#e11d74] to-[#8b5cf6] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_14px_44px_-14px_rgba(225,29,116,0.6)] transition-transform duration-300 hover:scale-[1.04]"
-          >
-            <span>{intro.primaryCta}</span>
-            <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-              ↓
-            </span>
-          </a>
-          <button
-            type="button"
-            onClick={copyEmail}
-            className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface-raised px-6 py-3.5 text-sm font-medium text-ink transition-all duration-300 hover:border-[#e11d74]/50 hover:bg-surface"
-          >
-            {copied ? (
-              <>
-                <CheckCircle2 className="h-4 w-4 text-[#34d399]" />
-                <span className="text-[#34d399]">{intro.copiedFeedback}</span>
-              </>
-            ) : (
-              <>
-                <Copy className="h-3.5 w-3.5 text-faint" />
-                <span>{intro.secondaryCta}</span>
-              </>
-            )}
-          </button>
-        </motion.div>
+            {/* Quick Impact Tags */}
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.62, ease }}
+              className="flex flex-wrap gap-2.5 pt-2"
+            >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
+                <Zap className="h-3 w-3 text-emerald-400" />
+                <span className="font-bold text-emerald-400">20 ms</span> P99 ONNX
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
+                <ShieldCheck className="h-3 w-3 text-[var(--color-accent)]" />
+                <span className="font-bold text-[var(--color-accent)]">96%</span> Recall
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
+                <Sparkles className="h-3 w-3 text-amber-400" />
+                <span className="font-bold text-amber-400">1er Puesto</span> Hackathon NEXIA
+              </span>
+            </motion.div>
 
-        {/* Pista de scroll + reloj en vivo */}
+            {/* Action CTAs */}
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.72, ease }}
+              className="flex flex-wrap items-center gap-4 pt-4"
+            >
+              <a
+                href={intro.primaryTarget}
+                className="group relative inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-7 py-3.5 text-sm font-bold text-white shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-all duration-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] hover:scale-105 active:scale-95"
+              >
+                <span>{intro.primaryCta}</span>
+                <ArrowDown
+                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1"
+                  aria-hidden
+                />
+              </a>
+              <button
+                type="button"
+                onClick={copyEmail}
+                className="inline-flex items-center gap-2 rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-6 py-3.5 text-sm font-semibold text-[var(--color-ink)] transition-all duration-300 hover:border-[var(--color-border-hover)] hover:bg-[var(--color-surface-hover)] active:scale-95 shadow-sm"
+              >
+                {copied ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                    <span className="text-emerald-400">{intro.copiedFeedback}</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5 text-[var(--color-faint)]" />
+                    <span>{intro.secondaryCta}</span>
+                  </>
+                )}
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Live Interactive Architecture / ONNX Runtime HUD */}
+          <div className="lg:col-span-5">
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.35, ease }}
+            >
+              <InteractiveRuntimeHUD />
+            </motion.div>
+          </div>
+
+        </div>
+
+        {/* Ambient bottom metadata bar */}
         <motion.div
           initial={reduce ? undefined : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 1.05, ease }}
-          className="mt-10 sm:mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-line pt-5 text-faint"
+          transition={{ duration: 0.8, delay: 0.9, ease }}
+          className="mt-14 sm:mt-18 flex flex-wrap items-center justify-between gap-y-3 border-t border-[var(--color-border)] pt-5 text-[var(--color-faint)]"
         >
-          <span className="font-mono-token flex items-center gap-3 text-[11px] tracking-[0.3em]">
+          <span className="mono-label flex items-center gap-3">
             <motion.span
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
               ↓
             </motion.span>
             {intro.scrollCue}
           </span>
-          <span className="hidden items-center gap-2 text-xs sm:flex">
-            Arequipa · UTC-5 <span aria-hidden className="text-faint">·</span> <LiveClock />
+          <span className="hidden items-center gap-2 text-xs font-mono sm:flex text-[var(--color-muted)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+            {footer.location} · {footer.timezone} · UTC-5
           </span>
         </motion.div>
       </div>
