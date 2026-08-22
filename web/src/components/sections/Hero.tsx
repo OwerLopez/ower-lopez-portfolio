@@ -6,6 +6,8 @@ import { CheckCircle2, Copy, ArrowDown, Sparkles, Terminal, ShieldCheck, Zap } f
 import { siteConfig } from "@/config/site";
 import type { PortfolioContent } from "@/types/content";
 import { InteractiveRuntimeHUD } from "@/components/ui/InteractiveRuntimeHUD";
+import { GlassKnotSculpture } from "@/components/animations/GlassKnotSculpture";
+import { playTick, playSuccess } from "@/lib/audio";
 
 /**
  * Hero section — 2026 High-Impact 2-Column Split.
@@ -26,6 +28,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
     } catch {
       /* ignore clipboard permission errors */
     }
+    playSuccess();
     setCopied(true);
     window.setTimeout(() => setCopied(false), 2200);
   };
@@ -129,6 +132,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
             >
               <a
                 href={intro.primaryTarget}
+                onClick={() => playTick()}
                 className="group relative inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-7 py-3.5 text-sm font-bold text-white shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-all duration-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] hover:scale-105 active:scale-95"
               >
                 <span>{intro.primaryCta}</span>
@@ -157,12 +161,43 @@ export function Hero({ content }: { content: PortfolioContent }) {
             </motion.div>
           </div>
 
-          {/* Right Column: Live Interactive Architecture / ONNX Runtime HUD */}
-          <div className="lg:col-span-5">
+          {/* Right Column: 3D Liquid Glass Monogram + Live ONNX Runtime HUD */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* 3D Liquid Glass Monogram / Tensor Knot Sculpture (Crafter Style) */}
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, scale: 0.9, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.25, ease }}
+              className="relative overflow-hidden rounded-2xl border border-blue-500/25 bg-gradient-to-b from-[#13141f]/80 via-[#0e0f17]/90 to-[#08080d]/95 p-4 sm:p-5 shadow-[0_15px_45px_-10px_rgba(0,0,0,0.8),0_0_30px_-5px_rgba(59,130,246,0.18)] backdrop-blur-xl"
+            >
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="mono-label text-[11px] text-cyan-300 font-bold tracking-wider">
+                    ISOTIPO 3D · VIDRIO LÍQUIDO & TENSORES
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-zinc-400 bg-white/[0.05] px-2 py-0.5 rounded border border-white/10">
+                  WebGL Raymarching
+                </span>
+              </div>
+
+              {/* Standalone 3D Sculpture Canvas (Prominent, Generous, Never Clipped) */}
+              <div className="w-full h-56 sm:h-64 relative flex items-center justify-center">
+                <GlassKnotSculpture className="w-full h-full" />
+              </div>
+
+              <div className="flex items-center justify-between pt-2 border-t border-white/[0.06] text-[10px] font-mono text-[var(--color-faint)]">
+                <span>Giro 3D interactivo con cursor</span>
+                <span className="text-cyan-400 font-semibold">60–120 FPS</span>
+              </div>
+            </motion.div>
+
+            {/* Live Interactive Architecture HUD */}
             <motion.div
               initial={reduce ? undefined : { opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.35, ease }}
+              transition={{ duration: 0.8, delay: 0.45, ease }}
             >
               <InteractiveRuntimeHUD />
             </motion.div>

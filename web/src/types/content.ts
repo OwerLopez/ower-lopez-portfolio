@@ -25,6 +25,8 @@ export interface NavContent {
   menuOpen: string;
   menuClose: string;
   statusText: string;
+  soundOn: string;
+  soundOff: string;
 }
 
 export interface IdentityFact {

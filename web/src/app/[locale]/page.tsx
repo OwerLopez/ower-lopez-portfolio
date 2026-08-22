@@ -6,7 +6,7 @@ import { SkipToContent } from "@/components/layout/SkipToContent";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { GridBackground } from "@/components/animations/GridBackground";
+import { WaterBackground } from "@/components/animations/WaterBackground";
 import { Hero } from "@/components/sections/Hero";
 import { Work } from "@/components/sections/Work";
 import { Expertise } from "@/components/sections/Expertise";
@@ -39,7 +39,7 @@ export default async function HomePage({
     <>
       <SkipToContent />
       <StructuredData locale={locale} />
-      <GridBackground />
+      <WaterBackground />
       <Navbar content={content} />
 
       <main id="main-content" className="relative z-10 min-h-screen flex flex-col pt-16">

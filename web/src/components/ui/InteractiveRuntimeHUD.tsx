@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, RotateCcw, Cpu, Server, Activity, CheckCircle2, ShieldAlert } from "lucide-react";
+import { playTick, playInference, playSuccess } from "@/lib/audio";
 
 export function InteractiveRuntimeHUD() {
   const [activeTab, setActiveTab] = useState<"inference" | "jvm" | "benchmark">("inference");
@@ -21,6 +22,7 @@ export function InteractiveRuntimeHUD() {
 
   const runSimulation = () => {
     setIsRunning(true);
+    playInference();
     setTimeout(() => {
       const randomLatency = +(16 + Math.random() * 4.5).toFixed(1);
       const randomProb = +(78 + Math.random() * 18).toFixed(1);
@@ -39,7 +41,13 @@ export function InteractiveRuntimeHUD() {
         timestamp: timeStr,
       });
       setIsRunning(false);
+      playSuccess();
     }, 450);
+  };
+
+  const handleTabChange = (tab: "inference" | "jvm" | "benchmark") => {
+    playTick();
+    setActiveTab(tab);
   };
 
   return (
@@ -64,7 +72,7 @@ export function InteractiveRuntimeHUD() {
         <div className="flex items-center gap-1 rounded-lg bg-[var(--color-base)]/80 p-1 border border-[var(--color-border)]">
           <button
             type="button"
-            onClick={() => setActiveTab("inference")}
+            onClick={() => handleTabChange("inference")}
             className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-mono transition-all ${
               activeTab === "inference"
                 ? "bg-[var(--color-accent)] text-white shadow-sm font-semibold"
@@ -76,7 +84,7 @@ export function InteractiveRuntimeHUD() {
           </button>
           <button
             type="button"
-            onClick={() => setActiveTab("jvm")}
+            onClick={() => handleTabChange("jvm")}
             className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-mono transition-all ${
               activeTab === "jvm"
                 ? "bg-[var(--color-accent)] text-white shadow-sm font-semibold"
@@ -88,7 +96,7 @@ export function InteractiveRuntimeHUD() {
           </button>
           <button
             type="button"
-            onClick={() => setActiveTab("benchmark")}
+            onClick={() => handleTabChange("benchmark")}
             className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-mono transition-all ${
               activeTab === "benchmark"
                 ? "bg-[var(--color-accent)] text-white shadow-sm font-semibold"

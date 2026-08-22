@@ -4,10 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Globe, Menu, X, Sparkles, ArrowUpRight } from "lucide-react";
+import { Globe, Menu, X, Sparkles, ArrowUpRight, Volume2, VolumeX } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { sections } from "@/config/navigation";
 import type { PortfolioContent } from "@/types/content";
+import { initSoundState, toggleSound, playTick } from "@/lib/audio";
 
 /**
  * Navbar — Precision Floating Glass Dock (2026 Edition).
@@ -25,10 +26,27 @@ export function Navbar({ content }: { content: PortfolioContent }) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
+  const [soundOn, setSoundOn] = useState(true);
+
   const isEn = pathname.startsWith("/en");
   const currentLocale = isEn ? "en" : "es";
   const otherLocale = isEn ? "/es" : "/en";
   const homePath = `/${currentLocale}`;
+
+  useEffect(() => {
+    setSoundOn(initSoundState());
+    const onSoundChange = (e: Event) => {
+      const customEvent = e as CustomEvent<boolean>;
+      setSoundOn(customEvent.detail);
+    };
+    window.addEventListener("sound_state_change", onSoundChange);
+    return () => window.removeEventListener("sound_state_change", onSoundChange);
+  }, []);
+
+  const handleSoundToggle = () => {
+    const next = toggleSound();
+    setSoundOn(next);
+  };
 
   // Scroll spy tracking active section
   useEffect(() => {
@@ -68,6 +86,7 @@ export function Navbar({ content }: { content: PortfolioContent }) {
   }, [open]);
 
   const scrollTo = useCallback((id: string) => {
+    playTick();
     setOpen(false);
     const el = document.getElementById(id);
     if (el) {
@@ -92,7 +111,11 @@ export function Navbar({ content }: { content: PortfolioContent }) {
           }`}
         >
           {/* Brand Logo & Live Radar Pill */}
-          <Link href={homePath} className="group flex shrink-0 items-center gap-3">
+          <Link
+            href={homePath}
+            onClick={() => playTick()}
+            className="group flex shrink-0 items-center gap-3"
+          >
             <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-400 p-[1px] shadow-[0_0_18px_rgba(59,130,246,0.6)] group-hover:shadow-[0_0_25px_rgba(6,182,212,0.8)] transition-all group-hover:scale-105">
               <div className="flex h-full w-full items-center justify-center rounded-[11px] bg-[#090a12] font-mono text-xs font-black text-white">
                 {siteConfig.initials}
@@ -138,11 +161,31 @@ export function Navbar({ content }: { content: PortfolioContent }) {
             })}
           </nav>
 
-          {/* Right Side: Language Switcher & Shiny CTA Button */}
-          <div className="flex shrink-0 items-center gap-2.5">
+          {/* Right Side: Sound Toggle + Language Switcher + Shiny CTA Button */}
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+            {/* Sound FX Toggle Button */}
+            <button
+              type="button"
+              onClick={handleSoundToggle}
+              aria-label={soundOn ? nav.soundOn : nav.soundOff}
+              title={soundOn ? nav.soundOn : nav.soundOff}
+              className={`inline-flex h-9 w-9 items-center justify-center rounded-full border transition-all shadow-sm ${
+                soundOn
+                  ? "border-blue-500/40 bg-blue-500/15 text-blue-300 hover:bg-blue-500/25 hover:border-blue-400"
+                  : "border-white/[0.12] bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/20"
+              }`}
+            >
+              {soundOn ? (
+                <Volume2 className="h-4 w-4 text-cyan-400" />
+              ) : (
+                <VolumeX className="h-4 w-4 text-zinc-500" />
+              )}
+            </button>
+
             {/* Bilingual Switcher */}
             <Link
               href={otherLocale}
+              onClick={() => playTick()}
               aria-label={isEn ? "Cambiar a Español" : "Switch to English"}
               className="inline-flex h-9 items-center gap-1.5 rounded-full border border-white/[0.12] bg-white/[0.04] px-3.5 font-mono text-xs font-bold text-zinc-200 transition-all hover:border-blue-500/50 hover:bg-blue-500/15 hover:text-white shadow-sm"
             >
@@ -163,7 +206,10 @@ export function Navbar({ content }: { content: PortfolioContent }) {
             {/* Mobile Hamburger Trigger */}
             <button
               type="button"
-              onClick={() => setOpen((v) => !v)}
+              onClick={() => {
+                playTick();
+                setOpen((v) => !v);
+              }}
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? nav.menuClose : nav.menuOpen}

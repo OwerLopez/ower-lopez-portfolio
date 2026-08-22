@@ -6,6 +6,8 @@ import type { PortfolioContent } from "@/types/content";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/animations/Reveal";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { playTick } from "@/lib/audio";
 
 export function Work({ content }: { content: PortfolioContent }) {
   const { work } = content;
@@ -22,7 +24,11 @@ export function Work({ content }: { content: PortfolioContent }) {
 
       {/* Featured Flagship Case Study — ChurnInsight Mission Cockpit */}
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border border-blue-500/30 bg-gradient-to-b from-[#13141f]/95 via-[#0e0f17]/95 to-[#09090e]/98 p-6 sm:p-9 lg:p-11 mb-14 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.8),0_0_40px_-5px_rgba(59,130,246,0.18)]">
+        <TiltCard
+          glowColor="rgba(59, 130, 246, 0.22)"
+          maxTilt={4}
+          className="rounded-3xl border border-blue-500/30 bg-gradient-to-b from-[#13141f]/95 via-[#0e0f17]/95 to-[#09090e]/98 p-6 sm:p-9 lg:p-11 mb-14 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.8),0_0_40px_-5px_rgba(59,130,246,0.18)]"
+        >
           {/* Radiant Corner Atmosphere */}
           <div
             aria-hidden
@@ -111,6 +117,7 @@ export function Work({ content }: { content: PortfolioContent }) {
                   href={link.href}
                   target={link.external ? "_blank" : undefined}
                   rel={link.external ? "noopener noreferrer" : undefined}
+                  onClick={() => playTick()}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border-strong)] text-xs font-mono font-bold text-[var(--color-ink)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-all shadow-sm"
                 >
                   {link.label}
@@ -119,18 +126,27 @@ export function Work({ content }: { content: PortfolioContent }) {
               ))}
             </div>
           </div>
-        </div>
+        </TiltCard>
       </Reveal>
 
-      {/* Secondary Projects Grid with Rich Cards */}
+      {/* Secondary Projects Grid with 3D Tilt Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
         {work.log.map((project, idx) => {
           const isGold = project.tone === "gold";
           const isEmerald = project.tone === "emerald";
+          const glow = isGold
+            ? "rgba(245, 158, 11, 0.18)"
+            : isEmerald
+            ? "rgba(16, 185, 129, 0.18)"
+            : "rgba(59, 130, 246, 0.16)";
           
           return (
             <Reveal key={project.title} delay={reduce ? 0 : idx * 60}>
-              <div className="glass-card hover-lift p-7 h-full flex flex-col justify-between group">
+              <TiltCard
+                glowColor={glow}
+                maxTilt={6}
+                className="glass-card hover-lift p-7 h-full flex flex-col justify-between group rounded-2xl"
+              >
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     {isGold && (
@@ -167,7 +183,7 @@ export function Work({ content }: { content: PortfolioContent }) {
                     <Badge key={tag}>{tag}</Badge>
                   ))}
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
           );
         })}

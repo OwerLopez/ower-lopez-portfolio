@@ -35,6 +35,8 @@ export const en: PortfolioContent = {
     menuOpen: "Open menu",
     menuClose: "Close menu",
     statusText: "Available Q3/Q4 2026",
+    soundOn: "Sound FX Enabled",
+    soundOff: "Sound FX Muted",
   },
 
   intro: {

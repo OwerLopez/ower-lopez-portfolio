@@ -37,6 +37,8 @@ export const es: PortfolioContent = {
     menuOpen: "Abrir menu",
     menuClose: "Cerrar menu",
     statusText: "Disponible Q3/Q4 2026",
+    soundOn: "Sonido activado",
+    soundOff: "Sonido silenciado",
   },
 
   intro: {
