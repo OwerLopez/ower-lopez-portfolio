@@ -2,17 +2,16 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { CheckCircle2, Copy, ArrowDown, Sparkles, Terminal, ShieldCheck, Zap } from "lucide-react";
+import { CheckCircle2, Copy, ArrowDown, Sparkles, Terminal, ShieldCheck, Server, Database, GraduationCap } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import type { PortfolioContent } from "@/types/content";
 import { InteractiveRuntimeHUD } from "@/components/ui/InteractiveRuntimeHUD";
-import { GlassKnotSculpture } from "@/components/animations/GlassKnotSculpture";
 import { playTick, playSuccess } from "@/lib/audio";
 
 /**
- * Hero section — 2026 High-Impact 2-Column Split.
- * Left: Recruiter hook, value proposition, quick-stats, glowing CTAs.
- * Right: Live Interactive JVM + ONNX Runtime HUD & benchmark simulator.
+ * Hero section — Clean 2-Column Overview.
+ * Left: Recruiter hook, value proposition, comprehensive skills.
+ * Right: Live Interactive Developer Profile Hub.
  */
 export function Hero({ content }: { content: PortfolioContent }) {
   const { intro, footer } = content;
@@ -35,11 +34,11 @@ export function Hero({ content }: { content: PortfolioContent }) {
 
   return (
     <section
-      className="relative min-h-[90vh] flex flex-col justify-center px-5 sm:px-8 py-16 sm:py-24"
+      className="relative min-h-[85vh] flex flex-col justify-center px-5 sm:px-8 py-14 sm:py-20"
       aria-label="Intro"
     >
       <div className="relative z-10 mx-auto w-full max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
           {/* Left Column: Thesis & Hook */}
           <div className="lg:col-span-7 space-y-6">
@@ -70,7 +69,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
             </motion.p>
 
             {/* Main heading */}
-            <h1 className="text-[clamp(2.5rem,5.5vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] text-[var(--color-ink)]">
+            <h1 className="text-[clamp(2.4rem,5.2vw,4rem)] font-extrabold leading-[1.1] tracking-[-0.035em] text-[var(--color-ink)]">
               {intro.titleLines.map((line, i) => (
                 <motion.span
                   key={i}
@@ -102,7 +101,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
               {intro.description}
             </motion.p>
 
-            {/* Quick Impact Tags */}
+            {/* Quick Skills & Achievements Badges */}
             <motion.div
               initial={reduce ? undefined : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -110,16 +109,20 @@ export function Hero({ content }: { content: PortfolioContent }) {
               className="flex flex-wrap gap-2.5 pt-2"
             >
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
-                <Zap className="h-3 w-3 text-emerald-400" />
-                <span className="font-bold text-emerald-400">20 ms</span> P99 ONNX
+                <Server className="h-3 w-3 text-blue-400" />
+                <span className="font-semibold text-blue-300">Java 17 & Spring Boot</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
-                <ShieldCheck className="h-3 w-3 text-[var(--color-accent)]" />
-                <span className="font-bold text-[var(--color-accent)]">96%</span> Recall
+                <Database className="h-3 w-3 text-amber-400" />
+                <span className="font-semibold text-amber-300">PostgreSQL & SQL</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
                 <Sparkles className="h-3 w-3 text-amber-400" />
-                <span className="font-bold text-amber-400">1er Puesto</span> Hackathon NEXIA
+                <span className="font-bold text-amber-400">1er Puesto Hackathon</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
+                <GraduationCap className="h-3 w-3 text-emerald-400" />
+                <span className="font-semibold text-emerald-400">Quinto Superior (UNSA)</span>
               </span>
             </motion.div>
 
@@ -161,43 +164,12 @@ export function Hero({ content }: { content: PortfolioContent }) {
             </motion.div>
           </div>
 
-          {/* Right Column: 3D Liquid Glass Monogram + Live ONNX Runtime HUD */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* 3D Liquid Glass Monogram / Tensor Knot Sculpture (Crafter Style) */}
+          {/* Right Column: Live Interactive Architecture & Inference HUD */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
             <motion.div
-              initial={reduce ? undefined : { opacity: 0, scale: 0.9, y: 15 }}
+              initial={reduce ? undefined : { opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.25, ease }}
-              className="relative overflow-hidden rounded-2xl border border-blue-500/25 bg-gradient-to-b from-[#13141f]/80 via-[#0e0f17]/90 to-[#08080d]/95 p-4 sm:p-5 shadow-[0_15px_45px_-10px_rgba(0,0,0,0.8),0_0_30px_-5px_rgba(59,130,246,0.18)] backdrop-blur-xl"
-            >
-              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-2">
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
-                  <span className="mono-label text-[11px] text-cyan-300 font-bold tracking-wider">
-                    ISOTIPO 3D · VIDRIO LÍQUIDO & TENSORES
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-zinc-400 bg-white/[0.05] px-2 py-0.5 rounded border border-white/10">
-                  WebGL Raymarching
-                </span>
-              </div>
-
-              {/* Standalone 3D Sculpture Canvas (Prominent, Generous, Never Clipped) */}
-              <div className="w-full h-56 sm:h-64 relative flex items-center justify-center">
-                <GlassKnotSculpture className="w-full h-full" />
-              </div>
-
-              <div className="flex items-center justify-between pt-2 border-t border-white/[0.06] text-[10px] font-mono text-[var(--color-faint)]">
-                <span>Giro 3D interactivo con cursor</span>
-                <span className="text-cyan-400 font-semibold">60–120 FPS</span>
-              </div>
-            </motion.div>
-
-            {/* Live Interactive Architecture HUD */}
-            <motion.div
-              initial={reduce ? undefined : { opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.45, ease }}
+              transition={{ duration: 0.8, delay: 0.35, ease }}
             >
               <InteractiveRuntimeHUD />
             </motion.div>

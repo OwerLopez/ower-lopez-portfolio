@@ -90,7 +90,7 @@ export function Work({ content }: { content: PortfolioContent }) {
               <div className="flex items-center gap-2">
                 <Zap className="h-4 w-4 text-emerald-400" />
                 <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                  Impacto de Arquitectura · 100x Aceleración
+                  Optimización de Arquitectura · Baja Latencia
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-[var(--color-muted)]">
@@ -129,8 +129,8 @@ export function Work({ content }: { content: PortfolioContent }) {
         </TiltCard>
       </Reveal>
 
-      {/* Secondary Projects Grid with 3D Tilt Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      {/* Secondary Projects Grid (3 Clean Cards) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {work.log.map((project, idx) => {
           const isGold = project.tone === "gold";
           const isEmerald = project.tone === "emerald";
@@ -145,40 +145,40 @@ export function Work({ content }: { content: PortfolioContent }) {
               <TiltCard
                 glowColor={glow}
                 maxTilt={6}
-                className="glass-card hover-lift p-7 h-full flex flex-col justify-between group rounded-2xl"
+                className="glass-card hover-lift p-6 h-full flex flex-col justify-between group rounded-2xl border border-[var(--color-border)]"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     {isGold && (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs font-mono text-amber-300 font-bold">
                         <Trophy className="h-3.5 w-3.5" />
-                        1er Puesto Hackathon
+                        1er Puesto
                       </span>
                     )}
                     {isEmerald && (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-300 font-bold">
                         <Trophy className="h-3.5 w-3.5" />
-                        1er Puesto Feria UNSA
+                        1er Puesto
                       </span>
                     )}
                     {!isGold && !isEmerald && (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-xs font-mono text-blue-300 font-bold">
                         <Zap className="h-3.5 w-3.5" />
-                        Producción
+                        Tiempo Real
                       </span>
                     )}
                   </div>
 
-                  <h4 className="text-2xl font-bold text-[var(--color-ink)] mb-3 group-hover:text-[var(--color-accent)] transition-colors">
+                  <h4 className="text-xl font-bold text-[var(--color-ink)] mb-2.5 group-hover:text-[var(--color-accent)] transition-colors">
                     {project.title}
                   </h4>
 
-                  <p className="text-sm text-[var(--color-muted)] leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-[var(--color-muted)] leading-relaxed mb-6">
                     {project.description}
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--color-border)]">
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--color-border)]">
                   {project.tags.map((tag) => (
                     <Badge key={tag}>{tag}</Badge>
                   ))}
@@ -188,52 +188,6 @@ export function Work({ content }: { content: PortfolioContent }) {
           );
         })}
       </div>
-
-      {/* Technical Comparison Matrix Table */}
-      <Reveal>
-        <div className="mt-14">
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="mono-label text-xs font-bold text-[var(--color-accent-cyan)]">
-              {work.matrixTitle}
-            </h4>
-            <span className="text-[11px] font-mono text-[var(--color-faint)]">
-              Auditoría Técnica Verificable
-            </span>
-          </div>
-
-          <div className="overflow-x-auto rounded-2xl border border-[var(--color-border-strong)] bg-gradient-to-b from-[#111116] to-[#0a0a0d] shadow-xl">
-            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
-              <thead>
-                <tr className="border-b border-[var(--color-border-strong)] bg-[#0d0d12] mono-label text-[11px]">
-                  <th className="py-4 px-5 font-bold text-[var(--color-ink)]">{work.matrixHeaders.project}</th>
-                  <th className="py-4 px-5 font-semibold">{work.matrixHeaders.domain}</th>
-                  <th className="py-4 px-5 font-semibold">{work.matrixHeaders.stack}</th>
-                  <th className="py-4 px-5 font-semibold text-[var(--color-accent)]">{work.matrixHeaders.result}</th>
-                  <th className="py-4 px-5 font-semibold">{work.matrixHeaders.role}</th>
-                  <th className="py-4 px-5 font-semibold text-right">{work.matrixHeaders.year}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[var(--color-border)]">
-                {work.matrix.map((row) => (
-                  <tr
-                    key={row.project}
-                    className="transition-colors hover:bg-blue-500/[0.04]"
-                  >
-                    <td className="py-4 px-5 font-bold text-[var(--color-ink)]">{row.project}</td>
-                    <td className="py-4 px-5 text-[var(--color-muted)]">{row.domain}</td>
-                    <td className="py-4 px-5 font-mono text-xs text-[var(--color-muted)]">{row.stack}</td>
-                    <td className="py-4 px-5 font-semibold text-emerald-400 font-mono text-xs">{row.result}</td>
-                    <td className="py-4 px-5 text-[var(--color-muted)]">{row.role}</td>
-                    <td className="py-4 px-5 font-mono text-xs tabular-nums text-right text-[var(--color-faint)]">
-                      {row.year}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </Reveal>
     </div>
   );
 }

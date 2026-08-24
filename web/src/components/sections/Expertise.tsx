@@ -85,7 +85,7 @@ export function Expertise({ content }: ExpertiseProps) {
       />
 
       {/* Categorized Tech Constellation Grid with Luminous Headers */}
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {stack.groups.map((group, idx) => {
           const meta = CATEGORY_META[group.name] ?? {
             icon: <Server className="h-4 w-4 text-blue-400" />,
