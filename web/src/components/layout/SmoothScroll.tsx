@@ -35,6 +35,13 @@ export function SmoothScroll({
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.6,
+      prevent: (node) => {
+        return (
+          node.hasAttribute("data-lenis-prevent") ||
+          Boolean(node.closest("[data-lenis-prevent]")) ||
+          document.body.style.overflow === "hidden"
+        );
+      },
     });
 
     let rafId = 0;

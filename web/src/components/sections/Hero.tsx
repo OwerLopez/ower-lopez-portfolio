@@ -101,28 +101,24 @@ export function Hero({ content }: { content: PortfolioContent }) {
               {intro.description}
             </motion.p>
 
-            {/* Quick Skills & Achievements Badges */}
+            {/* Quick Skills & Focus Badges */}
             <motion.div
               initial={reduce ? undefined : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.62, ease }}
               className="flex flex-wrap gap-2.5 pt-2"
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
-                <Server className="h-3 w-3 text-blue-400" />
-                <span className="font-semibold text-blue-300">Java 17 & Spring Boot</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/[0.1] text-xs font-mono text-zinc-200 shadow-sm">
+                <Server className="h-3.5 w-3.5 text-blue-400" />
+                <span className="font-semibold text-white">Java 17 & Spring Boot 3.4</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
-                <Database className="h-3 w-3 text-amber-400" />
-                <span className="font-semibold text-amber-300">PostgreSQL & SQL</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/[0.1] text-xs font-mono text-zinc-200 shadow-sm">
+                <Database className="h-3.5 w-3.5 text-cyan-400" />
+                <span className="font-semibold text-white">PostgreSQL & Python ETL</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
-                <Sparkles className="h-3 w-3 text-amber-400" />
-                <span className="font-bold text-amber-400">1er Puesto Hackathon</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-ink)]">
-                <GraduationCap className="h-3 w-3 text-emerald-400" />
-                <span className="font-semibold text-emerald-400">Quinto Superior (UNSA)</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-500/10 border border-blue-500/30 text-xs font-mono text-blue-300 shadow-sm">
+                <GraduationCap className="h-3.5 w-3.5 text-blue-400" />
+                <span className="font-semibold">Ingeniería de Sistemas · UNSA</span>
               </span>
             </motion.div>
 
@@ -147,7 +143,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
               <button
                 type="button"
                 onClick={copyEmail}
-                className="inline-flex items-center gap-2 rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-6 py-3.5 text-sm font-semibold text-[var(--color-ink)] transition-all duration-300 hover:border-[var(--color-border-hover)] hover:bg-[var(--color-surface-hover)] active:scale-95 shadow-sm"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/[0.12] bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-blue-500/40 hover:bg-blue-500/10 active:scale-95 shadow-sm"
               >
                 {copied ? (
                   <>
@@ -156,7 +152,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
                   </>
                 ) : (
                   <>
-                    <Copy className="h-3.5 w-3.5 text-[var(--color-faint)]" />
+                    <Copy className="h-3.5 w-3.5 text-zinc-400" />
                     <span>{intro.secondaryCta}</span>
                   </>
                 )}
@@ -182,7 +178,7 @@ export function Hero({ content }: { content: PortfolioContent }) {
           initial={reduce ? undefined : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.9, ease }}
-          className="mt-14 sm:mt-18 flex flex-wrap items-center justify-between gap-y-3 border-t border-[var(--color-border)] pt-5 text-[var(--color-faint)]"
+          className="mt-14 sm:mt-18 flex flex-wrap items-center justify-between gap-y-3 border-t border-white/[0.08] pt-5 text-[var(--color-faint)]"
         >
           <span className="mono-label flex items-center gap-3">
             <motion.span
@@ -193,9 +189,9 @@ export function Hero({ content }: { content: PortfolioContent }) {
             </motion.span>
             {intro.scrollCue}
           </span>
-          <span className="hidden items-center gap-2 text-xs font-mono sm:flex text-[var(--color-muted)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-            {footer.location} · {footer.timezone} · UTC-5
+          <span className="hidden items-center gap-2 text-xs font-mono sm:flex text-zinc-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            {footer.location} · {footer.timezone}
           </span>
         </motion.div>
       </div>

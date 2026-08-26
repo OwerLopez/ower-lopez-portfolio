@@ -72,22 +72,47 @@ export interface FeaturedProject {
   links: { label: string; href: string; external?: boolean }[];
 }
 
-export interface LogEntry {
+export interface WorkProject {
   index: string;
-  tone: "gold" | "emerald" | "violet";
+  category: "backend" | "data" | "mobile";
+  categoryLabel: string;
+  tone: "blue" | "emerald" | "gold" | "violet" | "cyan" | "amber";
+  badge: string;
   title: string;
+  repoName: string;
+  githubUrl: string;
+  demoUrl?: string;
   description: string;
+  image?: string;
+  metrics?: { label: string; value: string }[];
   tags: string[];
+  year: string;
+}
+
+export interface WorkFilterLabels {
+  all: string;
+  backend: string;
+  data: string;
+  mobile: string;
+}
+
+export interface WorkViewModes {
+  grid?: string;
+  carousel?: string;
+  collage?: string;
+  videoWall?: string;
 }
 
 export interface WorkSection {
   kicker: string;
   heading: string;
   description: string;
+  filterLabels: WorkFilterLabels;
+  viewModes?: WorkViewModes;
   featuredLabel: string;
   featured: FeaturedProject;
-  logLabel: string;
-  log: LogEntry[];
+  catalogLabel: string;
+  projects: WorkProject[];
   matrixTitle: string;
   matrixHeaders: {
     project: string;
@@ -165,28 +190,18 @@ export interface GithubSection {
   logEmpty: string;
 }
 
-export interface Trophy {
-  index: string;
-  title: string;
-  detail: string;
-  value: string;
-  suffix: string;
-  glow: "flame" | "magenta" | "violet" | "amber" | "emerald";
-}
-
 export interface Credential {
   name: string;
   issuer: string;
   acronym: string;
   href: string;
-  glow: "flame" | "magenta" | "violet" | "amber" | "emerald";
+  glow?: "flame" | "magenta" | "violet" | "amber" | "emerald";
 }
 
 export interface CredentialsSection {
   kicker: string;
   heading: string;
   description: string;
-  trophies: Trophy[];
   credentialsLabel: string;
   credentials: Credential[];
   verifyCta: string;
@@ -198,36 +213,37 @@ export interface Principle {
   detail: string;
 }
 
+export interface PersonalMoment {
+  id: string;
+  title: string;
+  subtitle: string;
+  category: string;
+  image?: string;
+  description: string;
+  tag: string;
+  accent: "flame" | "cyan" | "emerald" | "amber" | "violet";
+}
+
+export interface PersonalFacet {
+  label: string;
+  value: string;
+  detail?: string;
+}
+
 export interface PhilosophySection {
   kicker: string;
   headingLead: string;
   headingAccent: string;
   description: string;
+  bioHeading: string;
+  bioText: string[];
+  principlesLabel: string;
   principles: Principle[];
-  panelTitle: string;
-  facts: IdentityFact[];
-  panelFooter: { left: string; right: string };
-}
-
-export interface FaqQuestion {
-  category: string;
-  question: string;
-  answer: string;
-}
-
-export interface FaqItem {
-  index: string;
-  category?: string;
-  question: string;
-  answer: string;
-  questions?: FaqQuestion[];
-}
-
-export interface FaqSection {
-  kicker: string;
-  heading: string;
-  description: string;
-  items: FaqItem[];
+  momentsLabel: string;
+  momentsKicker: string;
+  moments: PersonalMoment[];
+  facetsLabel: string;
+  facets: PersonalFacet[];
 }
 
 export interface ContactChannel {
@@ -305,7 +321,6 @@ export interface PortfolioContent {
   github: GithubSection;
   credentials: CredentialsSection;
   philosophy: PhilosophySection;
-  faq: FaqSection;
   contact: ContactSection;
   footer: FooterSection;
 }

@@ -8,6 +8,7 @@ import { Globe, Menu, X, Sparkles, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { sections } from "@/config/navigation";
 import type { PortfolioContent } from "@/types/content";
+import { playTick, playHover } from "@/lib/audio";
 
 /**
  * Navbar — Floating Glass Dock.
@@ -66,6 +67,7 @@ export function Navbar({ content }: { content: PortfolioContent }) {
   }, [open]);
 
   const scrollTo = useCallback((id: string) => {
+    playTick();
     setOpen(false);
     const el = document.getElementById(id);
     if (el) {
@@ -92,6 +94,7 @@ export function Navbar({ content }: { content: PortfolioContent }) {
           {/* Brand Logo & Live Radar Pill */}
           <Link
             href={homePath}
+            onClick={() => playTick()}
             className="group flex shrink-0 items-center gap-3"
           >
             <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-400 p-[1px] shadow-[0_0_18px_rgba(59,130,246,0.6)] group-hover:shadow-[0_0_25px_rgba(6,182,212,0.8)] transition-all group-hover:scale-105">
@@ -127,6 +130,7 @@ export function Navbar({ content }: { content: PortfolioContent }) {
                   key={section.id}
                   type="button"
                   onClick={() => scrollTo(section.id)}
+                  onMouseEnter={() => playHover()}
                   className={`relative rounded-full px-4 py-1.5 text-[13px] font-semibold tracking-wide transition-all duration-200 ${
                     isActive
                       ? "text-blue-300 font-bold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/40 shadow-[0_0_15px_rgba(59,130,246,0.3)]"
@@ -144,6 +148,7 @@ export function Navbar({ content }: { content: PortfolioContent }) {
             {/* Bilingual Switcher */}
             <Link
               href={otherLocale}
+              onClick={() => playTick()}
               aria-label={isEn ? "Cambiar a Español" : "Switch to English"}
               className="inline-flex h-9 items-center gap-1.5 rounded-full border border-white/[0.12] bg-white/[0.04] px-3.5 font-mono text-xs font-bold text-zinc-200 transition-all hover:border-blue-500/50 hover:bg-blue-500/15 hover:text-white shadow-sm"
             >
@@ -165,6 +170,7 @@ export function Navbar({ content }: { content: PortfolioContent }) {
             <button
               type="button"
               onClick={() => {
+                playTick();
                 setOpen((v) => !v);
               }}
               aria-expanded={open}

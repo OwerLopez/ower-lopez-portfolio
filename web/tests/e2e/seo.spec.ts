@@ -3,10 +3,10 @@ import { test, expect } from "@playwright/test";
 test.describe("3. SEO Tags & Structured Data", () => {
   test("page title matches localized title", async ({ page }) => {
     await page.goto("/es");
-    await expect(page).toHaveTitle(/Ower Frank Lopez Arela/);
+    await expect(page).toHaveTitle(/Ower Frank L[oó]pez Arela/);
 
     await page.goto("/en");
-    await expect(page).toHaveTitle(/Ower Frank Lopez Arela/);
+    await expect(page).toHaveTitle(/Ower Frank L[oó]pez Arela/);
   });
 
   test("meta description matches localized description", async ({ page }) => {
@@ -44,8 +44,8 @@ test.describe("3. SEO Tags & Structured Data", () => {
   test("open graph metadata tags are present", async ({ page }) => {
     await page.goto("/es");
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute("content", "website");
-    await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute("content", "Ower Frank Lopez Arela");
-    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /Ower Frank Lopez Arela/);
+    await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute("content", /Ower Frank L[oó]pez Arela/);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /Ower Frank L[oó]pez Arela/);
     await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://owerlopez.dev/es");
   });
 

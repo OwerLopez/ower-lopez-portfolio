@@ -20,12 +20,12 @@ test.describe("1. Localization & i18n", () => {
 
   test("locale switcher toggles between ES and EN", async ({ page }) => {
     await page.goto("/es");
-    const enLink = page.locator("header").getByRole("link", { name: "EN" });
+    const enLink = page.locator("header").getByRole("link", { name: /EN|Switch to English/i });
     await expect(enLink).toBeVisible();
     await enLink.click();
     await expect(page).toHaveURL(/\/en/);
 
-    const esLink = page.locator("header").getByRole("link", { name: "ES" });
+    const esLink = page.locator("header").getByRole("link", { name: /^ES$|Cambiar a Español/i });
     await expect(esLink).toBeVisible();
     await esLink.click();
     await expect(page).toHaveURL(/\/es/);

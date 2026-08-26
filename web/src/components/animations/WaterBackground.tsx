@@ -113,23 +113,23 @@ void main() {
   vec4 data = texture2D(u_simTexture, v_uv);
   
   // Optical refraction distortion
-  vec2 distortion = 0.24 * data.zw;
+  vec2 distortion = 0.20 * data.zw;
 
-  // Dispersion
-  float r = texture2D(u_bgTexture, v_uv + distortion * 1.02).r;
+  // Subtle dispersion
+  float r = texture2D(u_bgTexture, v_uv + distortion * 1.015).r;
   float g = texture2D(u_bgTexture, v_uv + distortion).g;
-  float b = texture2D(u_bgTexture, v_uv + distortion * 0.98).b;
+  float b = texture2D(u_bgTexture, v_uv + distortion * 0.985).b;
   vec4 color = vec4(r, g, b, 1.0);
 
-  // Surface normals & Specular glint
-  vec3 normal = normalize(vec3(-data.z * 5.0, 0.38, -data.w * 5.0));
-  vec3 lightDir = normalize(vec3(-3.0, 10.0, 3.0));
-  float specular = pow(max(0.0, dot(normal, lightDir)), 70.0) * 1.8;
+  // Surface normals & Specular glint (smooth, crystal-clear liquid lighting)
+  vec3 normal = normalize(vec3(-data.z * 4.5, 0.45, -data.w * 4.5));
+  vec3 lightDir = normalize(vec3(-2.5, 8.0, 2.5));
+  float specular = pow(max(0.0, dot(normal, lightDir)), 50.0) * 0.95;
 
   // Thin liquid edge rim
-  float rim = pow(1.0 - max(0.0, normal.y), 3.0) * 0.18;
+  float rim = pow(1.0 - max(0.0, normal.y), 3.0) * 0.12;
 
-  gl_FragColor = color + vec4(specular + rim);
+  gl_FragColor = color + vec4(vec3(0.6, 0.85, 1.0) * (specular + rim), 0.0);
 }
 `;
 
@@ -171,7 +171,7 @@ function createProgram(
  * - Ultra-fine, sleek wave crests tracing directly from the cursor tip
  * - Crisp specular highlights catching light across the obsidian background
  */
-export function WaterBackground() {
+export function WaterBackground({ className = "" }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -307,36 +307,73 @@ export function WaterBackground() {
       bgCanvas.height = h;
 
       // Base Obsidian canvas
-      bgCtx.fillStyle = "#070709";
+      bgCtx.fillStyle = "#07080d";
       bgCtx.fillRect(0, 0, w, h);
 
-      // Ambient radial glow top-left (Electric Cyan/Blue)
-      const grad1 = bgCtx.createRadialGradient(w * 0.2, h * 0.15, 0, w * 0.2, h * 0.15, Math.max(w, h) * 0.45);
-      grad1.addColorStop(0, "rgba(59, 130, 246, 0.16)");
-      grad1.addColorStop(0.5, "rgba(6, 182, 212, 0.06)");
-      grad1.addColorStop(1, "rgba(7, 7, 9, 0)");
-      bgCtx.fillStyle = grad1;
+      // Section 1: Hero Ambient Aura (Electric Blue & Cyan)
+      const gradHero = bgCtx.createRadialGradient(w * 0.2, h * 0.15, 0, w * 0.2, h * 0.15, Math.max(w, h) * 0.45);
+      gradHero.addColorStop(0, "rgba(59, 130, 246, 0.20)");
+      gradHero.addColorStop(0.5, "rgba(6, 182, 212, 0.08)");
+      gradHero.addColorStop(1, "rgba(7, 8, 13, 0)");
+      bgCtx.fillStyle = gradHero;
       bgCtx.fillRect(0, 0, w, h);
 
-      // Ambient radial glow top-right (Violet / Indigo)
-      const grad2 = bgCtx.createRadialGradient(w * 0.8, h * 0.25, 0, w * 0.8, h * 0.25, Math.max(w, h) * 0.4);
-      grad2.addColorStop(0, "rgba(168, 85, 247, 0.12)");
-      grad2.addColorStop(0.6, "rgba(59, 130, 246, 0.03)");
-      grad2.addColorStop(1, "rgba(7, 7, 9, 0)");
-      bgCtx.fillStyle = grad2;
+      // Section 2: Work & Projects Aura (Deep Indigo & Violet)
+      const gradWork = bgCtx.createRadialGradient(w * 0.82, h * 0.32, 0, w * 0.82, h * 0.32, Math.max(w, h) * 0.42);
+      gradWork.addColorStop(0, "rgba(99, 102, 241, 0.15)");
+      gradWork.addColorStop(0.6, "rgba(59, 130, 246, 0.05)");
+      gradWork.addColorStop(1, "rgba(7, 8, 13, 0)");
+      bgCtx.fillStyle = gradWork;
       bgCtx.fillRect(0, 0, w, h);
 
-      // Mid-page warm glow (Amber)
-      const grad3 = bgCtx.createRadialGradient(w * 0.75, h * 0.65, 0, w * 0.75, h * 0.65, Math.max(w, h) * 0.35);
-      grad3.addColorStop(0, "rgba(245, 158, 11, 0.08)");
-      grad3.addColorStop(1, "rgba(7, 7, 9, 0)");
-      bgCtx.fillStyle = grad3;
+      // Section 3: Stack & Circuit Aura (Cyan & Emerald)
+      const gradStack = bgCtx.createRadialGradient(w * 0.15, h * 0.52, 0, w * 0.15, h * 0.52, Math.max(w, h) * 0.4);
+      gradStack.addColorStop(0, "rgba(6, 182, 212, 0.14)");
+      gradStack.addColorStop(0.5, "rgba(16, 185, 129, 0.06)");
+      gradStack.addColorStop(1, "rgba(7, 8, 13, 0)");
+      bgCtx.fillStyle = gradStack;
       bgCtx.fillRect(0, 0, w, h);
 
-      // Subtle tech grid lines
-      bgCtx.strokeStyle = "rgba(255, 255, 255, 0.025)";
+      // Section 4: Experience & Leadership Aura (Sapphire Blue & Teal)
+      const gradExp = bgCtx.createRadialGradient(w * 0.85, h * 0.70, 0, w * 0.85, h * 0.70, Math.max(w, h) * 0.38);
+      gradExp.addColorStop(0, "rgba(37, 99, 235, 0.14)");
+      gradExp.addColorStop(0.5, "rgba(20, 184, 166, 0.06)");
+      gradExp.addColorStop(1, "rgba(7, 8, 13, 0)");
+      bgCtx.fillStyle = gradExp;
+      bgCtx.fillRect(0, 0, w, h);
+
+      // Section 5: About & Principles Aura (Warm Amber & Sapphire)
+      const gradAbout = bgCtx.createRadialGradient(w * 0.25, h * 0.85, 0, w * 0.25, h * 0.85, Math.max(w, h) * 0.35);
+      gradAbout.addColorStop(0, "rgba(245, 158, 11, 0.10)");
+      gradAbout.addColorStop(0.5, "rgba(59, 130, 246, 0.05)");
+      gradAbout.addColorStop(1, "rgba(7, 8, 13, 0)");
+      bgCtx.fillStyle = gradAbout;
+      bgCtx.fillRect(0, 0, w, h);
+
+      // Section 6: Contact & Terminal Aura (Cyan & Indigo)
+      const gradContact = bgCtx.createRadialGradient(w * 0.7, h * 0.95, 0, w * 0.7, h * 0.95, Math.max(w, h) * 0.35);
+      gradContact.addColorStop(0, "rgba(6, 182, 212, 0.14)");
+      gradContact.addColorStop(0.6, "rgba(99, 102, 241, 0.06)");
+      gradContact.addColorStop(1, "rgba(7, 8, 13, 0)");
+      bgCtx.fillStyle = gradContact;
+      bgCtx.fillRect(0, 0, w, h);
+
+      // Central Content Reading Spine - Intensified deep obsidian for maximum text clarity & focus
+      const gradCenter = bgCtx.createLinearGradient(0, 0, w, 0);
+      gradCenter.addColorStop(0, "rgba(4, 5, 8, 0.15)");
+      gradCenter.addColorStop(0.18, "rgba(4, 5, 8, 0.60)");
+      gradCenter.addColorStop(0.35, "rgba(2, 3, 6, 0.88)");
+      gradCenter.addColorStop(0.5, "rgba(2, 3, 6, 0.94)");
+      gradCenter.addColorStop(0.65, "rgba(2, 3, 6, 0.88)");
+      gradCenter.addColorStop(0.82, "rgba(4, 5, 8, 0.60)");
+      gradCenter.addColorStop(1, "rgba(4, 5, 8, 0.15)");
+      bgCtx.fillStyle = gradCenter;
+      bgCtx.fillRect(0, 0, w, h);
+
+      // Subtle Tech Grid Lines
+      bgCtx.strokeStyle = "rgba(255, 255, 255, 0.024)";
       bgCtx.lineWidth = 1;
-      const gridSize = 44 * dpr;
+      const gridSize = 46 * dpr;
       for (let x = 0; x <= w; x += gridSize) {
         bgCtx.beginPath();
         bgCtx.moveTo(x, 0);
@@ -350,7 +387,13 @@ export function WaterBackground() {
         bgCtx.stroke();
       }
 
-
+      // Micro intersection dots for high-tech precision
+      bgCtx.fillStyle = "rgba(255, 255, 255, 0.07)";
+      for (let x = 0; x <= w; x += gridSize * 2) {
+        for (let y = 0; y <= h; y += gridSize * 2) {
+          bgCtx.fillRect(x - 1, y - 1, 2, 2);
+        }
+      }
 
       // Upload to WebGL
       gl.bindTexture(gl.TEXTURE_2D, bgTexture);

@@ -1,193 +1,959 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Cpu, Sparkles, Trophy, Zap } from "lucide-react";
-import type { PortfolioContent } from "@/types/content";
+import { useState, useCallback, useEffect, useId } from "react";
+import { createPortal } from "react-dom";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  X,
+  Github,
+  Play,
+  Cpu,
+  Sparkles,
+} from "lucide-react";
+import type { PortfolioContent, WorkProject, FeaturedProject } from "@/types/content";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Badge } from "@/components/ui/Badge";
-import { Reveal } from "@/components/animations/Reveal";
-import { TiltCard } from "@/components/ui/TiltCard";
-import { playTick } from "@/lib/audio";
+import { playTick, playHover, playSuccess, playInference } from "@/lib/audio";
 
-export function Work({ content }: { content: PortfolioContent }) {
-  const { work } = content;
-  const reduce = useReducedMotion();
-  const featured = work.featured;
+/* ==========================================================================
+   Unified Project Interface
+   ========================================================================== */
+interface UnifiedProject {
+  id: string;
+  category: "backend" | "data" | "mobile";
+  categoryLabel: string;
+  badge: string;
+  title: string;
+  repoName: string;
+  githubUrl: string;
+  description: string;
+  metrics: { label: string; value: string; highlight?: boolean }[];
+  tags: string[];
+  year: string;
+  image?: string;
+  isFlagship?: boolean;
+  links?: { label: string; href: string; external?: boolean }[];
+}
+
+/* ==========================================================================
+   High-Fidelity Product UI Mockups (Clean, Dark Slate & Obsidian)
+   ========================================================================== */
+
+/** 0. ChurnInsight Flagship Mockup */
+function ChurnInsightMockup({
+  latency,
+  isInferencing,
+  onRunInference,
+}: {
+  latency: string;
+  isInferencing: boolean;
+  onRunInference: (e: React.MouseEvent) => void;
+}) {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-blue-300 font-bold flex items-center gap-2.5 text-sm">
+          <Cpu className="h-4 w-4 text-blue-400" />
+          CHURNINSIGHT · EMBEDDED ONNX JVM ENGINE
+        </span>
+        <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-bold">
+          Spring Boot 3.4
+        </span>
+      </div>
+
+      <div className="my-auto grid grid-cols-1 sm:grid-cols-2 gap-4 py-3">
+        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5 space-y-1.5">
+          <span className="text-xs text-zinc-500 block uppercase font-semibold">P99 In-Memory Latency:</span>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tabular-nums">{latency}</span>
+            <span className="text-xs text-zinc-400">(Zero Network RPC)</span>
+          </div>
+          <span className="text-xs text-zinc-400 block pt-1">Legacy RPC: 2,000ms ➔ 100x speedup</span>
+        </div>
+
+        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5 space-y-1.5">
+          <span className="text-xs text-zinc-500 block uppercase font-semibold">Calidad del Modelo</span>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl sm:text-3xl font-extrabold text-blue-300 tabular-nums">96.0% Recall</span>
+          </div>
+          <span className="text-xs text-zinc-400 block pt-1">Random Forest · 99% Reducción de Costos</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between pt-3 border-t border-white/[0.08] text-xs">
+        <span className="text-zinc-500">Java 17 · ONNX Runtime · Docker</span>
+        <button
+          type="button"
+          onClick={onRunInference}
+          disabled={isInferencing}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-all shadow-md cursor-pointer disabled:opacity-50"
+        >
+          <Play className="h-3.5 w-3.5 fill-white" />
+          <span>{isInferencing ? "Calculando..." : "Simular Inferencia ONNX"}</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** 1. VisionTransit AI */
+function VisionTransitMockup() {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-white font-bold flex items-center gap-2 text-sm">
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+          CAM-04 · AREQUIPA TRANSIT SURVEILLANCE
+        </span>
+        <span className="px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-zinc-200 text-xs font-bold">
+          28.7 FPS (CPU)
+        </span>
+      </div>
+
+      <div className="my-auto grid grid-cols-2 gap-4 py-3">
+        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5">
+          <span className="text-xs text-zinc-500 block uppercase font-semibold">Detección YOLO11</span>
+          <span className="text-emerald-400 font-bold text-base sm:text-lg mt-1 block">BUS URBANO [98.4%]</span>
+          <span className="text-xs text-zinc-400 mt-0.5 block">Tracking Kalman ID #104</span>
+        </div>
+        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5">
+          <span className="text-xs text-zinc-500 block uppercase font-semibold">Sincronización</span>
+          <span className="text-cyan-300 font-bold text-base sm:text-lg mt-1 block">WebSocket 60 msg/s</span>
+          <span className="text-xs text-zinc-400 mt-0.5 block">Latencia P99: 14.2 ms</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
+        <span>FastAPI + YOLO11 ONNX</span>
+        <span className="text-zinc-300 font-semibold">6 Capas Desacopladas</span>
+      </div>
+    </div>
+  );
+}
+
+/** 2. NEXIA 2026 */
+function NexiaMockup() {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-amber-300 font-bold text-sm">1ER PUESTO IBM HACKATHON · BUILD WITH AI</span>
+        <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+          Sprint &lt; 48 Horas
+        </span>
+      </div>
+
+      <div className="my-auto grid grid-cols-3 gap-3 text-center py-3">
+        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4">
+          <div className="text-white font-bold text-sm">React 19</div>
+          <div className="text-xs text-zinc-400 mt-1">Tailwind v4 UI</div>
+        </div>
+        <div className="rounded-2xl bg-amber-500/10 border border-amber-500/30 p-4">
+          <div className="text-amber-300 font-bold text-sm">NestJS API</div>
+          <div className="text-xs text-amber-200/80 mt-1">Auth Guards</div>
+        </div>
+        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4">
+          <div className="text-cyan-300 font-bold text-sm">Generative AI</div>
+          <div className="text-xs text-zinc-400 mt-1">RAG Engine</div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
+        <span>Jaku UNSA &amp; GDG Arequipa</span>
+        <span className="text-amber-300 font-semibold">Producción Desplegada</span>
+      </div>
+    </div>
+  );
+}
+
+/** 3. AI Life OS Mobile */
+function AiLifeOsMockup() {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-cyan-300 font-bold text-sm">ANDROID 15 · KOTLIN &amp; COMPOSE</span>
+        <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
+          Gemini Pro AI
+        </span>
+      </div>
+
+      <div className="my-auto rounded-2xl bg-white/[0.03] border border-white/[0.08] p-5 space-y-2">
+        <div className="flex items-center justify-between text-xs sm:text-sm">
+          <span className="text-white font-bold">Síntesis Semántica en Dispositivo</span>
+          <span className="text-emerald-400 text-xs font-bold">Room SQLite Sync</span>
+        </div>
+        <p className="text-xs sm:text-sm text-zinc-300 italic leading-relaxed">
+          &ldquo;Clasificación contextual de tareas y generación de resúmenes ejecutivos offline.&rdquo;
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
+        <span>Clean Architecture + MVI</span>
+        <span className="text-cyan-300 font-semibold">Offline-First</span>
+      </div>
+    </div>
+  );
+}
+
+/** 4. AI Workflow Recorder */
+function WorkflowRecorderMockup() {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-emerald-300 font-bold text-sm">TELEMETRY &amp; WORKFLOW RECORDER</span>
+        <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
+          Dockerized
+        </span>
+      </div>
+
+      <div className="my-auto rounded-2xl bg-black/50 border border-white/[0.08] p-4 sm:p-5 space-y-2 text-xs">
+        <div className="text-emerald-400 flex items-center gap-2 font-semibold">
+          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+          <span>[DOM-EVENT] Captura de mutaciones web en tiempo real</span>
+        </div>
+        <div className="text-zinc-300">
+          <span>[FASTAPI] Ingesta asíncrona completada (200 OK · 8ms)</span>
+        </div>
+        <div className="text-cyan-300">
+          <span>[DOCKER] Worker pool saludable (4 réplicas activas)</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
+        <span>Chrome Extension + Python 3.12</span>
+        <span className="text-emerald-300 font-semibold">Ejecución Determinista</span>
+      </div>
+    </div>
+  );
+}
+
+/** 5. Telecom Churn ML Pipeline */
+function TelecomChurnMockup() {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-blue-300 font-bold text-sm">MACHINE LEARNING CLASSIFICATION PIPELINE</span>
+        <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-bold">
+          ROC-AUC 0.94
+        </span>
+      </div>
+
+      <div className="my-auto space-y-3 py-2">
+        <div>
+          <div className="flex justify-between text-xs text-zinc-300 mb-1.5 font-semibold">
+            <span>TotalCharges (Feature Importance)</span>
+            <span className="text-blue-400 font-bold">38%</span>
+          </div>
+          <div className="h-2.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+            <div className="h-full bg-blue-500 rounded-full w-[38%]" />
+          </div>
+        </div>
+        <div>
+          <div className="flex justify-between text-xs text-zinc-300 mb-1.5 font-semibold">
+            <span>ContractType (Feature Importance)</span>
+            <span className="text-cyan-300 font-bold">29%</span>
+          </div>
+          <div className="h-2.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+            <div className="h-full bg-cyan-400 rounded-full w-[29%]" />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
+        <span>Scikit-Learn · Pandas · Seaborn</span>
+        <span className="text-blue-300 font-semibold">Recall: 94%</span>
+      </div>
+    </div>
+  );
+}
+
+/** 6. NovaChef Platform */
+function NovaChefMockup() {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-purple-300 font-bold text-sm">PYTEST AUTOMATED QA TEST RUNNER</span>
+        <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+          48 Tests Passed
+        </span>
+      </div>
+
+      <div className="my-auto rounded-2xl bg-black/50 border border-white/[0.08] p-4 sm:p-5 space-y-2 text-xs">
+        <div className="flex items-center justify-between text-zinc-200">
+          <span>✓ test_jwt_auth_security_roles.py</span>
+          <span className="text-emerald-400 font-bold">PASSED</span>
+        </div>
+        <div className="flex items-center justify-between text-zinc-200">
+          <span>✓ test_order_limits_bva_concurrency.py</span>
+          <span className="text-emerald-400 font-bold">PASSED</span>
+        </div>
+        <div className="flex items-center justify-between text-zinc-200">
+          <span>✓ test_sql_injection_defense.py</span>
+          <span className="text-emerald-400 font-bold">PASSED</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
+        <span>FastAPI + PostgreSQL</span>
+        <span className="text-purple-300 font-semibold">100% Cobertura de Seguridad</span>
+      </div>
+    </div>
+  );
+}
+
+/** 7. Qt Water Resources System */
+function QtWaterMockup() {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-amber-300 font-bold text-sm">DESKTOP GIS &amp; HIDROINFORMÁTICA</span>
+        <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+          C++17 / Qt GUI
+        </span>
+      </div>
+
+      <div className="my-auto rounded-2xl bg-white/[0.03] border border-white/[0.08] p-5 text-center space-y-2">
+        <div className="text-white font-bold text-sm">
+          Modelado Espacial de Cuencas &amp; Presas Hidráulicas
+        </div>
+        <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto">
+          Cálculo numérico de caudales volumétricos y topología hidrográfica en tiempo real.
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
+        <span>C++17 Desktop Nativo</span>
+        <span className="text-amber-300 font-semibold">Cero Overhead de Navegador</span>
+      </div>
+    </div>
+  );
+}
+
+/** 8. Gestor Tareas Pro */
+function GestorTareasMockup() {
+  return (
+    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
+        <span className="text-cyan-300 font-bold text-sm">CLEAN ARCHITECTURE ANDROID</span>
+        <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
+          Room SQLite
+        </span>
+      </div>
+
+      <div className="my-auto rounded-2xl bg-white/[0.03] border border-white/[0.08] p-5 text-center space-y-2.5">
+        <div className="text-zinc-200 text-xs sm:text-sm font-semibold">
+          Domain Layer ──&gt; Data Layer ──&gt; Presentation (MVI)
+        </div>
+        <div className="text-amber-300 font-bold text-sm">
+          🔥 28 Días de Racha Inmutable Activa
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
+        <span>Kotlin + Jetpack Compose</span>
+        <span className="text-cyan-300 font-semibold">Offline-First Local DB</span>
+      </div>
+    </div>
+  );
+}
+
+/** Dispatcher to render the appropriate project visual */
+function UnifiedProjectVisualCard({
+  project,
+  latency,
+  isInferencing,
+  onRunInference,
+}: {
+  project: UnifiedProject;
+  latency: string;
+  isInferencing: boolean;
+  onRunInference: (e: React.MouseEvent) => void;
+}) {
+  if (project.image) {
+    return (
+      <div className="relative h-full w-full bg-black">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover object-top"
+          sizes="(max-width: 1024px) 100vw, 860px"
+        />
+      </div>
+    );
+  }
+
+  if (project.isFlagship) {
+    return (
+      <ChurnInsightMockup
+        latency={latency}
+        isInferencing={isInferencing}
+        onRunInference={onRunInference}
+      />
+    );
+  }
+
+  switch (project.repoName) {
+    case "VisionTransit_AI":
+      return <VisionTransitMockup />;
+    case "wewinti-fullstack-app":
+      return <NexiaMockup />;
+    case "AI_Life_OS_mobile":
+      return <AiLifeOsMockup />;
+    case "ai-workflow-recorder":
+      return <WorkflowRecorderMockup />;
+    case "telecom-churn-ml-pipeline":
+      return <TelecomChurnMockup />;
+    case "novachef-restaurant-platform":
+      return <NovaChefMockup />;
+    case "qt-water-resources-system":
+      return <QtWaterMockup />;
+    case "GestorTareasPro":
+    default:
+      return <GestorTareasMockup />;
+  }
+}
+
+/* ==========================================================================
+   Master Expanded 3D Coverflow Perspective Gallery
+   ========================================================================== */
+function UnifiedCoverflowShowcase({
+  projects,
+  onSelectProject,
+  latency,
+  isInferencing,
+  onRunInference,
+}: {
+  projects: UnifiedProject[];
+  onSelectProject: (project: UnifiedProject) => void;
+  latency: string;
+  isInferencing: boolean;
+  onRunInference: (e: React.MouseEvent) => void;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!projects || projects.length === 0) return null;
+  const active = projects[activeIndex] ?? projects[0]!;
+
+  const prev = () => {
+    playTick();
+    setActiveIndex((curr) => (curr === 0 ? projects.length - 1 : curr - 1));
+  };
+
+  const next = () => {
+    playTick();
+    setActiveIndex((curr) => (curr === projects.length - 1 ? 0 : curr + 1));
+  };
 
   return (
-    <div aria-label="Work and Projects" className="w-full">
-      <SectionHeader
-        kicker={work.kicker}
-        heading={work.heading}
-        description={work.description}
-      />
-
-      {/* Featured Flagship Case Study — ChurnInsight Mission Cockpit */}
-      <Reveal>
-        <TiltCard
-          glowColor="rgba(59, 130, 246, 0.22)"
-          maxTilt={4}
-          className="rounded-3xl border border-blue-500/30 bg-gradient-to-b from-[#13141f]/95 via-[#0e0f17]/95 to-[#09090e]/98 p-6 sm:p-9 lg:p-11 mb-14 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.8),0_0_40px_-5px_rgba(59,130,246,0.18)]"
+    <div className="relative py-4 w-full">
+      {/* 3D Cinema-Scale Perspective Stage with Smooth Edge Fade Mask */}
+      <div
+        style={{
+          maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+        }}
+        className="relative mx-auto h-[340px] sm:h-[440px] md:h-[520px] lg:h-[560px] w-full overflow-hidden flex items-center justify-center"
+      >
+        {/* Navigation Left Arrow */}
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Proyecto anterior"
+          className="absolute left-4 sm:left-10 lg:left-20 z-40 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-black/80 border border-white/20 text-white backdrop-blur-xl hover:bg-white/20 transition-all shadow-2xl active:scale-95 cursor-pointer"
         >
-          {/* Radiant Corner Atmosphere */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full opacity-25 blur-3xl"
-            style={{ background: "radial-gradient(circle, #3b82f6, #06b6d4)" }}
-          />
+          <ChevronLeft className="h-7 w-7 sm:h-8 sm:w-8" />
+        </button>
 
-          {/* Top Label & Flag */}
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-xs font-mono font-bold text-[var(--color-accent)]">
-                <Cpu className="h-3.5 w-3.5" />
-                {work.featuredLabel}
-              </span>
-              <span className="text-[var(--color-faint)]">·</span>
-              <span className="text-xs font-mono text-[var(--color-muted)]">{featured.category}</span>
-            </div>
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-amber-600/20 border border-amber-500/40 text-xs font-mono font-bold text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-              <Sparkles className="h-3 w-3" />
-              {featured.flag}
-            </span>
-          </div>
+        {/* Navigation Right Arrow */}
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Proyecto siguiente"
+          className="absolute right-4 sm:right-10 lg:right-20 z-40 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-black/80 border border-white/20 text-white backdrop-blur-xl hover:bg-white/20 transition-all shadow-2xl active:scale-95 cursor-pointer"
+        >
+          <ChevronRight className="h-7 w-7 sm:h-8 sm:w-8" />
+        </button>
 
-          {/* Main Title & Value Proposition */}
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[var(--color-ink)] mb-4">
-            {featured.title}
-          </h3>
+        {/* 3D Coverflow Cards Stack */}
+        <div className="relative h-full w-full flex items-center justify-center">
+          {projects.map((project, index) => {
+            const offset = index - activeIndex;
+            const isCenter = offset === 0;
 
-          <p className="text-base sm:text-lg text-[var(--color-muted)] leading-relaxed max-w-3xl mb-8">
-            {featured.summary}
-          </p>
+            let translateX = "0%";
+            let scale = 1;
+            let zIndex = 30;
+            let opacity = 1;
+            let rotateY = 0;
+            let pointerEvents: "auto" | "none" = "auto";
 
-          {/* Metrics Grid: 4 High-Impact Visual Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-8">
-            {featured.metrics.map((metric) => (
-              <div
-                key={metric.label}
-                className="relative overflow-hidden rounded-2xl border border-[var(--color-border-strong)] bg-[#0d0d14]/90 p-5 shadow-inner transition-transform hover:scale-[1.02]"
+            if (offset === 0) {
+              translateX = "0%";
+              scale = 1;
+              zIndex = 30;
+              opacity = 1;
+              rotateY = 0;
+            } else if (offset === -1 || (activeIndex === 0 && index === projects.length - 1)) {
+              translateX = "-50%";
+              scale = 0.82;
+              zIndex = 20;
+              opacity = 0.55;
+              rotateY = 16;
+            } else if (offset === 1 || (activeIndex === projects.length - 1 && index === 0)) {
+              translateX = "50%";
+              scale = 0.82;
+              zIndex = 20;
+              opacity = 0.55;
+              rotateY = -16;
+            } else if (offset === -2) {
+              translateX = "-84%";
+              scale = 0.68;
+              zIndex = 10;
+              opacity = 0.25;
+              rotateY = 26;
+            } else if (offset === 2) {
+              translateX = "84%";
+              scale = 0.68;
+              zIndex = 10;
+              opacity = 0.25;
+              rotateY = -26;
+            } else {
+              translateX = offset < 0 ? "-120%" : "120%";
+              scale = 0.5;
+              zIndex = 0;
+              opacity = 0;
+              pointerEvents = "none";
+            }
+
+            return (
+              <motion.div
+                key={project.id}
+                animate={{
+                  x: translateX,
+                  scale,
+                  opacity,
+                  rotateY,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 280,
+                  damping: 28,
+                }}
+                style={{
+                  zIndex,
+                  perspective: 1200,
+                  pointerEvents,
+                }}
+                onClick={() => {
+                  if (isCenter) {
+                    onSelectProject(project);
+                  } else {
+                    playTick();
+                    setActiveIndex(index);
+                  }
+                }}
+                className="absolute top-1/2 -translate-y-1/2 w-[320px] sm:w-[580px] md:w-[740px] lg:w-[840px] aspect-[16/10] cursor-pointer"
               >
                 <div
-                  className={`text-3xl sm:text-4xl font-extrabold tracking-tight tabular-nums ${
-                    metric.highlight
-                      ? "text-accent-gradient drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]"
-                      : "text-[var(--color-ink)]"
+                  className={`relative h-full w-full rounded-3xl overflow-hidden border shadow-2xl transition-all duration-300 ${
+                    isCenter
+                      ? "border-white/30 shadow-[0_25px_70px_rgba(0,0,0,0.9)]"
+                      : "border-white/10"
                   }`}
                 >
-                  {metric.value}
+                  <UnifiedProjectVisualCard
+                    project={project}
+                    latency={latency}
+                    isInferencing={isInferencing}
+                    onRunInference={onRunInference}
+                  />
+
+                  {/* Play / Inspect Overlay */}
+                  {isCenter && (
+                    <div className="absolute inset-0 pointer-events-none bg-black/20 hover:bg-black/40 transition-colors flex items-center justify-center group">
+                      <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white shadow-2xl group-hover:scale-110 transition-transform">
+                        <Play className="h-7 w-7 sm:h-9 sm:w-9 fill-white ml-1" />
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className="mono-label mt-2 text-[10px] text-[var(--color-muted)] font-semibold">
-                  {metric.label}
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Editorial Content Below Carousel */}
+      <div className="mt-10 text-center max-w-4xl mx-auto px-4">
+        <motion.div
+          key={active.id}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="space-y-4"
+        >
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-xs font-mono font-bold text-zinc-300">
+            {active.isFlagship && <Sparkles className="h-3.5 w-3.5 text-amber-400" />}
+            <span>{active.badge}</span>
+            <span className="text-zinc-600">·</span>
+            <span className="text-zinc-400">{active.categoryLabel}</span>
+          </div>
+
+          {/* Centered Large Title */}
+          <h4 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-snug">
+            {active.title}
+          </h4>
+
+          {/* Centered Description */}
+          <p className="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+            {active.description}
+          </p>
+
+          {/* Metric Chips */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 max-w-3xl mx-auto">
+            {active.metrics.map((m) => (
+              <div
+                key={m.label}
+                className="rounded-2xl border border-white/[0.08] bg-[#0c0e18] p-4 text-center"
+              >
+                <div
+                  className={`text-2xl sm:text-3xl font-extrabold tabular-nums ${
+                    m.highlight ? "text-blue-400" : "text-white"
+                  }`}
+                >
+                  {m.value}
+                </div>
+                <div className="mono-label mt-1 text-[11px] text-zinc-400 font-semibold">
+                  {m.label}
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Speedup Architecture Callout */}
-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-4 sm:p-5 my-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <Zap className="h-4 w-4 text-emerald-400" />
-                <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                  Optimización de Arquitectura · Baja Latencia
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-[var(--color-muted)]">
-                Inferencia ejecutada en el mismo proceso JVM (Spring Boot) redujo la latencia de <strong className="text-red-400">2000 ms</strong> a <strong className="text-emerald-400">20 ms</strong> sin costo de llamadas externas.
-              </p>
-            </div>
-            <div className="shrink-0 px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-xs font-mono font-bold text-emerald-300">
-              P99 &lt; 20 ms
-            </div>
+          {/* Action Link / Button */}
+          <div className="pt-4">
+            <button
+              type="button"
+              onClick={() => onSelectProject(active)}
+              title="Inspeccionar detalles técnicos"
+              className="inline-flex items-center gap-2 text-base sm:text-lg font-bold text-white hover:text-blue-400 transition-colors underline underline-offset-8 cursor-pointer py-2"
+            >
+              <span>Ver Proyecto Completo &amp; Arquitectura</span>
+              <span className="text-xl">→</span>
+            </button>
           </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
 
-          {/* Tags & Action Links */}
-          <div className="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-[var(--color-border)]">
-            <div className="flex flex-wrap gap-2">
-              {featured.tags.map((tag) => (
-                <Badge key={tag} variant="accent">{tag}</Badge>
-              ))}
-            </div>
+/* ==========================================================================
+   Main Work Section Component
+   ========================================================================== */
+export function Work({ content }: { content: PortfolioContent }) {
+  const { work } = content;
+  const activePillId = useId();
 
-            <div className="flex flex-wrap gap-3">
-              {featured.links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noopener noreferrer" : undefined}
-                  onClick={() => playTick()}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border-strong)] text-xs font-mono font-bold text-[var(--color-ink)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-all shadow-sm"
+  const [activeCategory, setActiveCategory] = useState<"all" | "backend" | "data" | "mobile">(
+    "all"
+  );
+  const [inspectProject, setInspectProject] = useState<UnifiedProject | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [isInferencing, setIsInferencing] = useState(false);
+  const [latency, setLatency] = useState("18.4 ms");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Modal Scroll Lock & Escape Key Handler
+  useEffect(() => {
+    if (inspectProject) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setInspectProject(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [inspectProject]);
+
+  const handleRunInference = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    playInference();
+    setIsInferencing(true);
+    const randomizedLatency = (14 + Math.random() * 5).toFixed(1);
+
+    setTimeout(() => {
+      setLatency(`${randomizedLatency} ms`);
+      setIsInferencing(false);
+      playSuccess();
+    }, 400);
+  };
+
+  // Build unified project list (ChurnInsight + 8 Projects)
+  const allProjects: UnifiedProject[] = [
+    {
+      id: "churninsight-flagship",
+      category: "backend",
+      categoryLabel: "Backend & ML",
+      badge: "Proyecto Insignia",
+      title: work.featured.title,
+      repoName: "ChurnInsight-Backend",
+      githubUrl: "https://github.com/OwerLopez/ChurnInsight-Backend",
+      description: work.featured.summary,
+      metrics: work.featured.metrics,
+      tags: work.featured.tags,
+      year: "2025",
+      isFlagship: true,
+      links: work.featured.links,
+    },
+    ...work.projects.map((p) => ({
+      id: p.repoName,
+      category: p.category,
+      categoryLabel: p.categoryLabel,
+      badge: p.badge,
+      title: p.title,
+      repoName: p.repoName,
+      githubUrl: p.githubUrl,
+      description: p.description,
+      metrics: p.metrics || [],
+      tags: p.tags,
+      year: p.year,
+      image: p.image,
+      isFlagship: false,
+    })),
+  ];
+
+  const filterKeys: ("all" | "backend" | "data" | "mobile")[] = [
+    "all",
+    "backend",
+    "data",
+    "mobile",
+  ];
+
+  const filteredProjects =
+    activeCategory === "all"
+      ? allProjects
+      : allProjects.filter((p) => p.category === activeCategory);
+
+  const handleFilterChange = (key: "all" | "backend" | "data" | "mobile") => {
+    playTick();
+    setActiveCategory(key);
+  };
+
+  const handleOpenModal = useCallback((project: UnifiedProject) => {
+    playSuccess();
+    setInspectProject(project);
+  }, []);
+
+  return (
+    <div aria-label="Work and Projects" className="w-full">
+      {/* Top Header & Filter Controls (Contained for Optimal Legibility) */}
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
+        <SectionHeader kicker={work.kicker} heading={work.heading} description={work.description} />
+
+        {/* Category Filter Bar — Clean, Spaced, Capsule Pills */}
+        <div className="my-8 flex items-center justify-center">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 p-1.5 rounded-full bg-[#0a0c16] border border-white/[0.08] shadow-inner">
+            {filterKeys.map((key) => {
+              const isActive = activeCategory === key;
+              const label = work.filterLabels[key];
+              const count =
+                key === "all"
+                  ? allProjects.length
+                  : allProjects.filter((p) => p.category === key).length;
+
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => handleFilterChange(key)}
+                  onMouseEnter={() => playHover()}
+                  className={`relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-mono font-medium transition-all duration-200 flex items-center gap-2 cursor-pointer ${
+                    isActive ? "text-white" : "text-zinc-400 hover:text-zinc-200"
+                  }`}
                 >
-                  {link.label}
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
-              ))}
-            </div>
+                  {isActive && (
+                    <motion.div
+                      layoutId={activePillId}
+                      className="absolute inset-0 rounded-full bg-white/[0.12] border border-white/20 shadow-sm"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10 font-bold">{label}</span>
+                  <span
+                    className={`relative z-10 px-2 py-0.5 rounded-full text-[11px] font-bold ${
+                      isActive ? "bg-white/20 text-white" : "bg-white/[0.06] text-zinc-400"
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
-        </TiltCard>
-      </Reveal>
+        </div>
+      </div>
 
-      {/* Secondary Projects Grid (3 Clean Cards) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {work.log.map((project, idx) => {
-          const isGold = project.tone === "gold";
-          const isEmerald = project.tone === "emerald";
-          const glow = isGold
-            ? "rgba(245, 158, 11, 0.18)"
-            : isEmerald
-            ? "rgba(16, 185, 129, 0.18)"
-            : "rgba(59, 130, 246, 0.16)";
-          
-          return (
-            <Reveal key={project.title} delay={reduce ? 0 : idx * 60}>
-              <TiltCard
-                glowColor={glow}
-                maxTilt={6}
-                className="glass-card hover-lift p-6 h-full flex flex-col justify-between group rounded-2xl border border-[var(--color-border)]"
+      {/* Master 3D Coverflow Perspective Gallery — Edge-to-Edge Full Width */}
+      <div className="mb-8 w-full">
+        <UnifiedCoverflowShowcase
+          projects={filteredProjects}
+          onSelectProject={handleOpenModal}
+          latency={latency}
+          isInferencing={isInferencing}
+          onRunInference={handleRunInference}
+        />
+      </div>
+
+      {/* Deep-Dive Floating Glassmorphism Modal with Bulletproof Scroll Lock */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {inspectProject && (
+              <div
+                data-lenis-prevent="true"
+                className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 md:p-8"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    {isGold && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs font-mono text-amber-300 font-bold">
-                        <Trophy className="h-3.5 w-3.5" />
-                        1er Puesto
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setInspectProject(null)}
+                  data-lenis-prevent="true"
+                  className="fixed inset-0 bg-black/85 backdrop-blur-xl"
+                />
+
+                {/* Modal Window Container (Internal Scroll with full event isolation) */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 350 }}
+                  data-lenis-prevent="true"
+                  onWheel={(e) => e.stopPropagation()}
+                  onTouchMove={(e) => e.stopPropagation()}
+                  style={{
+                    overscrollBehavior: "contain",
+                    WebkitOverflowScrolling: "touch",
+                  }}
+                  className="relative z-10 w-full max-w-3xl max-h-[85vh] overflow-y-auto overscroll-contain rounded-3xl border border-white/[0.15] bg-[#0b0d18] p-6 sm:p-9 shadow-2xl text-white"
+                >
+                  {/* Modal Header */}
+                  <div className="sticky top-0 z-20 -mt-2 -mx-2 px-2 pt-2 flex items-center justify-between border-b border-white/[0.08] pb-4 mb-6 bg-[#0b0d18] backdrop-blur-md">
+                    <div className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full bg-red-500" />
+                      <span className="h-3 w-3 rounded-full bg-amber-500" />
+                      <span className="h-3 w-3 rounded-full bg-emerald-500" />
+                      <span className="ml-2 font-mono text-xs text-zinc-400">
+                        repo://{inspectProject.repoName}
                       </span>
-                    )}
-                    {isEmerald && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-300 font-bold">
-                        <Trophy className="h-3.5 w-3.5" />
-                        1er Puesto
-                      </span>
-                    )}
-                    {!isGold && !isEmerald && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-xs font-mono text-blue-300 font-bold">
-                        <Zap className="h-3.5 w-3.5" />
-                        Tiempo Real
-                      </span>
-                    )}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setInspectProject(null)}
+                      aria-label="Cerrar modal de inspección"
+                      className="rounded-full p-1.5 text-zinc-400 hover:bg-white/[0.08] hover:text-white transition-all cursor-pointer"
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
                   </div>
 
-                  <h4 className="text-xl font-bold text-[var(--color-ink)] mb-2.5 group-hover:text-[var(--color-accent)] transition-colors">
-                    {project.title}
-                  </h4>
+                  {/* Modal Body */}
+                  <div className="space-y-6">
+                    {/* Viewport Canvas */}
+                    <div className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 shadow-lg">
+                      <UnifiedProjectVisualCard
+                        project={inspectProject}
+                        latency={latency}
+                        isInferencing={isInferencing}
+                        onRunInference={handleRunInference}
+                      />
+                    </div>
 
-                  <p className="text-xs sm:text-sm text-[var(--color-muted)] leading-relaxed mb-6">
-                    {project.description}
-                  </p>
-                </div>
+                    <div>
+                      <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-bold mb-1">
+                        {inspectProject.badge} · {inspectProject.year}
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-white">{inspectProject.title}</h3>
+                      <p className="mt-3 text-sm sm:text-base text-zinc-300 leading-relaxed">
+                        {inspectProject.description}
+                      </p>
+                    </div>
 
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--color-border)]">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag}>{tag}</Badge>
-                  ))}
-                </div>
-              </TiltCard>
-            </Reveal>
-          );
-        })}
-      </div>
+                    {/* Metrics Grid */}
+                    {inspectProject.metrics && inspectProject.metrics.length > 0 && (
+                      <div className="grid grid-cols-2 gap-3">
+                        {inspectProject.metrics.map((m) => (
+                          <div
+                            key={m.label}
+                            className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08]"
+                          >
+                            <span className="text-xs font-mono text-zinc-500">{m.label}</span>
+                            <div className="text-base font-mono font-bold text-white mt-1">
+                              {m.value}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Tech Badges */}
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {inspectProject.tags.map((tag) => (
+                        <Badge key={tag} variant="accent">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    {/* Action Links */}
+                    <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between gap-4">
+                      <span className="font-mono text-xs text-zinc-500">
+                        Auditado y verificado en GitHub
+                      </span>
+
+                      <a
+                        href={inspectProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => playTick()}
+                        className="inline-flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 px-5 py-2.5 text-xs font-mono font-bold text-white transition-all shadow-[0_0_20px_rgba(59,130,246,0.5)] active:scale-95"
+                      >
+                        <Github className="h-4 w-4" />
+                        <span>Explorar Repositorio</span>
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </div>
   );
 }

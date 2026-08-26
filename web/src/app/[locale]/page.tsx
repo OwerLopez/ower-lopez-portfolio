@@ -18,11 +18,10 @@ import { Contact } from "@/components/sections/Contact";
  * PORTAFOLIO 2026 — Production Page
  *
  * High-Impact visual engineering experience:
- * - Dynamic cybernetic GridBackground with ambient gradient orbs
- * - Interactive 2-column Hero with live JVM+ONNX Runtime HUD
+ * - Dynamic interactive fluid simulation with multi-stop ambient lighting
  * - Mission-cockpit Flagship case study + datasheet matrix
  * - Visual Data & ML Lifecycle Circuit with glowing pipeline
- * - Radiant golden Trophy wall + Credly badges
+ * - Verified credentials & leadership timeline
  * - Clean terminal CTA + live system telemetry
  */
 export default async function HomePage({
@@ -39,29 +38,48 @@ export default async function HomePage({
     <>
       <SkipToContent />
       <StructuredData locale={locale} />
+      
+      {/* Full-Page Interactive Water & Multi-Aura Ambient Background */}
       <WaterBackground />
+      
       <Navbar content={content} />
 
       <main id="main-content" className="relative z-10 min-h-screen flex flex-col pt-16">
+        {/* Soft darkened central content spine for maximum reading contrast */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-6xl bg-gradient-to-r from-transparent via-[#05060b]/75 to-transparent -z-10"
+        />
+
         <Hero content={content} />
 
-        <section id="work" className="py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-[var(--color-border)]">
+        {/* Work / Projects with Full-Bleed 3D Showcase */}
+        <section id="work" className="relative py-20 sm:py-28 w-full border-t border-white/[0.08] overflow-hidden">
+          <div aria-hidden="true" className="pointer-events-none absolute -top-24 right-0 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl -z-10" />
           <Work content={content} />
         </section>
 
-        <section id="expertise" className="py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-[var(--color-border)]">
+        {/* Expertise / Stack with Subtle Cyan Circuit Aura */}
+        <section id="expertise" className="relative py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-white/[0.08]">
+          <div aria-hidden="true" className="pointer-events-none absolute top-10 -left-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl -z-10" />
           <Expertise content={content} />
         </section>
 
-        <section id="experience" className="py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-[var(--color-border)]">
+        {/* Experience / Timeline with Sapphire & Emerald Aura */}
+        <section id="experience" className="relative py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-white/[0.08]">
+          <div aria-hidden="true" className="pointer-events-none absolute top-20 right-10 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl -z-10" />
           <Experience content={content} />
         </section>
 
-        <section id="about" className="py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-[var(--color-border)]">
+        {/* About / Deep Dives with Warm Amber & Sapphire Aura */}
+        <section id="about" className="relative py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-white/[0.08]">
+          <div aria-hidden="true" className="pointer-events-none absolute top-10 left-10 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl -z-10" />
           <About content={content} />
         </section>
 
-        <section id="contact" className="py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-[var(--color-border)]">
+        {/* Contact with Cyber-Terminal Cyan Beam */}
+        <section id="contact" className="relative py-20 sm:py-28 px-5 sm:px-8 mx-auto max-w-5xl w-full border-t border-white/[0.08]">
+          <div aria-hidden="true" className="pointer-events-none absolute bottom-10 inset-x-0 mx-auto h-72 w-3/4 rounded-full bg-blue-500/10 blur-3xl -z-10" />
           <Contact content={content} />
         </section>
       </main>

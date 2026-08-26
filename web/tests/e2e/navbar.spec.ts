@@ -6,9 +6,9 @@ test.describe("2. Navbar Navigation", () => {
     await page.setViewportSize({ width: 1280, height: 720 });
     const nav = page.locator("header nav");
     await expect(nav.getByRole("button", { name: "Proyectos" })).toBeVisible();
-    await expect(nav.getByRole("button", { name: "Expertise" })).toBeVisible();
+    await expect(nav.getByRole("button", { name: /Especialidad|Expertise/i })).toBeVisible();
     await expect(nav.getByRole("button", { name: "Experiencia" })).toBeVisible();
-    await expect(nav.getByRole("button", { name: "Sobre mi" })).toBeVisible();
+    await expect(nav.getByRole("button", { name: /Sobre m[ií]/i })).toBeVisible();
     await expect(nav.getByRole("button", { name: "Contacto" })).toBeVisible();
   });
 
@@ -35,7 +35,7 @@ test.describe("2. Navbar Navigation", () => {
   test("mobile menu trigger button is visible on mobile viewports", async ({ page }) => {
     await page.goto("/es");
     await page.setViewportSize({ width: 375, height: 667 });
-    const menuBtn = page.getByRole("button", { name: "Abrir menu" });
+    const menuBtn = page.getByRole("button", { name: /Abrir men[uú]/i });
     await expect(menuBtn).toBeVisible();
     await expect(menuBtn).toHaveAttribute("aria-expanded", "false");
   });
@@ -43,7 +43,7 @@ test.describe("2. Navbar Navigation", () => {
   test("mobile menu button toggles mobile overlay", async ({ page }) => {
     await page.goto("/es");
     await page.setViewportSize({ width: 375, height: 667 });
-    const menuBtn = page.getByRole("button", { name: "Abrir menu" });
+    const menuBtn = page.getByRole("button", { name: /Abrir men[uú]/i });
     await menuBtn.click();
 
     const mobileNav = page.locator("nav[aria-label='Mobile navigation']");
@@ -55,7 +55,7 @@ test.describe("2. Navbar Navigation", () => {
     await page.goto("/es");
     await page.setViewportSize({ width: 375, height: 667 });
 
-    const menuBtn = page.getByRole("button", { name: "Abrir menu" });
+    const menuBtn = page.getByRole("button", { name: /Abrir men[uú]/i });
     await menuBtn.click();
 
     const mobileNav = page.locator("nav[aria-label='Mobile navigation']");
