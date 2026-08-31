@@ -66,6 +66,7 @@ export interface FeaturedProject {
   category: string;
   title: string;
   summary: string;
+  image?: string;
   tags: string[];
   note: string;
   metrics: { value: string; label: string; highlight?: boolean }[];
@@ -207,27 +208,34 @@ export interface CredentialsSection {
   verifyCta: string;
 }
 
-export interface Principle {
-  index: string;
-  title: string;
-  detail: string;
+export interface PersonalFacet {
+  label: string;
+  value: string;
+  detail?: string;
 }
 
-export interface PersonalMoment {
+export interface PersonalHobby {
   id: string;
-  title: string;
-  subtitle: string;
+  name: string;
   category: string;
-  image?: string;
   description: string;
   tag: string;
   accent: "flame" | "cyan" | "emerald" | "amber" | "violet";
 }
 
-export interface PersonalFacet {
-  label: string;
-  value: string;
-  detail?: string;
+export interface ArcadeContent {
+  kicker: string;
+  title: string;
+  tagline: string;
+  instructions: string;
+  startCta: string;
+  scoreLabel: string;
+  latencyLabel: string;
+  comboLabel: string;
+  highScoreLabel: string;
+  gcButton: string;
+  resetButton: string;
+  tipText: string;
 }
 
 export interface PhilosophySection {
@@ -236,14 +244,18 @@ export interface PhilosophySection {
   headingAccent: string;
   description: string;
   bioHeading: string;
+  bioRole: string;
+  bioLocation: string;
+  bioBadge: string;
   bioText: string[];
-  principlesLabel: string;
-  principles: Principle[];
-  momentsLabel: string;
-  momentsKicker: string;
-  moments: PersonalMoment[];
   facetsLabel: string;
   facets: PersonalFacet[];
+  hobbiesKicker: string;
+  hobbiesLabel: string;
+  hobbiesDescription: string;
+  hobbies: PersonalHobby[];
+  footerMotto: string;
+  footerTag: string;
 }
 
 export interface ContactChannel {

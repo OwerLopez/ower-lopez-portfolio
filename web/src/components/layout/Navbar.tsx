@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Globe, Menu, X, Sparkles, ArrowUpRight } from "lucide-react";
+import { Globe, Menu, X, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { sections } from "@/config/navigation";
 import type { PortfolioContent } from "@/types/content";
@@ -13,7 +14,7 @@ import { playTick, playHover } from "@/lib/audio";
 /**
  * Navbar — Floating Glass Dock.
  * - Nav pills with hover and active states
- * - Brand monogram with live status badge
+ * - Brand profile avatar with live status badge
  * - Bilingual toggle and contact CTA button
  */
 export function Navbar({ content }: { content: PortfolioContent }) {
@@ -98,8 +99,15 @@ export function Navbar({ content }: { content: PortfolioContent }) {
             className="group flex shrink-0 items-center gap-3"
           >
             <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-400 p-[1px] shadow-[0_0_18px_rgba(59,130,246,0.6)] group-hover:shadow-[0_0_25px_rgba(6,182,212,0.8)] transition-all group-hover:scale-105">
-              <div className="flex h-full w-full items-center justify-center rounded-[11px] bg-[#090a12] font-mono text-xs font-black text-white">
-                {siteConfig.initials}
+              <div className="relative h-full w-full overflow-hidden rounded-[11px] bg-[#090a12]">
+                <Image
+                  src="/assets/profile.jpg"
+                  alt={siteConfig.name}
+                  width={36}
+                  height={36}
+                  priority
+                  className="h-full w-full object-cover"
+                />
               </div>
             </div>
 
@@ -156,13 +164,12 @@ export function Navbar({ content }: { content: PortfolioContent }) {
               <span>{isEn ? "ES" : "EN"}</span>
             </Link>
 
-            {/* Glowing Shimmer CTA Button */}
+            {/* Glowing Shimmer CTA Button (Without icon as requested) */}
             <button
               type="button"
               onClick={() => scrollTo("contact")}
-              className="hidden sm:inline-flex h-9 items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 px-5 text-xs font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.7)] hover:scale-[1.04] active:scale-[0.98]"
+              className="hidden sm:inline-flex h-9 items-center rounded-full bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 px-5 text-xs font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.7)] hover:scale-[1.04] active:scale-[0.98]"
             >
-              <Sparkles className="h-3.5 w-3.5" />
               <span>{nav.cta}</span>
             </button>
 

@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Github, Linkedin, ShieldCheck, Terminal, MapPin, Sparkles } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, ShieldCheck, Terminal, MapPin } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { sections } from "@/config/navigation";
 import type { PortfolioContent } from "@/types/content";
@@ -47,8 +48,14 @@ export function Footer({ content }: { content: PortfolioContent }) {
               className="group inline-flex items-center gap-3"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-400 p-[1px] shadow-[0_0_15px_rgba(59,130,246,0.5)] group-hover:scale-105 transition-transform">
-                <div className="flex h-full w-full items-center justify-center rounded-[11px] bg-[#090a12] font-mono text-xs font-black text-white">
-                  {siteConfig.initials}
+                <div className="relative h-full w-full overflow-hidden rounded-[11px] bg-[#090a12]">
+                  <Image
+                    src="/assets/profile.jpg"
+                    alt={siteConfig.name}
+                    width={36}
+                    height={36}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
               </div>
               <span className="text-xl font-extrabold text-white group-hover:text-blue-400 transition-colors tracking-tight">

@@ -33,41 +33,41 @@ export function InteractiveRuntimeHUD() {
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex items-center gap-1 rounded-lg bg-[#07080d] p-1 border border-white/[0.08]">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-1 rounded-lg bg-[#07080d] p-1 border border-white/[0.08]">
           <button
             type="button"
             onClick={() => handleTabChange("telemetry")}
-            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-mono transition-all ${
+            className={`flex items-center gap-1.5 rounded-md px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-mono transition-all cursor-pointer ${
               activeTab === "telemetry"
                 ? "bg-blue-600/90 text-white shadow-sm font-semibold"
                 : "text-[var(--color-muted)] hover:text-white"
             }`}
           >
-            <Activity className="h-3 w-3 text-cyan-300" />
+            <Activity className="h-3 w-3 text-cyan-300 shrink-0" />
             <span>Telemetría</span>
           </button>
           <button
             type="button"
             onClick={() => handleTabChange("stack")}
-            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-mono transition-all ${
+            className={`flex items-center gap-1.5 rounded-md px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-mono transition-all cursor-pointer ${
               activeTab === "stack"
                 ? "bg-blue-600/90 text-white shadow-sm font-semibold"
                 : "text-[var(--color-muted)] hover:text-white"
             }`}
           >
-            <Server className="h-3 w-3 text-blue-300" />
+            <Server className="h-3 w-3 text-blue-300 shrink-0" />
             <span>Stack Core</span>
           </button>
           <button
             type="button"
             onClick={() => handleTabChange("architecture")}
-            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-mono transition-all ${
+            className={`flex items-center gap-1.5 rounded-md px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-mono transition-all cursor-pointer ${
               activeTab === "architecture"
                 ? "bg-blue-600/90 text-white shadow-sm font-semibold"
                 : "text-[var(--color-muted)] hover:text-white"
             }`}
           >
-            <Layers className="h-3 w-3 text-cyan-300" />
+            <Layers className="h-3 w-3 text-cyan-300 shrink-0" />
             <span>Arquitectura</span>
           </button>
         </div>
@@ -84,44 +84,44 @@ export function InteractiveRuntimeHUD() {
             transition={{ duration: 0.2 }}
             className="mt-4 space-y-3 font-mono text-xs"
           >
-            <div className="grid grid-cols-2 gap-2.5">
-              <div className="rounded-xl border border-blue-500/25 bg-blue-950/20 p-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="rounded-xl border border-blue-500/25 bg-blue-950/20 p-3 sm:p-3.5">
                 <div className="flex items-center justify-between text-[11px] text-blue-400 font-bold mb-1">
-                  <span className="flex items-center gap-1.5">
-                    <Zap className="h-3.5 w-3.5 text-cyan-400" />
+                  <span className="flex items-center gap-1.5 truncate">
+                    <Zap className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
                     Latencia Inferencia
                   </span>
-                  <span className="text-emerald-400 font-extrabold">20 ms</span>
+                  <span className="text-emerald-400 font-extrabold ml-2 shrink-0">20 ms</span>
                 </div>
-                <p className="text-[var(--color-ink)] font-semibold text-xs">P99 embebido (ONNX)</p>
-                <span className="text-[10px] text-[var(--color-muted)]">Sin overhead de red externa</span>
+                <p className="text-[var(--color-ink)] font-semibold text-xs truncate">P99 embebido (ONNX)</p>
+                <span className="text-[10px] text-[var(--color-muted)] block mt-0.5">Sin overhead de red externa</span>
               </div>
 
-              <div className="rounded-xl border border-emerald-500/25 bg-emerald-950/20 p-3">
+              <div className="rounded-xl border border-emerald-500/25 bg-emerald-950/20 p-3 sm:p-3.5">
                 <div className="flex items-center justify-between text-[11px] text-emerald-400 font-bold mb-1">
-                  <span className="flex items-center gap-1.5">
-                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+                  <span className="flex items-center gap-1.5 truncate">
+                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                     Model Recall
                   </span>
-                  <span className="text-emerald-300 font-extrabold">96.0%</span>
+                  <span className="text-emerald-300 font-extrabold ml-2 shrink-0">96.0%</span>
                 </div>
-                <p className="text-[var(--color-ink)] font-semibold text-xs">Random Forest Model</p>
-                <span className="text-[10px] text-[var(--color-muted)]">Optimizado para churn</span>
+                <p className="text-[var(--color-ink)] font-semibold text-xs truncate">Random Forest Model</p>
+                <span className="text-[10px] text-[var(--color-muted)] block mt-0.5">Optimizado para churn</span>
               </div>
             </div>
 
-            <div className="rounded-xl border border-white/[0.08] bg-[#07080d] p-3 space-y-2">
-              <div className="flex items-center justify-between text-[11px]">
+            <div className="rounded-xl border border-white/[0.08] bg-[#07080d] p-3 sm:p-3.5 space-y-2">
+              <div className="flex flex-wrap items-center justify-between gap-1 text-[11px]">
                 <span className="text-[var(--color-muted)] flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
                   JVM 17 + Spring Boot 3.4 Runtime
                 </span>
                 <span className="text-blue-400 font-bold">ACTIVO</span>
               </div>
-              <div className="flex items-center justify-between text-[11px]">
+              <div className="flex flex-wrap items-center justify-between gap-1 text-[11px]">
                 <span className="text-[var(--color-muted)] flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-blue-400" />
-                  PostgreSQL Connection Pool & Migraciones
+                  <span className="h-2 w-2 rounded-full bg-blue-400 shrink-0" />
+                  PostgreSQL Pool & Migraciones
                 </span>
                 <span className="text-emerald-400 font-bold">READY</span>
               </div>
@@ -140,40 +140,40 @@ export function InteractiveRuntimeHUD() {
             className="mt-4 space-y-3 font-mono text-xs"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              <div className="rounded-xl border border-white/[0.08] bg-[#0c0d15] p-3">
+              <div className="rounded-xl border border-white/[0.08] bg-[#0c0d15] p-3 sm:p-3.5">
                 <div className="flex items-center gap-1.5 text-[11px] text-blue-400 font-bold mb-1">
-                  <Server className="h-3.5 w-3.5" />
+                  <Server className="h-3.5 w-3.5 shrink-0" />
                   <span>Backend Core</span>
                 </div>
                 <p className="text-[var(--color-ink)] font-semibold text-xs">Java 17 · Spring Boot 3.4</p>
-                <span className="text-[10px] text-[var(--color-muted)]">NestJS · Node.js · REST APIs</span>
+                <span className="text-[10px] text-[var(--color-muted)] block mt-0.5">NestJS · Node.js · REST APIs</span>
               </div>
 
-              <div className="rounded-xl border border-white/[0.08] bg-[#0c0d15] p-3">
+              <div className="rounded-xl border border-white/[0.08] bg-[#0c0d15] p-3 sm:p-3.5">
                 <div className="flex items-center gap-1.5 text-[11px] text-cyan-400 font-bold mb-1">
-                  <Database className="h-3.5 w-3.5" />
+                  <Database className="h-3.5 w-3.5 shrink-0" />
                   <span>Datos & SQL</span>
                 </div>
                 <p className="text-[var(--color-ink)] font-semibold text-xs">PostgreSQL · MySQL · SQL Server</p>
-                <span className="text-[10px] text-[var(--color-muted)]">MongoDB · Python ETL</span>
+                <span className="text-[10px] text-[var(--color-muted)] block mt-0.5">MongoDB · Python ETL</span>
               </div>
 
-              <div className="rounded-xl border border-white/[0.08] bg-[#0c0d15] p-3">
+              <div className="rounded-xl border border-white/[0.08] bg-[#0c0d15] p-3 sm:p-3.5">
                 <div className="flex items-center gap-1.5 text-[11px] text-blue-400 font-bold mb-1">
-                  <Cloud className="h-3.5 w-3.5" />
+                  <Cloud className="h-3.5 w-3.5 shrink-0" />
                   <span>Cloud & DevOps</span>
                 </div>
                 <p className="text-[var(--color-ink)] font-semibold text-xs">Oracle Cloud (OCI) · AWS · GCP</p>
-                <span className="text-[10px] text-[var(--color-muted)]">Docker · Git CI/CD</span>
+                <span className="text-[10px] text-[var(--color-muted)] block mt-0.5">Docker · Git CI/CD</span>
               </div>
 
-              <div className="rounded-xl border border-white/[0.08] bg-[#0c0d15] p-3">
+              <div className="rounded-xl border border-white/[0.08] bg-[#0c0d15] p-3 sm:p-3.5">
                 <div className="flex items-center gap-1.5 text-[11px] text-cyan-400 font-bold mb-1">
-                  <Cpu className="h-3.5 w-3.5" />
+                  <Cpu className="h-3.5 w-3.5 shrink-0" />
                   <span>ML & Rendimiento</span>
                 </div>
                 <p className="text-[var(--color-ink)] font-semibold text-xs">ONNX Runtime · Fast In-Memory</p>
-                <span className="text-[10px] text-[var(--color-muted)]">Clean Architecture & Scrum</span>
+                <span className="text-[10px] text-[var(--color-muted)] block mt-0.5">Clean Architecture & Scrum</span>
               </div>
             </div>
           </motion.div>
@@ -189,19 +189,19 @@ export function InteractiveRuntimeHUD() {
             transition={{ duration: 0.2 }}
             className="mt-4 space-y-2.5 font-mono text-xs"
           >
-            <div className="rounded-xl border border-blue-500/20 bg-blue-950/20 p-3">
+            <div className="rounded-xl border border-blue-500/20 bg-blue-950/20 p-3 sm:p-3.5">
               <div className="flex items-center justify-between text-xs mb-1">
                 <span className="font-bold text-blue-300">Pipeline de Datos 5 Etapas</span>
                 <span className="text-[10px] text-emerald-400 font-bold">E1 → E5</span>
               </div>
-              <p className="text-[11px] text-[var(--color-muted)]">
+              <p className="text-[11px] text-[var(--color-muted)] leading-relaxed">
                 Ingesta estructurada, procesamiento ETL, validación de esquemas, inferencia embebida y capa de servicio REST documentada.
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/[0.08] bg-[#07080d] p-3 text-[11px] text-[var(--color-muted)] flex items-center justify-between">
+            <div className="rounded-xl border border-white/[0.08] bg-[#07080d] p-3 sm:p-3.5 text-[11px] text-[var(--color-muted)] flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
               <span className="flex items-center gap-2 text-emerald-400 font-bold">
-                <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shrink-0" />
                 Arquitectura Limpia & Tipado Estricto
               </span>
               <span className="text-[10px] text-[var(--color-faint)]">Arequipa, Perú · UTC-5</span>

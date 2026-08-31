@@ -110,6 +110,7 @@ export const es: PortfolioContent = {
       title: "ChurnInsight",
       summary:
         "Plataforma de predicción de abandono de clientes con inferencia de ML embebida directamente en el backend mediante ONNX Runtime, eliminando sobrecostos de red y dependencias de servicios externos.",
+      image: "/assets/projects/churn-insight.jpg",
       tags: ["Java 17", "Spring Boot 3.4", "ONNX Runtime", "Random Forest", "MySQL", "JWT"],
       note: "Al ejecutar el modelo ONNX en el mismo proceso de Spring Boot, la latencia P99 se redujo de 2,000 ms a 20 ms. Incluye autenticación JWT, migraciones SQL versionadas y explicabilidad de modelo (XAI) con un Recall del 96%.",
       metrics: [
@@ -135,6 +136,7 @@ export const es: PortfolioContent = {
         title: "VisionTransit AI",
         repoName: "VisionTransit_AI",
         githubUrl: "https://github.com/OwerLopez/VisionTransit_AI",
+        image: "/assets/projects/vision-transit.jpg",
         description:
           "Pipeline de visión computacional en tiempo real para monitoreo de transporte público. Arquitectura desacoplada en 6 capas con FastAPI, YOLO11 y WebSockets, sosteniendo 28.7 FPS sobre CPU.",
         metrics: [
@@ -153,6 +155,7 @@ export const es: PortfolioContent = {
         title: "NEXIA 2026 (WeWin TI)",
         repoName: "wewinti-fullstack-app",
         githubUrl: "https://github.com/OwerLopez/wewinti-fullstack-app",
+        image: "/assets/projects/nexia-ai.jpg",
         description:
           "1er puesto en el Hackathon 'Build with AI' (IBM, GDG Arequipa y JAKU UNSA). Plataforma de innovación educativa construida en <48h con arquitectura NestJS, capa de servicios protegidos y consumo de APIs de IA generativa.",
         metrics: [
@@ -171,6 +174,7 @@ export const es: PortfolioContent = {
         title: "AI Life OS Mobile",
         repoName: "AI_Life_OS_mobile",
         githubUrl: "https://github.com/OwerLopez/AI_Life_OS_mobile",
+        image: "/assets/projects/ai-life-os.jpg",
         description:
           "Aplicación nativa Android que centraliza notas y tareas personales integrando Google Gemini AI para resúmenes y clasificación inteligente. Construida bajo Clean Architecture, Jetpack Compose y sincronización Offline-First (Room + Firestore).",
         metrics: [
@@ -189,6 +193,7 @@ export const es: PortfolioContent = {
         title: "AI Workflow Recorder",
         repoName: "ai-workflow-recorder",
         githubUrl: "https://github.com/OwerLopez/ai-workflow-recorder",
+        image: "/assets/projects/workflow-recorder.jpg",
         description:
           "Plataforma end-to-end para telemetría silenciosa en navegadores y automatización determinista de flujos de trabajo. Compuesto por extensión de navegador, backend de captura en Python y panel de control contenerizado en Docker.",
         metrics: [
@@ -207,6 +212,7 @@ export const es: PortfolioContent = {
         title: "Telecom Churn ML Pipeline",
         repoName: "telecom-churn-ml-pipeline",
         githubUrl: "https://github.com/OwerLopez/telecom-churn-ml-pipeline",
+        image: "/assets/projects/telecom-churn.jpg",
         description:
           "Pipeline integral de análisis y machine learning para predicción de fuga de clientes: limpieza de datos estructurados, ingeniería de características (feature engineering), balanceo de clases y comparativa de modelos predictivos.",
         metrics: [
@@ -225,6 +231,7 @@ export const es: PortfolioContent = {
         title: "NovaChef Restaurant Platform",
         repoName: "novachef-restaurant-platform",
         githubUrl: "https://github.com/OwerLopez/novachef-restaurant-platform",
+        image: "/assets/projects/novachef.jpg",
         description:
           "Plataforma backend de gestión de restaurantes con control de roles, pedidos, pasarela de pagos e inventario. Incluye una suite exhaustiva de pruebas automatizadas con PyTest (unitarias, integración, seguridad y análisis de valores límite BVA/EP).",
         metrics: [
@@ -243,6 +250,7 @@ export const es: PortfolioContent = {
         title: "Qt Water Resources System",
         repoName: "qt-water-resources-system",
         githubUrl: "https://github.com/OwerLopez/qt-water-resources-system",
+        image: "/assets/projects/qt-water.jpg",
         description:
           "Sistema de información de escritorio de alto rendimiento para gestión de recursos hídricos: administración técnica de cuencas, presas y canales con visualizaciones gráficas y modelos hidrológicos en C++ y Qt Framework.",
         metrics: [
@@ -261,6 +269,7 @@ export const es: PortfolioContent = {
         title: "Gestor Tareas Pro",
         repoName: "GestorTareasPro",
         githubUrl: "https://github.com/OwerLopez/GestorTareasPro",
+        image: "/assets/projects/gestor-tareas.jpg",
         description:
           "Gestor de tareas y hábitos para Android nativo con Jetpack Compose y Clean Architecture. Diseño offline-first con base de datos Room, calendario de progreso inmutable y sistema de rachas motivacionales.",
         metrics: [
@@ -474,75 +483,65 @@ export const es: PortfolioContent = {
   },
 
   philosophy: {
-    kicker: "SOBRE MÍ & PERFIL PERSONAL",
+    kicker: "SOBRE MÍ & ENFOQUE PERSONAL",
     headingLead: "Detrás del código:",
-    headingAccent: "enfoque, rigor y visión.",
+    headingAccent: "visión, rigor y equilibrio.",
     description:
-      "Combino formación rigurosa en Ciencias de la Computación / Ingeniería de Sistemas con experiencia práctica construyendo servicios backend y pipelines de datos en producción.",
+      "Formación rigurosa en Ingeniería de Sistemas en la UNSA, experiencia en servicios backend de alto rendimiento y pasión por la algoritmia y la arquitectura limpia.",
     bioHeading: "Ower Frank López Arela",
+    bioRole: "Backend & Data Engineer · UNSA (Quinto Superior)",
+    bioLocation: "Arequipa, Perú",
+    bioBadge: "UNSA Top 20% · Egresando 2026",
     bioText: [
-      "Estudiante de 9no ciclo de Ingeniería de Sistemas en la UNSA (Quinto Superior) y Desarrollador Backend en Fundación CALMA. Me apasiona resolver problemas de rendimiento, diseñar arquitecturas limpias y transformar flujos de datos en servicios estables y confiables.",
-      "Enfoco mi aprendizaje continuo en arquitecturas distribuidas, inferencia de baja latencia en la JVM y calidad de software. Como Secretario del ACM Student Chapter UNSA, impulso espacios de formación técnica en algoritmos y tecnologías emergentes.",
+      "Estudiante de 9no ciclo de Ingeniería de Sistemas en la Universidad Nacional de San Agustín (UNSA), ubicado en el Quinto Superior (Top 20% de rendimiento académico), y Desarrollador Backend en Fundación CALMA.",
+      "Me apasiona resolver desafíos de rendimiento, diseñar contratos de APIs estrictos y transformar flujos complejos de datos en servicios estables y confiables. Como Secretario del ACM Student Chapter UNSA, fomento espacios de formación en algoritmia, estructuras de datos y tecnologías emergentes.",
     ],
-    principlesLabel: "Principios de Ingeniería",
-    principles: [
-      {
-        index: "01",
-        title: "Arquitectura limpia y mantenible",
-        detail: "Diseño modular desacoplado, contratos de APIs rigurosos y tipado estricto preparado para escalar.",
-      },
-      {
-        index: "02",
-        title: "Integridad y calidad de datos",
-        detail: "Modelado relacional eficiente, validaciones consistentes entre capas y pipelines ETL confiables.",
-      },
-      {
-        index: "03",
-        title: "Orientado a producción y rendimiento",
-        detail: "Inferencia de baja latencia, documentación OpenAPI, migraciones SQL controladas y despliegues con Docker.",
-      },
-    ],
-    momentsLabel: "Especialización & Visión Técnica",
-    momentsKicker: "ENFOQUE & DEEP DIVES",
-    moments: [
-      {
-        id: "low-latency-ml",
-        title: "Inferencia ML Embebida en JVM",
-        subtitle: "Spring Boot + ONNX Runtime",
-        category: "Baja Latencia",
-        image: "/assets/profile.jpg",
-        description: "Ejecución de modelos predictivos en memoria nativa del backend, reduciendo la latencia de 2,000 ms a 20 ms sin dependencias de red externa.",
-        tag: "Latencia 20ms",
-        accent: "cyan",
-      },
-      {
-        id: "data-engineering",
-        title: "Modelado SQL & Pipelines ETL",
-        subtitle: "Integridad & Procesamiento",
-        category: "Data Engineering",
-        image: "/assets/profile.jpg",
-        description: "Estructuración de datos relacionales y NoSQL, consultas analíticas con CTEs/Window Functions y flujos automatizados de transformación.",
-        tag: "SQL & ETL",
-        accent: "amber",
-      },
-      {
-        id: "community-leadership",
-        title: "Liderazgo & Comunidad Técnica",
-        subtitle: "ACM Student Chapter UNSA",
-        category: "Comunidad & Formación",
-        image: "/assets/profile.jpg",
-        description: "Coordinación y gestión de talleres de inteligencia artificial, programación competitiva y mentoría académica en Ingeniería de Sistemas.",
-        tag: "Directiva ACM",
-        accent: "emerald",
-      },
-    ],
-    facetsLabel: "Facetas & Datos Clave",
+    facetsLabel: "Datos Clave & Perfil",
     facets: [
       { label: "Idiomas", value: "Español (Nativo) · Inglés (Técnico B2)", detail: "Lectura técnica y documentación fluida" },
       { label: "Área de Interés", value: "Low-Latency Backend & Data Streaming", detail: "Sistemas distribuidos e inferencia ML en JVM" },
       { label: "Rendimiento", value: "Quinto Superior (Top 20%)", detail: "Escuela Profesional de Ingeniería de Sistemas UNSA" },
       { label: "Ubicación", value: "Arequipa, Perú (UTC-5)", detail: "Disponible para trabajo remoto o híbrido" },
     ],
+    hobbiesKicker: "PASATIEMPOS & ENFOQUE",
+    hobbiesLabel: "Mente, Concentración & Vida Universitaria",
+    hobbiesDescription: "Las disciplinas y hábitos que potencian mi capacidad de análisis, resolución de problemas y concentración profunda.",
+    hobbies: [
+      {
+        id: "chess",
+        name: "Ajedrez Táctico",
+        category: "Estrategia & Pensamiento",
+        description: "Resolución de tácticas y partidas rápidas. Aplico el cálculo posicional y la anticipación de variantes a la toma de decisiones en diseño de arquitecturas de software.",
+        tag: "Estrategia",
+        accent: "amber",
+      },
+      {
+        id: "music",
+        name: "Synthwave & Deep Work",
+        category: "Música & Concentración",
+        description: "Amante del Synthwave, Lo-Fi y paisajes sonoros retro-futuristas. Mi catalizador indispensable para alcanzar estados de flujo profundo y máximo foco al programar.",
+        tag: "Estado de Flujo",
+        accent: "violet",
+      },
+      {
+        id: "competitive-coding",
+        name: "Algoritmos & Mentoría ACM",
+        category: "Ciencias de la Computación",
+        description: "Entrenamiento constante en LeetCode y talleres con el ACM Chapter UNSA: grafos, estructuras de datos y optimización de complejidad temporal/espacial.",
+        tag: "Algoritmia",
+        accent: "cyan",
+      },
+      {
+        id: "photography-campus",
+        name: "Fotografía & Vida en UNSA",
+        category: "Campus & Entorno",
+        description: "Capturando la energía del campus San Agustín, el paisaje arequipeño bajo el Misti y los sprints de hackathons con el equipo universitario.",
+        tag: "UNSA / Arequipa",
+        accent: "emerald",
+      },
+    ],
+    footerMotto: "Disciplina · Estrategia · Foco",
+    footerTag: "UNSA 2026",
   },
 
   contact: {

@@ -55,46 +55,46 @@ function ChurnInsightMockup({
   onRunInference: (e: React.MouseEvent) => void;
 }) {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-blue-300 font-bold flex items-center gap-2.5 text-sm">
-          <Cpu className="h-4 w-4 text-blue-400" />
-          CHURNINSIGHT · EMBEDDED ONNX JVM ENGINE
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-blue-300 font-bold flex items-center gap-2 text-xs sm:text-sm truncate">
+          <Cpu className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-blue-400 shrink-0" />
+          <span className="truncate">CHURNINSIGHT · EMBEDDED ONNX</span>
         </span>
-        <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-bold">
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-[10px] sm:text-xs font-bold shrink-0">
           Spring Boot 3.4
         </span>
       </div>
 
-      <div className="my-auto grid grid-cols-1 sm:grid-cols-2 gap-4 py-3">
-        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5 space-y-1.5">
-          <span className="text-xs text-zinc-500 block uppercase font-semibold">P99 In-Memory Latency:</span>
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tabular-nums">{latency}</span>
-            <span className="text-xs text-zinc-400">(Zero Network RPC)</span>
+      <div className="my-auto grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3.5 py-1.5 sm:py-2">
+        <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-2.5 sm:p-4 space-y-1">
+          <span className="text-[10px] sm:text-xs text-zinc-500 block uppercase font-semibold">P99 In-Memory Latency:</span>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-lg sm:text-2xl md:text-3xl font-extrabold text-emerald-400 tabular-nums">{latency}</span>
+            <span className="text-[10px] sm:text-xs text-zinc-400">(Zero RPC)</span>
           </div>
-          <span className="text-xs text-zinc-400 block pt-1">Legacy RPC: 2,000ms ➔ 100x speedup</span>
+          <span className="text-[10px] sm:text-xs text-zinc-400 block pt-0.5">Legacy RPC: 2,000ms ➔ 100x</span>
         </div>
 
-        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5 space-y-1.5">
-          <span className="text-xs text-zinc-500 block uppercase font-semibold">Calidad del Modelo</span>
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-extrabold text-blue-300 tabular-nums">96.0% Recall</span>
+        <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-2.5 sm:p-4 space-y-1">
+          <span className="text-[10px] sm:text-xs text-zinc-500 block uppercase font-semibold">Calidad del Modelo</span>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-lg sm:text-2xl md:text-3xl font-extrabold text-blue-300 tabular-nums">96.0% Recall</span>
           </div>
-          <span className="text-xs text-zinc-400 block pt-1">Random Forest · 99% Reducción de Costos</span>
+          <span className="text-[10px] sm:text-xs text-zinc-400 block pt-0.5">Random Forest · 99% Menos Costo</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between pt-3 border-t border-white/[0.08] text-xs">
-        <span className="text-zinc-500">Java 17 · ONNX Runtime · Docker</span>
+      <div className="flex flex-wrap items-center justify-between pt-2 sm:pt-3 border-t border-white/[0.08] text-[10px] sm:text-xs gap-2">
+        <span className="text-zinc-500 truncate">Java 17 · ONNX Runtime · Docker</span>
         <button
           type="button"
           onClick={onRunInference}
           disabled={isInferencing}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-all shadow-md cursor-pointer disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] sm:text-xs transition-all shadow-md cursor-pointer disabled:opacity-50"
         >
-          <Play className="h-3.5 w-3.5 fill-white" />
-          <span>{isInferencing ? "Calculando..." : "Simular Inferencia ONNX"}</span>
+          <Play className="h-3 w-3 fill-white" />
+          <span>{isInferencing ? "Calculando..." : "Simular ONNX"}</span>
         </button>
       </div>
     </div>
@@ -104,33 +104,33 @@ function ChurnInsightMockup({
 /** 1. VisionTransit AI */
 function VisionTransitMockup() {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-white font-bold flex items-center gap-2 text-sm">
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          CAM-04 · AREQUIPA TRANSIT SURVEILLANCE
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-white font-bold flex items-center gap-2 text-xs sm:text-sm truncate">
+          <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+          <span className="truncate">CAM-04 · AREQUIPA SURVEILLANCE</span>
         </span>
-        <span className="px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-zinc-200 text-xs font-bold">
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-zinc-200 text-[10px] sm:text-xs font-bold shrink-0">
           28.7 FPS (CPU)
         </span>
       </div>
 
-      <div className="my-auto grid grid-cols-2 gap-4 py-3">
-        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5">
-          <span className="text-xs text-zinc-500 block uppercase font-semibold">Detección YOLO11</span>
-          <span className="text-emerald-400 font-bold text-base sm:text-lg mt-1 block">BUS URBANO [98.4%]</span>
-          <span className="text-xs text-zinc-400 mt-0.5 block">Tracking Kalman ID #104</span>
+      <div className="my-auto grid grid-cols-2 gap-2 sm:gap-3.5 py-1.5 sm:py-2">
+        <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-2.5 sm:p-4">
+          <span className="text-[10px] sm:text-xs text-zinc-500 block uppercase font-semibold">Detección YOLO11</span>
+          <span className="text-emerald-400 font-bold text-sm sm:text-base mt-1 block truncate">BUS URBANO [98.4%]</span>
+          <span className="text-[10px] sm:text-xs text-zinc-400 mt-0.5 block truncate">Tracking Kalman ID #104</span>
         </div>
-        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5">
-          <span className="text-xs text-zinc-500 block uppercase font-semibold">Sincronización</span>
-          <span className="text-cyan-300 font-bold text-base sm:text-lg mt-1 block">WebSocket 60 msg/s</span>
-          <span className="text-xs text-zinc-400 mt-0.5 block">Latencia P99: 14.2 ms</span>
+        <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-2.5 sm:p-4">
+          <span className="text-[10px] sm:text-xs text-zinc-500 block uppercase font-semibold">Sincronización</span>
+          <span className="text-cyan-300 font-bold text-sm sm:text-base mt-1 block truncate">WebSocket 60 msg/s</span>
+          <span className="text-[10px] sm:text-xs text-zinc-400 mt-0.5 block truncate">Latencia P99: 14.2 ms</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
-        <span>FastAPI + YOLO11 ONNX</span>
-        <span className="text-zinc-300 font-semibold">6 Capas Desacopladas</span>
+      <div className="flex items-center justify-between text-[10px] sm:text-xs text-zinc-500 pt-2 sm:pt-3 border-t border-white/[0.08]">
+        <span className="truncate">FastAPI + YOLO11 ONNX</span>
+        <span className="text-zinc-300 font-semibold truncate ml-2">6 Capas Desacopladas</span>
       </div>
     </div>
   );
@@ -139,32 +139,32 @@ function VisionTransitMockup() {
 /** 2. NEXIA 2026 */
 function NexiaMockup() {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-amber-300 font-bold text-sm">1ER PUESTO IBM HACKATHON · BUILD WITH AI</span>
-        <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
-          Sprint &lt; 48 Horas
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-amber-300 font-bold text-xs sm:text-sm truncate">1ER PUESTO IBM HACKATHON · BUILD WITH AI</span>
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[10px] sm:text-xs font-bold shrink-0">
+          Sprint &lt; 48h
         </span>
       </div>
 
-      <div className="my-auto grid grid-cols-3 gap-3 text-center py-3">
-        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4">
-          <div className="text-white font-bold text-sm">React 19</div>
-          <div className="text-xs text-zinc-400 mt-1">Tailwind v4 UI</div>
+      <div className="my-auto grid grid-cols-3 gap-2 sm:gap-3 text-center py-1.5 sm:py-2">
+        <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-2 sm:p-3.5">
+          <div className="text-white font-bold text-xs sm:text-sm">React 19</div>
+          <div className="text-[10px] sm:text-xs text-zinc-400 mt-0.5">Tailwind v4</div>
         </div>
-        <div className="rounded-2xl bg-amber-500/10 border border-amber-500/30 p-4">
-          <div className="text-amber-300 font-bold text-sm">NestJS API</div>
-          <div className="text-xs text-amber-200/80 mt-1">Auth Guards</div>
+        <div className="rounded-xl sm:rounded-2xl bg-amber-500/10 border border-amber-500/30 p-2 sm:p-3.5">
+          <div className="text-amber-300 font-bold text-xs sm:text-sm">NestJS API</div>
+          <div className="text-[10px] sm:text-xs text-amber-200/80 mt-0.5">Auth Guards</div>
         </div>
-        <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-4">
-          <div className="text-cyan-300 font-bold text-sm">Generative AI</div>
-          <div className="text-xs text-zinc-400 mt-1">RAG Engine</div>
+        <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-2 sm:p-3.5">
+          <div className="text-cyan-300 font-bold text-xs sm:text-sm">Gen AI</div>
+          <div className="text-[10px] sm:text-xs text-zinc-400 mt-0.5">RAG Engine</div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
-        <span>Jaku UNSA &amp; GDG Arequipa</span>
-        <span className="text-amber-300 font-semibold">Producción Desplegada</span>
+      <div className="flex items-center justify-between text-[10px] sm:text-xs text-zinc-500 pt-2 sm:pt-3 border-t border-white/[0.08]">
+        <span className="truncate">Jaku UNSA &amp; GDG Arequipa</span>
+        <span className="text-amber-300 font-semibold truncate ml-2">Producción Desplegada</span>
       </div>
     </div>
   );
@@ -173,27 +173,27 @@ function NexiaMockup() {
 /** 3. AI Life OS Mobile */
 function AiLifeOsMockup() {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-cyan-300 font-bold text-sm">ANDROID 15 · KOTLIN &amp; COMPOSE</span>
-        <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-cyan-300 font-bold text-xs sm:text-sm truncate">ANDROID 15 · KOTLIN &amp; COMPOSE</span>
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[10px] sm:text-xs font-bold shrink-0">
           Gemini Pro AI
         </span>
       </div>
 
-      <div className="my-auto rounded-2xl bg-white/[0.03] border border-white/[0.08] p-5 space-y-2">
-        <div className="flex items-center justify-between text-xs sm:text-sm">
-          <span className="text-white font-bold">Síntesis Semántica en Dispositivo</span>
-          <span className="text-emerald-400 text-xs font-bold">Room SQLite Sync</span>
+      <div className="my-auto rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-3 sm:p-4 space-y-1 sm:space-y-1.5">
+        <div className="flex items-center justify-between text-xs sm:text-sm gap-2">
+          <span className="text-white font-bold truncate">Síntesis Semántica en Dispositivo</span>
+          <span className="text-emerald-400 text-[10px] sm:text-xs font-bold shrink-0">Room SQLite</span>
         </div>
-        <p className="text-xs sm:text-sm text-zinc-300 italic leading-relaxed">
+        <p className="text-[11px] sm:text-xs text-zinc-300 italic leading-relaxed">
           &ldquo;Clasificación contextual de tareas y generación de resúmenes ejecutivos offline.&rdquo;
         </p>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
-        <span>Clean Architecture + MVI</span>
-        <span className="text-cyan-300 font-semibold">Offline-First</span>
+      <div className="flex items-center justify-between text-[10px] sm:text-xs text-zinc-500 pt-2 sm:pt-3 border-t border-white/[0.08]">
+        <span className="truncate">Clean Architecture + MVI</span>
+        <span className="text-cyan-300 font-semibold truncate ml-2">Offline-First</span>
       </div>
     </div>
   );
@@ -202,30 +202,30 @@ function AiLifeOsMockup() {
 /** 4. AI Workflow Recorder */
 function WorkflowRecorderMockup() {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-emerald-300 font-bold text-sm">TELEMETRY &amp; WORKFLOW RECORDER</span>
-        <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-emerald-300 font-bold text-xs sm:text-sm truncate">TELEMETRY &amp; WORKFLOW RECORDER</span>
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[10px] sm:text-xs font-bold shrink-0">
           Dockerized
         </span>
       </div>
 
-      <div className="my-auto rounded-2xl bg-black/50 border border-white/[0.08] p-4 sm:p-5 space-y-2 text-xs">
-        <div className="text-emerald-400 flex items-center gap-2 font-semibold">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-          <span>[DOM-EVENT] Captura de mutaciones web en tiempo real</span>
+      <div className="my-auto rounded-xl sm:rounded-2xl bg-black/50 border border-white/[0.08] p-3 sm:p-4 space-y-1.5 text-[11px] sm:text-xs">
+        <div className="text-emerald-400 flex items-center gap-2 font-semibold truncate">
+          <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
+          <span className="truncate">[DOM-EVENT] Captura de mutaciones web en vivo</span>
         </div>
-        <div className="text-zinc-300">
-          <span>[FASTAPI] Ingesta asíncrona completada (200 OK · 8ms)</span>
+        <div className="text-zinc-300 truncate">
+          <span>[FASTAPI] Ingesta asíncrona (200 OK · 8ms)</span>
         </div>
-        <div className="text-cyan-300">
-          <span>[DOCKER] Worker pool saludable (4 réplicas activas)</span>
+        <div className="text-cyan-300 truncate">
+          <span>[DOCKER] Worker pool saludable (4 réplicas)</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
-        <span>Chrome Extension + Python 3.12</span>
-        <span className="text-emerald-300 font-semibold">Ejecución Determinista</span>
+      <div className="flex items-center justify-between text-[10px] sm:text-xs text-zinc-500 pt-2 sm:pt-3 border-t border-white/[0.08]">
+        <span className="truncate">Chrome Extension + Python 3.12</span>
+        <span className="text-emerald-300 font-semibold truncate ml-2">Determinista</span>
       </div>
     </div>
   );
@@ -234,38 +234,38 @@ function WorkflowRecorderMockup() {
 /** 5. Telecom Churn ML Pipeline */
 function TelecomChurnMockup() {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-blue-300 font-bold text-sm">MACHINE LEARNING CLASSIFICATION PIPELINE</span>
-        <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-bold">
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-blue-300 font-bold text-xs sm:text-sm truncate">ML CLASSIFICATION PIPELINE</span>
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-[10px] sm:text-xs font-bold shrink-0">
           ROC-AUC 0.94
         </span>
       </div>
 
-      <div className="my-auto space-y-3 py-2">
+      <div className="my-auto space-y-2 py-1">
         <div>
-          <div className="flex justify-between text-xs text-zinc-300 mb-1.5 font-semibold">
-            <span>TotalCharges (Feature Importance)</span>
+          <div className="flex justify-between text-[11px] sm:text-xs text-zinc-300 mb-1 font-semibold">
+            <span>TotalCharges (Feature)</span>
             <span className="text-blue-400 font-bold">38%</span>
           </div>
-          <div className="h-2.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+          <div className="h-2 sm:h-2.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
             <div className="h-full bg-blue-500 rounded-full w-[38%]" />
           </div>
         </div>
         <div>
-          <div className="flex justify-between text-xs text-zinc-300 mb-1.5 font-semibold">
-            <span>ContractType (Feature Importance)</span>
+          <div className="flex justify-between text-[11px] sm:text-xs text-zinc-300 mb-1 font-semibold">
+            <span>ContractType (Feature)</span>
             <span className="text-cyan-300 font-bold">29%</span>
           </div>
-          <div className="h-2.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+          <div className="h-2 sm:h-2.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
             <div className="h-full bg-cyan-400 rounded-full w-[29%]" />
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
-        <span>Scikit-Learn · Pandas · Seaborn</span>
-        <span className="text-blue-300 font-semibold">Recall: 94%</span>
+      <div className="flex items-center justify-between text-[10px] sm:text-xs text-zinc-500 pt-2 sm:pt-3 border-t border-white/[0.08]">
+        <span className="truncate">Scikit-Learn · Pandas</span>
+        <span className="text-blue-300 font-semibold truncate ml-2">Recall: 94%</span>
       </div>
     </div>
   );
@@ -274,32 +274,32 @@ function TelecomChurnMockup() {
 /** 6. NovaChef Platform */
 function NovaChefMockup() {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-purple-300 font-bold text-sm">PYTEST AUTOMATED QA TEST RUNNER</span>
-        <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-purple-300 font-bold text-xs sm:text-sm truncate">PYTEST AUTOMATED QA TEST RUNNER</span>
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-bold shrink-0">
           48 Tests Passed
         </span>
       </div>
 
-      <div className="my-auto rounded-2xl bg-black/50 border border-white/[0.08] p-4 sm:p-5 space-y-2 text-xs">
-        <div className="flex items-center justify-between text-zinc-200">
-          <span>✓ test_jwt_auth_security_roles.py</span>
-          <span className="text-emerald-400 font-bold">PASSED</span>
+      <div className="my-auto rounded-xl sm:rounded-2xl bg-black/50 border border-white/[0.08] p-3 sm:p-4 space-y-1.5 text-[11px] sm:text-xs">
+        <div className="flex items-center justify-between text-zinc-200 gap-2">
+          <span className="truncate">✓ test_jwt_auth_security.py</span>
+          <span className="text-emerald-400 font-bold shrink-0">PASSED</span>
         </div>
-        <div className="flex items-center justify-between text-zinc-200">
-          <span>✓ test_order_limits_bva_concurrency.py</span>
-          <span className="text-emerald-400 font-bold">PASSED</span>
+        <div className="flex items-center justify-between text-zinc-200 gap-2">
+          <span className="truncate">✓ test_concurrency_limits.py</span>
+          <span className="text-emerald-400 font-bold shrink-0">PASSED</span>
         </div>
-        <div className="flex items-center justify-between text-zinc-200">
-          <span>✓ test_sql_injection_defense.py</span>
-          <span className="text-emerald-400 font-bold">PASSED</span>
+        <div className="flex items-center justify-between text-zinc-200 gap-2">
+          <span className="truncate">✓ test_sql_injection_defense.py</span>
+          <span className="text-emerald-400 font-bold shrink-0">PASSED</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
-        <span>FastAPI + PostgreSQL</span>
-        <span className="text-purple-300 font-semibold">100% Cobertura de Seguridad</span>
+      <div className="flex items-center justify-between text-[10px] sm:text-xs text-zinc-500 pt-2 sm:pt-3 border-t border-white/[0.08]">
+        <span className="truncate">FastAPI + PostgreSQL</span>
+        <span className="text-purple-300 font-semibold truncate ml-2">100% Seguridad QA</span>
       </div>
     </div>
   );
@@ -308,26 +308,26 @@ function NovaChefMockup() {
 /** 7. Qt Water Resources System */
 function QtWaterMockup() {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-amber-300 font-bold text-sm">DESKTOP GIS &amp; HIDROINFORMÁTICA</span>
-        <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-amber-300 font-bold text-xs sm:text-sm truncate">DESKTOP GIS &amp; HIDROINFORMÁTICA</span>
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[10px] sm:text-xs font-bold shrink-0">
           C++17 / Qt GUI
         </span>
       </div>
 
-      <div className="my-auto rounded-2xl bg-white/[0.03] border border-white/[0.08] p-5 text-center space-y-2">
-        <div className="text-white font-bold text-sm">
-          Modelado Espacial de Cuencas &amp; Presas Hidráulicas
+      <div className="my-auto rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-3.5 sm:p-4 text-center space-y-1.5">
+        <div className="text-white font-bold text-xs sm:text-sm truncate">
+          Modelado Espacial de Cuencas &amp; Presas
         </div>
-        <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto">
+        <p className="text-[11px] sm:text-xs text-zinc-400 max-w-md mx-auto line-clamp-2">
           Cálculo numérico de caudales volumétricos y topología hidrográfica en tiempo real.
         </p>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
-        <span>C++17 Desktop Nativo</span>
-        <span className="text-amber-300 font-semibold">Cero Overhead de Navegador</span>
+      <div className="flex items-center justify-between text-[10px] sm:text-xs text-zinc-500 pt-2 sm:pt-3 border-t border-white/[0.08]">
+        <span className="truncate">C++17 Desktop Nativo</span>
+        <span className="text-amber-300 font-semibold truncate ml-2">Cero Overhead</span>
       </div>
     </div>
   );
@@ -336,26 +336,26 @@ function QtWaterMockup() {
 /** 8. Gestor Tareas Pro */
 function GestorTareasMockup() {
   return (
-    <div className="h-full w-full bg-[#080a14] p-6 sm:p-8 flex flex-col justify-between select-none font-mono text-xs text-zinc-300">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3.5 text-zinc-400">
-        <span className="text-cyan-300 font-bold text-sm">CLEAN ARCHITECTURE ANDROID</span>
-        <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
+    <div className="h-full w-full bg-[#080a14] p-3.5 sm:p-6 md:p-7 flex flex-col justify-between select-none font-mono text-[11px] sm:text-xs text-zinc-300">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 sm:pb-3 text-zinc-400 gap-2">
+        <span className="text-cyan-300 font-bold text-xs sm:text-sm truncate">CLEAN ARCHITECTURE ANDROID</span>
+        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[10px] sm:text-xs font-bold shrink-0">
           Room SQLite
         </span>
       </div>
 
-      <div className="my-auto rounded-2xl bg-white/[0.03] border border-white/[0.08] p-5 text-center space-y-2.5">
-        <div className="text-zinc-200 text-xs sm:text-sm font-semibold">
-          Domain Layer ──&gt; Data Layer ──&gt; Presentation (MVI)
+      <div className="my-auto rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] p-3.5 sm:p-4 text-center space-y-1.5">
+        <div className="text-zinc-200 text-[11px] sm:text-xs font-semibold truncate">
+          Domain Layer ──&gt; Data Layer ──&gt; MVI
         </div>
-        <div className="text-amber-300 font-bold text-sm">
+        <div className="text-amber-300 font-bold text-xs sm:text-sm truncate">
           🔥 28 Días de Racha Inmutable Activa
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-zinc-500 pt-3 border-t border-white/[0.08]">
-        <span>Kotlin + Jetpack Compose</span>
-        <span className="text-cyan-300 font-semibold">Offline-First Local DB</span>
+      <div className="flex items-center justify-between text-[10px] sm:text-xs text-zinc-500 pt-2 sm:pt-3 border-t border-white/[0.08]">
+        <span className="truncate">Kotlin + Jetpack Compose</span>
+        <span className="text-cyan-300 font-semibold truncate ml-2">Offline-First</span>
       </div>
     </div>
   );
@@ -375,14 +375,16 @@ function UnifiedProjectVisualCard({
 }) {
   if (project.image) {
     return (
-      <div className="relative h-full w-full bg-black">
+      <div className="relative h-full w-full bg-[#080a14] overflow-hidden group">
         <Image
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover object-top"
+          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           sizes="(max-width: 1024px) 100vw, 860px"
+          priority={project.isFlagship}
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080a14]/60 via-transparent to-transparent pointer-events-none" />
       </div>
     );
   }
@@ -724,6 +726,7 @@ export function Work({ content }: { content: PortfolioContent }) {
       metrics: work.featured.metrics,
       tags: work.featured.tags,
       year: "2025",
+      image: work.featured.image,
       isFlagship: true,
       links: work.featured.links,
     },

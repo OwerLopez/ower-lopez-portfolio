@@ -1,23 +1,25 @@
 "use client";
 
 import React, { useState } from "react";
-import { PortfolioContent, PersonalMoment } from "@/types/content";
+import Image from "next/image";
+import { PortfolioContent, PersonalHobby } from "@/types/content";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/animations/Reveal";
-import { TiltCard } from "@/components/ui/TiltCard";
-import { useReducedMotion } from "framer-motion";
 import { 
-  Trophy, 
-  Sparkles, 
-  GraduationCap, 
   Languages, 
   MapPin, 
-  ShieldCheck, 
+  GraduationCap, 
   Terminal, 
-  Layers,
-  Camera,
+  Gamepad2, 
+  Headphones, 
+  Code2, 
+  Camera, 
+  Sparkles, 
   Cpu,
-  Award
+  Flame,
+  Binary,
+  ArrowUpRight,
+  ShieldCheck
 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { playTick, playHover } from "@/lib/audio";
@@ -26,41 +28,37 @@ export interface AboutProps {
   content: PortfolioContent;
 }
 
-const ACCENT_STYLES = {
-  flame: {
-    border: "border-amber-500/30",
-    bg: "bg-amber-500/10",
-    text: "text-amber-400",
-    glow: "rgba(245, 158, 11, 0.2)",
-    icon: <Trophy className="h-4 w-4 text-amber-400" />,
+const HOBBY_META: Record<
+  string, 
+  { icon: React.ReactNode; glowColor: string; borderColor: string; bgGradient: string; tagClass: string }
+> = {
+  chess: {
+    icon: <Gamepad2 className="h-5 w-5 text-amber-400" />,
+    glowColor: "rgba(245, 158, 11, 0.25)",
+    borderColor: "hover:border-amber-500/50 group-hover:shadow-[0_0_25px_rgba(245,158,11,0.2)]",
+    bgGradient: "from-amber-500/10 via-transparent to-transparent",
+    tagClass: "bg-amber-500/15 border-amber-500/30 text-amber-300",
   },
-  cyan: {
-    border: "border-cyan-500/30",
-    bg: "bg-cyan-500/10",
-    text: "text-cyan-400",
-    glow: "rgba(6, 182, 212, 0.2)",
-    icon: <Layers className="h-4 w-4 text-cyan-400" />,
+  music: {
+    icon: <Headphones className="h-5 w-5 text-purple-400" />,
+    glowColor: "rgba(168, 85, 247, 0.25)",
+    borderColor: "hover:border-purple-500/50 group-hover:shadow-[0_0_25px_rgba(168,85,247,0.2)]",
+    bgGradient: "from-purple-500/10 via-transparent to-transparent",
+    tagClass: "bg-purple-500/15 border-purple-500/30 text-purple-300",
   },
-  emerald: {
-    border: "border-emerald-500/30",
-    bg: "bg-emerald-500/10",
-    text: "text-emerald-400",
-    glow: "rgba(16, 185, 129, 0.2)",
-    icon: <Sparkles className="h-4 w-4 text-emerald-400" />,
+  "competitive-coding": {
+    icon: <Code2 className="h-5 w-5 text-cyan-400" />,
+    glowColor: "rgba(6, 182, 212, 0.25)",
+    borderColor: "hover:border-cyan-500/50 group-hover:shadow-[0_0_25px_rgba(6,182,212,0.2)]",
+    bgGradient: "from-cyan-500/10 via-transparent to-transparent",
+    tagClass: "bg-cyan-500/15 border-cyan-500/30 text-cyan-300",
   },
-  amber: {
-    border: "border-amber-500/30",
-    bg: "bg-amber-500/10",
-    text: "text-amber-400",
-    glow: "rgba(245, 158, 11, 0.2)",
-    icon: <Award className="h-4 w-4 text-amber-400" />,
-  },
-  violet: {
-    border: "border-purple-500/30",
-    bg: "bg-purple-500/10",
-    text: "text-purple-400",
-    glow: "rgba(168, 85, 247, 0.2)",
-    icon: <Cpu className="h-4 w-4 text-purple-400" />,
+  "photography-campus": {
+    icon: <Camera className="h-5 w-5 text-emerald-400" />,
+    glowColor: "rgba(16, 185, 129, 0.25)",
+    borderColor: "hover:border-emerald-500/50 group-hover:shadow-[0_0_25px_rgba(16,185,129,0.2)]",
+    bgGradient: "from-emerald-500/10 via-transparent to-transparent",
+    tagClass: "bg-emerald-500/15 border-emerald-500/30 text-emerald-300",
   },
 };
 
@@ -71,160 +69,115 @@ const FACET_ICONS = [
   <MapPin key="map" className="h-4 w-4 text-amber-400 shrink-0" />,
 ];
 
-function MomentCard({ moment, index }: { moment: PersonalMoment; index: number }) {
-  const [imageError, setImageError] = useState(false);
-  const style = ACCENT_STYLES[moment.accent] || ACCENT_STYLES.flame;
-
-  return (
-    <div onMouseEnter={() => playHover()} onClick={() => playTick()}>
-      <TiltCard
-        glowColor={style.glow}
-        maxTilt={5}
-        className={`rounded-2xl border ${style.border} bg-gradient-to-b from-[#11121b]/95 to-[#0a0a10]/95 p-5 sm:p-6 flex flex-col justify-between group shadow-lg cursor-default`}
-      >
-        <div>
-          {/* Top bar with category & status tag */}
-          <div className="flex items-center justify-between gap-2 mb-3">
-            <span className="mono-label text-[10px] text-[var(--color-muted)] font-bold flex items-center gap-1.5">
-              {style.icon}
-              {moment.category}
-            </span>
-            <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${style.bg} ${style.border} ${style.text} border`}>
-              {moment.tag}
-            </span>
-          </div>
-
-          {/* Optional Image / Visual Banner slot */}
-          {moment.image && !imageError ? (
-            <div className="relative mb-4 h-36 w-full overflow-hidden rounded-xl border border-white/10 bg-black/40">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={moment.image}
-                alt={moment.title}
-                onError={() => setImageError(true)}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a10] via-transparent to-transparent opacity-80" />
-            </div>
-          ) : (
-            /* Stylized Fallback Visual Banner when image is not uploaded */
-            <div className="relative mb-4 h-24 w-full overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-br from-blue-950/30 via-[#0e0f17] to-amber-950/20 p-3 flex flex-col justify-between">
-              <div className="flex items-center justify-between text-[10px] font-mono text-[var(--color-faint)]">
-                <span className="flex items-center gap-1">
-                  <Camera className="h-3 w-3 text-cyan-400" />
-                  Snapshot #{index + 1}
-                </span>
-                <span className="text-zinc-500">2024–2026</span>
-              </div>
-              <div className="text-xs font-mono font-semibold text-zinc-300 flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                {moment.subtitle}
-              </div>
-            </div>
-          )}
-
-          <h4 className="text-lg font-bold text-[var(--color-ink)] mb-1.5 group-hover:text-blue-400 transition-colors">
-            {moment.title}
-          </h4>
-
-          <p className="text-xs sm:text-sm text-[var(--color-muted)] leading-relaxed mb-3">
-            {moment.description}
-          </p>
-        </div>
-
-        <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[var(--color-faint)]">
-          <span>{moment.subtitle}</span>
-          <span className="text-blue-400 group-hover:translate-x-1 transition-transform">→</span>
-        </div>
-      </TiltCard>
-    </div>
-  );
-}
-
 export function About({ content }: AboutProps) {
   const { philosophy } = content;
-  const shouldReduceMotion = useReducedMotion();
   const [avatarError, setAvatarError] = useState(false);
 
   return (
-    <div aria-label="About and Personal Snapshot" className="w-full">
+    <div aria-label="About Section" className="w-full space-y-12">
+      {/* Section Header */}
       <SectionHeader
         kicker={philosophy.kicker}
         heading={`${philosophy.headingLead} ${philosophy.headingAccent}`}
         description={philosophy.description}
       />
 
-      {/* Main 2-Column Bento Layout */}
-      <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        {/* Left Column: Personal Narrative, Facets & Engineering Principles (Col 1-6) */}
-        <div className="lg:col-span-6 space-y-6">
+      {/* =========================================================================
+          Master Persona & Bio Showcase (Editorial Obsidian Bento)
+          ========================================================================= */}
+      <Reveal>
+        <div className="relative overflow-hidden rounded-3xl border border-white/[0.12] bg-gradient-to-b from-[#111322]/95 via-[#0c0e18]/95 to-[#080912]/98 p-6 sm:p-9 md:p-10 backdrop-blur-2xl shadow-[0_25px_70px_-15px_rgba(0,0,0,0.9),0_0_35px_rgba(59,130,246,0.12)] group hover:border-blue-500/40 transition-all duration-500">
           
-          {/* Personal Bio Spotlight Card */}
-          <Reveal>
-            <div className="glass-card p-6 sm:p-7 rounded-3xl border border-white/[0.12] bg-gradient-to-b from-[#11121a]/95 to-[#090a10]/95 shadow-xl">
+          {/* Subtle Top Ambient Lighting Aura */}
+          <div className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-44 w-3/4 rounded-full bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-purple-600/15 blur-3xl" />
+
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left: Interactive Profile Avatar & Status Node (Col 1-4) */}
+            <div className="lg:col-span-4 flex flex-col items-center text-center lg:items-start lg:text-left">
               
-              {/* Profile Header with Avatar / Monogram */}
-              <div className="flex items-center gap-4 mb-6 pb-5 border-b border-white/[0.08]">
-                <div className="relative shrink-0">
-                  <div className="h-16 w-16 sm:h-18 sm:w-18 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-400 p-[1.5px] shadow-[0_0_20px_rgba(59,130,246,0.5)]">
-                    <div className="relative h-full w-full overflow-hidden rounded-[14px] bg-[#0c0d15] flex items-center justify-center">
-                      {!avatarError ? (
-                        /* eslint-disable-next-line @next/next/no-img-element */
-                        <img
-                          src="/assets/profile.jpg"
-                          alt={philosophy.bioHeading}
-                          onError={() => setAvatarError(true)}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <span className="font-mono text-xl font-black text-white">
-                          {siteConfig.initials}
-                        </span>
-                      )}
-                    </div>
+              {/* Profile Image with Multi-Gradient Luminous Ring */}
+              <div className="relative group/avatar mb-5">
+                <div className="h-32 w-32 sm:h-36 sm:w-36 rounded-3xl bg-gradient-to-br from-blue-500 via-cyan-400 to-indigo-500 p-[2px] shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover/avatar:shadow-[0_0_40px_rgba(6,182,212,0.7)] group-hover/avatar:scale-105 transition-all duration-300">
+                  <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-[#090b14]">
+                    {!avatarError ? (
+                      <Image
+                        src="/assets/profile.jpg"
+                        alt={philosophy.bioHeading}
+                        width={144}
+                        height={144}
+                        priority
+                        onError={() => setAvatarError(true)}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center font-mono text-3xl font-black text-white">
+                        {siteConfig.initials}
+                      </div>
+                    )}
                   </div>
-                  {/* Active Radar Pulse */}
-                  <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-[#090a10]" />
-                  </span>
                 </div>
 
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--color-ink)]">
-                    {philosophy.bioHeading}
-                  </h3>
-                  <p className="text-xs font-mono text-blue-400 flex items-center gap-1.5 mt-0.5 font-semibold">
-                    <Terminal className="h-3 w-3" />
-                    Backend & Data Engineer · UNSA
-                  </p>
+                {/* Pulsing Active Availability Radar Beacon */}
+                <span className="absolute -bottom-1 -right-1 flex h-6 w-6">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-6 w-6 bg-emerald-500 border-3 border-[#090b14]" />
+                </span>
+              </div>
+
+              {/* Status Chips */}
+              <div className="space-y-2">
+                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-mono font-bold text-emerald-300 shadow-sm">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Disponible para Backend & Datos
+                </span>
+
+                <div className="text-xs font-mono text-zinc-400 flex items-center justify-center lg:justify-start gap-1.5 pt-1">
+                  <GraduationCap className="h-4 w-4 text-blue-400 shrink-0" />
+                  <span>{philosophy.bioBadge}</span>
                 </div>
               </div>
 
-              {/* Bio Narrative */}
-              <div className="space-y-3.5 text-sm sm:text-base text-[var(--color-muted)] leading-relaxed">
+            </div>
+
+            {/* Right: Identity Narrative & Engineering Story (Col 5-12) */}
+            <div className="lg:col-span-8 space-y-5">
+              
+              {/* Identity Header */}
+              <div>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                  {philosophy.bioHeading}
+                </h3>
+                <p className="text-sm sm:text-base font-mono text-blue-400 flex items-center justify-center lg:justify-start gap-2 mt-1.5 font-bold">
+                  <Terminal className="h-4 w-4 text-cyan-400" />
+                  <span>{philosophy.bioRole}</span>
+                </p>
+              </div>
+
+              {/* Narrative Text */}
+              <div className="space-y-3.5 text-sm sm:text-base text-zinc-300 leading-relaxed">
                 {philosophy.bioText.map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
                 ))}
               </div>
 
-              {/* Personal Facets / Key Facts */}
-              <div className="mt-6 pt-5 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {/* Quick Technical Facets (2x2 Glass Tile Grid) */}
+              <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {philosophy.facets.map((facet, idx) => (
-                  <div 
+                  <div
                     key={facet.label}
-                    className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] flex flex-col justify-between"
+                    onMouseEnter={() => playHover()}
+                    className="p-3.5 rounded-2xl border border-white/[0.08] bg-white/[0.03] hover:border-blue-500/40 hover:bg-blue-500/[0.05] transition-all flex flex-col justify-between shadow-sm"
                   >
-                    <div className="flex items-center gap-2 text-xs font-mono text-[var(--color-muted)] mb-1">
+                    <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 mb-1">
                       {FACET_ICONS[idx % FACET_ICONS.length]}
                       <span>{facet.label}</span>
                     </div>
-                    <div className="text-xs font-bold text-[var(--color-ink)]">
+                    <div className="text-xs sm:text-sm font-bold text-white">
                       {facet.value}
                     </div>
                     {facet.detail && (
-                      <div className="text-[10px] font-mono text-[var(--color-faint)] mt-1">
+                      <div className="text-[10px] font-mono text-zinc-500 mt-1">
                         {facet.detail}
                       </div>
                     )}
@@ -233,71 +186,112 @@ export function About({ content }: AboutProps) {
               </div>
 
             </div>
-          </Reveal>
 
-          {/* 3 Core Engineering Principles */}
-          <Reveal>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 mb-2">
-                <ShieldCheck className="h-4 w-4 text-blue-400" />
-                <h4 className="mono-label text-xs font-bold text-blue-400">
-                  {philosophy.principlesLabel}
-                </h4>
-              </div>
-
-              <div className="grid grid-cols-1 gap-3">
-                {philosophy.principles.map((principle) => (
-                  <div
-                    key={principle.index}
-                    className="glass-card p-4 rounded-xl border border-white/[0.08] hover:border-blue-500/30 transition-all flex items-start gap-3.5 group"
-                  >
-                    <span className="font-mono text-xs font-extrabold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded-lg shrink-0">
-                      {principle.index}
-                    </span>
-                    <div>
-                      <h5 className="text-sm font-bold text-[var(--color-ink)] group-hover:text-blue-300 transition-colors">
-                        {principle.title}
-                      </h5>
-                      <p className="text-xs text-[var(--color-muted)] leading-relaxed mt-1">
-                        {principle.detail}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-        </div>
-
-        {/* Right Column: Visual Moments & Milestones Gallery ("Mini-Blog / Snapshot") (Col 7-12) */}
-        <div className="lg:col-span-6 space-y-6">
-          <Reveal>
-            <div className="flex items-center justify-between mb-2">
-              <div>
-                <span className="mono-label text-xs font-bold text-amber-400 flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  {philosophy.momentsKicker}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--color-ink)] mt-0.5">
-                  {philosophy.momentsLabel}
-                </h3>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Cards Stack */}
-          <div className="space-y-4">
-            {philosophy.moments.map((moment, idx) => (
-              <Reveal key={moment.id} delay={shouldReduceMotion ? 0 : idx * 70}>
-                <MomentCard moment={moment} index={idx} />
-              </Reveal>
-            ))}
           </div>
 
         </div>
+      </Reveal>
 
-      </div>
+      {/* =========================================================================
+          Hobbies, Mindset & Flow State Section (4 Distinctive Glowing Cards)
+          ========================================================================= */}
+      <Reveal delay={80}>
+        <div className="space-y-6 pt-4">
+          
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.08] pb-4">
+            <div>
+              <span className="mono-label text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+                <Flame className="h-4 w-4 text-cyan-400" />
+                {philosophy.hobbiesKicker}
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
+                {philosophy.hobbiesLabel}
+              </h3>
+            </div>
+            <p className="text-xs text-zinc-400 max-w-md leading-relaxed">
+              {philosophy.hobbiesDescription}
+            </p>
+          </div>
+
+          {/* 4 Custom Hobbies Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {philosophy.hobbies.map((hobby: PersonalHobby) => {
+              const meta = HOBBY_META[hobby.id] ?? {
+                icon: <Gamepad2 className="h-5 w-5 text-amber-400" />,
+                glowColor: "rgba(245, 158, 11, 0.25)",
+                borderColor: "hover:border-amber-500/50 group-hover:shadow-[0_0_25px_rgba(245,158,11,0.2)]",
+                bgGradient: "from-amber-500/10 via-transparent to-transparent",
+                tagClass: "bg-amber-500/15 border-amber-500/30 text-amber-300",
+              };
+
+              return (
+                <div
+                  key={hobby.id}
+                  onMouseEnter={() => playHover()}
+                  onClick={() => playTick()}
+                  className={`group relative overflow-hidden rounded-3xl border border-white/[0.09] bg-gradient-to-b from-[#111320]/90 via-[#0d0e19]/90 to-[#080912]/95 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 cursor-default flex flex-col justify-between ${meta.borderColor}`}
+                >
+                  {/* Internal ambient corner glow */}
+                  <div className={`pointer-events-none absolute -top-12 -right-12 h-28 w-28 rounded-full bg-gradient-to-br ${meta.bgGradient} blur-2xl opacity-70 group-hover:opacity-100 transition-opacity`} />
+
+                  <div>
+                    {/* Top Row: Icon + Category Badge */}
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/[0.05] border border-white/[0.1] shadow-inner group-hover:scale-110 transition-transform duration-300">
+                        {meta.icon}
+                      </div>
+
+                      <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold border ${meta.tagClass}`}>
+                        {hobby.tag}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h4 className="text-base font-bold text-white group-hover:text-blue-300 transition-colors mb-2">
+                      {hobby.name}
+                    </h4>
+
+                    {/* Description */}
+                    <p className="text-xs text-zinc-400 leading-relaxed">
+                      {hobby.description}
+                    </p>
+                  </div>
+
+                  {/* Category Footer */}
+                  <div className="mt-5 pt-3 border-t border-white/[0.05] flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                    <span>{hobby.category}</span>
+                    <span className="text-zinc-400 group-hover:translate-x-1 group-hover:text-cyan-300 transition-all">→</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </Reveal>
+
+      {/* =========================================================================
+          Academic & Community Motto Footer Bar
+          ========================================================================= */}
+      <Reveal delay={120}>
+        <div className="rounded-2xl border border-white/[0.08] bg-[#090b14]/90 p-4 px-6 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-400 shadow-sm">
+          <div className="flex items-center gap-2 text-zinc-300 font-semibold">
+            <ShieldCheck className="h-4 w-4 text-blue-400 shrink-0" />
+            <span>Secretario ACM Student Chapter UNSA</span>
+          </div>
+
+          <div className="flex items-center gap-2 text-blue-400 font-bold">
+            <Binary className="h-3.5 w-3.5 text-cyan-400" />
+            <span>{philosophy.footerMotto}</span>
+          </div>
+
+          <div className="text-zinc-500">
+            <span>{philosophy.footerTag}</span>
+          </div>
+        </div>
+      </Reveal>
+
     </div>
   );
 }
